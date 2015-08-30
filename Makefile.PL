@@ -11,7 +11,7 @@ WriteMakefile(
     LICENSE            => 'artistic_2',
     PL_FILES           => {},
     dist               => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean              => { FILES => 'www-manwar-org-*' },
+    clean              => { FILES => 'www.manwar.org-*' },
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
     },
@@ -20,13 +20,8 @@ WriteMakefile(
         'Plack::Test'           => 0,
         'HTTP::Request::Common' => 0,
     },
-    PREREQ_PM => {
-        'YAML'      => 0,
-        'Try::Tiny' => 0,
-        'Dancer2'   => 0.159001,
-        'Dancer2::Plugin::Ajax'       => 0,
-        'Dancer2::Plugin::Chain'      => 0,
-        'DBIx::Class::Schema::Loader' => 0,
-        'Dancer2::Session::Simple'    => 0,
+    PREREQ_PM     => {
+        'JSON'    => 0,
+        'Dancer2' => 0.159001,
     },
 );
