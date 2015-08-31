@@ -13,9 +13,9 @@
     };
 
     $(function () {
-        load_cpan_monthly_stats();
-        load_cpan_weekly_stats();
         load_cpan_daily_stats();
+        load_cpan_weekly_stats();
+        load_cpan_monthly_stats();
     });
 
     function load_cpan_monthly_stats() {
@@ -65,6 +65,6 @@
 <script src="<% request.uri_base %>/javascripts/highstock.js"></script>
 <script src="<% request.uri_base %>/javascripts/exporting.js"></script>
 
-<div id="monthly" style="height:300px; margin: 0 2em; clear:both; min-width: 300px"></div><br>
-<div id="weekly"  style="height:300px; margin: 0 2em; clear:both; min-width: 300px"></div><br>
 <div id="daily"   style="height:300px; margin: 0 2em; clear:both; min-width: 300px"></div><br>
+<div id="weekly"  style="height:300px; margin: 0 2em; clear:both; min-width: 300px"></div><br>
+<div id="monthly" style="height:300px; margin: 0 2em; clear:both; min-width: 300px"></div><br>
