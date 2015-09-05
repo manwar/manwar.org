@@ -27,7 +27,7 @@ get '/' => sub {
     template 'stats';
 };
 
-get '/cpan-release' => sub {
+get '/cpan-regulars' => sub {
     template 'stats';
 };
 
