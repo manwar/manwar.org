@@ -15,28 +15,35 @@
 
 <style type="text/css">
   div.header {
+    font-family: "Helvetica", "Geneva", "Arial", "SunSans-Regular", "sans-serif";
     padding: 2px 4px;
-    color: #343434;
-    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #2B65EC;
     font-size: 24px;
-    text-shadow: 0 2px white, 0 3px #777;
   }
   div.subtitle {
+    color: #FFFFFF;
+    background-color: #2B65EC;
     text-decoration: underline;
+    font-family: "Helvetica", "Geneva", "Arial", "SunSans-Regular", "sans-serif";
     font-style: italic;
     font-weight: bold;
-    color: #555;
     font-size: 14px;
     padding: 2px 4px;
-    margin-left: 240px;
   }
   div.footer {
+    color: #FFFFFF;
+    background-color: #2B65EC;
     text-align: center;
+    padding-left: 10em;
     font-family: sans-serif;
+    font-size: 12px;
   }
-  a { color: #555; }
-  a:hover { color: white; background-color: white; }
+  a { color: #FFF; }
+  a:hover { color: white; background-color: #4863A0; }
   div.navbar {
+    color: #FFFFFF;
+    background-color: #6698FF;
     padding: 5px;
     white-space: nowrap;
   }
@@ -46,7 +53,7 @@
     padding: 2px 4px;
   }
   div.navbar a {
-    color: #555;
+    color: #FFF;
     border-style: ridge;
     text-decoration: none;
     font-weight: bold
@@ -85,18 +92,17 @@
 <body>
 <div class="header">Mohammad S Anwar (MANWAR)</div>
 <div class="subtitle">Just another Perl hacker</div>
-<hr/>
-</div>
+<div class="navbar"></div>
 <div class="navbar">
 <a href="/cpan-regulars">CPAN Regulars</a>
 <a href="/my-cpan">my CPAN</a>
 </div>
-<hr/>
+<div class="navbar"></div>
 <% content %>
-<hr/>
 <div class="footer">
+Copyright &copy; 2015 (www.manwar.org)
+&nbsp; | &nbsp;
 Powered by <a href="http://perldancer.org/">Dancer2</a> <% dancer_version %>
 </div>
-<hr/>
 </body>
 </html>
