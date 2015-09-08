@@ -1,0 +1,22 @@
+<script type="text/javascript">
+
+    $(function () {
+        load_cpan_uploaders();
+    });
+
+    function load_cpan_uploaders() {
+        $.ajax({
+            url: "/cpan-uploaders/20",
+            dataType: "JSON",
+            success: function(data) { $('#cpan_uploaders').highcharts(data); }
+        });
+    };
+
+</script>
+
+<script src="<% request.uri_base %>/javascripts/highcharts.js"></script>
+<script src="<% request.uri_base %>/javascripts/data.js"></script>
+<script src="<% request.uri_base %>/javascripts/drilldown.js"></script>
+<script src="<% request.uri_base %>/javascripts/exporting.js"></script>
+
+<div id="cpan_uploaders" style="height:400px; margin: 0 2em; clear:both; min-width: 300px"></div>
