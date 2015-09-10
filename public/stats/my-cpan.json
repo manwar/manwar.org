@@ -1,6 +1,7 @@
 {
    "chart":{
-      "type":"column"
+      "type":"bar",
+      "height": 1200
    },
    "title":{
       "text":"CPAN 2010 - 2015"
@@ -12,6 +13,9 @@
       "min":"0",
       "title":{
          "text":"Favourites"
+      },
+      "labels":{
+         "overflow": "justify"
       }
    },
    "tooltip":{
@@ -22,12 +26,30 @@
       "useHTML":true
    },
    "plotOptions":{
-      "column":{
-         "pointPadding":0.2,
-         "borderWidth":0
+      "bar":{
+         "dataLabels":{
+            "enabled": 0
+         }
       }
    },
+   "legends":{
+      "layout": "vertical",
+      "align": "right",
+      "verticalAlign": "top",
+      "x": -40,
+      "y": 80,
+      "floating": "true",
+      "borderWidth": 1,
+      "backgroundColor": "((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')",
+      "shadow": "true"
+   },
+   "credits": {
+      "enabled": "false"
+   },
    "xAxis":{
+      "title":{
+        "text": null
+      },
       "categories":[
          "Address::PostCode::Australia",
          "Address::PostCode::India",
