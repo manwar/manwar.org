@@ -12,7 +12,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 AUTHOR
 
@@ -20,7 +20,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.02';
+$manwar::VERSION   = '0.03';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
@@ -68,6 +68,20 @@ get '/cpan-uploaders' => sub {
 get '/cpan-uploaders/20' => sub {
 
     my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'cpan-uploaders.json');
+    my $data = Dancer2::FileUtils::read_file_content($file);
+    my $stat = JSON->new->decode($data);
+
+   content_type 'application/json';
+   return to_json($stat);
+};
+
+get '/cpant-kwalitee' => sub {
+    template 'cpant-kwalitee';
+};
+
+get '/cpant-kwalitee/100' => sub {
+
+    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'cpant-kwalitee.json');
     my $data = Dancer2::FileUtils::read_file_content($file);
     my $stat = JSON->new->decode($data);
 
