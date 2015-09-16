@@ -1,0 +1,48 @@
+<script type="text/javascript">
+
+    var categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+                      '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                      '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+                      '31', '32', '33', '34', '35', '36', '37', '38', '39', '40',
+                      '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'
+                      ];
+    var chart_data = {
+        "title": null,
+     "subtitle": null,
+       "series": null,
+        "chart": { "type": "bar" },
+        "xAxis": [ { title:{ text: "Rank" },"categories": categories, "reversed": false, "labels": { "step": 1 }},{ "categories": categories, "reversed": false, "labels":{ "step": 1 }, "opposite": true, "linkedTo": 0 }],
+        "yAxis": { "title": { "text": null }, "labels": { "formatter": function () { return Math.abs(this.value); } } },
+  "plotOptions": { "series": { "stacking": "normal" } },
+      "tooltip": { "formatter" : function () {
+                       return this.series.options.meta[this.key-1] +
+                          '<b> (' +
+                          Highcharts.numberFormat(Math.abs(this.point.y), 0) + ')</b>';
+                    }
+                 }
+    };
+
+    $(function () {
+        load_neocpan_uploaders();
+    });
+
+    function load_neocpan_uploaders() {
+        $.ajax({
+            url: "/neocpan-uploaders/50",
+            dataType: "JSON",
+            success: function(data) {
+                var monthly_chart_data      = chart_data;
+                monthly_chart_data.title    = data.title;
+                monthly_chart_data.subtitle = data.subtitle;
+                monthly_chart_data.series   = data.series;
+                $('#neocpan_uploaders').highcharts(monthly_chart_data);
+            }
+        });
+    };
+
+</script>
+
+<script src="<% request.uri_base %>/javascripts/highcharts.js"></script>
+<script src="<% request.uri_base %>/javascripts/exporting.js"></script>
+
+<div id="neocpan_uploaders" style="height:650px; margin: 0 2em; clear:both; min-width: 300px"></div>
