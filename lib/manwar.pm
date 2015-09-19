@@ -12,7 +12,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =head1 AUTHOR
 
@@ -20,7 +20,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.04';
+$manwar::VERSION   = '0.05';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
@@ -115,6 +115,10 @@ get '/my-cpan/stat' => sub {
 
     content_type 'application/json';
     return to_json($stat);
+};
+
+get '/my-job' => sub {
+    template 'my-job';
 };
 
 1;
