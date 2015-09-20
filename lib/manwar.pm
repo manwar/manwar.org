@@ -24,7 +24,7 @@ $manwar::VERSION   = '0.05';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
-    template 'stats';
+    template 'cpan-uploaders';
 };
 
 get '/cpan-regulars' => sub {
