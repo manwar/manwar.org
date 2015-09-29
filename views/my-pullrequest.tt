@@ -1,0 +1,21 @@
+<script type="text/javascript">
+
+    $(function () {
+        load_my_pullrequest_stat();
+    });
+
+    function load_my_pullrequest_stat() {
+        $.ajax({
+            url: "/my-pullrequest/2015",
+            dataType: "JSON",
+            success: function(data) { $('#my_pullrequest').highcharts(data); }
+        });
+    };
+
+</script>
+
+<script src="<% request.uri_base %>/javascripts/highcharts.js"></script>
+<script src="<% request.uri_base %>/javascripts/data.js"></script>
+<script src="<% request.uri_base %>/javascripts/drilldown.js"></script>
+
+<div id="my_pullrequest" style="height:400px; margin: 0 2em; clear:both; min-width: 310px"></div>
