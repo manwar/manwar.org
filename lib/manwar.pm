@@ -131,6 +131,20 @@ get '/my-pullrequest/2015' => sub {
     return to_json($stat);
 };
 
+get '/my-gitcommits' => sub {
+    template 'my-gitcommits';
+};
+
+get '/my-gitcommits/2014-15' => sub {
+
+    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-gitcommits.json');
+    my $data = Dancer2::FileUtils::read_file_content($file);
+    my $stat = JSON->new->decode($data);
+
+    content_type 'application/json';
+    return to_json($stat);
+};
+
 get '/my-job' => sub {
     template 'my-job';
 };
