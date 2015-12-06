@@ -145,6 +145,10 @@ get '/my-gitcommits/2014-15' => sub {
     return to_json($stat);
 };
 
+get '/my-activities' => sub {
+    template 'my-activities';
+};
+
 get '/my-job' => sub {
     template 'my-job';
 };
