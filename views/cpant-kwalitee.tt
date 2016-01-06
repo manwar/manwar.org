@@ -5,10 +5,12 @@
     });
 
     function load_cpant_kwalitee() {
+        $('#spinner').show();
         $.ajax({
             url: "/cpant-kwalitee/100",
             dataType: "JSON",
-            success: function(data) { $('#cpant_kwalitee').highcharts(data); }
+            success: function(data) { $('#cpant_kwalitee').highcharts(data); },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 

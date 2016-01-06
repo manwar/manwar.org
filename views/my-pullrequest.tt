@@ -5,10 +5,12 @@
     });
 
     function load_my_pullrequest_stat() {
+        $('#spinner').show();
         $.ajax({
             url: "/my-pullrequest/2015",
             dataType: "JSON",
-            success: function(data) { $('#my_pullrequest').highcharts(data); }
+            success: function(data) { $('#my_pullrequest').highcharts(data); },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 

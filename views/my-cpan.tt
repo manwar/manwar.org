@@ -5,10 +5,12 @@
     });
 
     function load_my_cpan_stat() {
+        $('#spinner').show();
         $.ajax({
             url: "/my-cpan/stat",
             dataType: "JSON",
-            success: function(data) { $('#my_cpan_stat').highcharts(data); }
+            success: function(data) { $('#my_cpan_stat').highcharts(data); },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 

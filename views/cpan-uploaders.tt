@@ -5,10 +5,12 @@
     });
 
     function load_cpan_uploaders() {
+        $('#spinner').show();
         $.ajax({
             url: "/cpan-uploaders/20",
             dataType: "JSON",
-            success: function(data) { $('#cpan_uploaders').highcharts(data); }
+            success: function(data) { $('#cpan_uploaders').highcharts(data); },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 

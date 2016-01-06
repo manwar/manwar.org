@@ -27,6 +27,7 @@
     });
 
     function load_neocpan_uploaders() {
+        $('#spinner').show();
         $.ajax({
             url: "/neocpan-uploaders/50",
             dataType: "JSON",
@@ -36,7 +37,8 @@
                 monthly_chart_data.subtitle = data.subtitle;
                 monthly_chart_data.series   = data.series;
                 $('#neocpan_uploaders').highcharts(monthly_chart_data);
-            }
+            },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 
