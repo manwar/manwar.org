@@ -12,7 +12,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =head1 AUTHOR
 
@@ -20,11 +20,11 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.08';
+$manwar::VERSION   = '0.09';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
-    template 'cpan-uploaders';
+    template 'stats';
 };
 
 get '/cpan-regulars' => sub {
