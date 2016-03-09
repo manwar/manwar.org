@@ -1,94 +1,43 @@
 {
-   "chart":{
-      "type":"bar"
-   },
-   "title":{
-      "text":"Adopted CPAN 2015 - 2016"
-   },
-   "subtitle":{
-      "text":"Source: <a href='https://metacpan.org/author/MANWAR'>[ MetaCPAN ] </a><a href='https://github.com/Manwar'>[ GitHub ]</a>. Last updated at 2016-03-06 21:10:00 GMT"
-   },
-   "yAxis":{
-      "min":"0",
-      "title":{
-         "text":"Favourites"
-      },
-      "labels":{
-         "overflow": "justify"
-      }
-   },
-   "tooltip":{
-      "headerFormat":"<span style='font-size:10px'>{point.key}</span><table>",
-      "pointFormat":"<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y:f}</b></td></tr>",
-      "footerFormat":"</table>",
-      "shared":true,
-      "useHTML":true
-   },
-   "plotOptions":{
-      "bar":{
-         "dataLabels":{
-            "enabled": 0
-         }
-      }
-   },
-   "legends":{
-      "layout": "vertical",
-      "align": "right",
-      "verticalAlign": "top",
-      "x": -20,
-      "y": 50,
-      "floating": "true",
-      "borderWidth": 1,
-      "backgroundColor": "((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')",
-      "shadow": "true"
-   },
-   "credits": {
-      "enabled": "false"
-   },
-   "xAxis":{
-      "title":{
-        "text": null
-      },
-      "categories":[
-         "Data::Money",
-         "Data::Money::Converter",
-         "Data::Money::Converter::WebserviceX",
-         "File::Same",
-         "PDF::Create",
-         "Test::Strict",
-         "URL::Check",
-         "XML::SAX::Simple",
-         "XML::XPath"
-      ]
-   },
-   "series":[
-      {
-         "name":"MetaCPAN",
-         "data":[
-            5,
-            0,
-            0,
-            1,
-            5,
-            0,
-            0,
-            0,
-            2
+        "chart": {
+            "type": "column"
+        },
+        "title": {
+            "text": "Adopted CPAN Popularity Chart 2015 - 2016"
+        },
+        "subtitle":{
+            "text":"Source: <a href='https://metacpan.org/author/MANWAR'>[ MetaCPAN ] </a><a href='https://github.com/Manwar'>[ GitHub ]</a>. Last updated at 2016-03-06 21:10:00 GMT"
+        },
+        "xAxis": {
+            "categories": [ "Data::Money", "Data::Money::Converter", "Data::Money::Converter::WebserviceX", "File::Same", "PDF::Create", "Test::Strict", "URL::Check", "XML::SAX::Simple", "XML::XPath" ]
+        },
+        "yAxis": {
+            "min": 0,
+            "title": {
+                "text": ""
+            }
+        },
+        "tooltip": {
+            "pointFormat": "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b><br/>",
+            "shared": true
+        },
+        "plotOptions": {
+            "column": {
+                "stacking": "percent"
+            }
+        },
+        "series": [
+          {
+            "name": "Releases",
+            "data": [10,4,1,6,19,8,8,2,21]
+          },
+          {
+            "name": "GitHub",
+            "data": [0,0,0,0,7,1,0,0,0]
+          },
+          {
+            "name": "MetaCPAN",
+            "data": [5,0,0,1,5,0,0,0,2]
+          }
         ]
-      },
-      {
-         "name":"GitHub",
-         "data":[
-            0,
-            0,
-            0,
-            0,
-            7,
-            1,
-            0,
-            0,
-            0
-         ]
-      }
-   ]
 }
