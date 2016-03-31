@@ -1,8 +1,16 @@
 {
+   "plotOptions" : {
+      "series" : {
+         "stacking" : "normal"
+      }
+   },
    "yAxis" : {
       "min" : 0
    },
    "xAxis" : {
+      "labels" : {
+         "step" : 1
+      },
       "categories" : [
          "ZOFFIX",
          "MANWAR",
@@ -104,26 +112,14 @@
          "JMATES",
          "NEILB",
          "TAPPER"
-      ],
-      "labels" : {
-         "step" : 1
-      }
+      ]
    },
    "chart" : {
-      "type" : "bar",
-      "height" : 1300
-   },
-   "plotOptions" : {
-      "series" : {
-         "stacking" : "normal"
-      }
-   },
-   "legend" : {
-      "reversed" : 1
+      "height" : 1300,
+      "type" : "bar"
    },
    "series" : [
       {
-         "name" : "Distributions",
          "data" : [
             92,
             81,
@@ -225,10 +221,10 @@
             23,
             112,
             36
-         ]
+         ],
+         "name" : "Distributions"
       },
       {
-         "name" : "CPAN Game Kwalitee",
          "data" : [
             100,
             100,
@@ -330,13 +326,17 @@
             99.88,
             99.85,
             99.84
-         ]
+         ],
+         "name" : "CPAN Game Kwalitee"
       }
    ],
-   "subtitle" : {
-      "text" : "Last updated at 2016-03-31 09:17:07 GMT"
-   },
    "title" : {
       "text" : "CPAN Kwalitee (Top 100)"
+   },
+   "legend" : {
+      "reversed" : 1
+   },
+   "subtitle" : {
+      "text" : "Last updated at 2016-03-31 14:15:12 GMT"
    }
 }
