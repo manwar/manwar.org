@@ -23,6 +23,22 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 $manwar::VERSION   = '0.11';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
+get '/contact-us' => sub {
+    template 'contact-us';
+};
+
+post '/contact-us' => sub {
+    my $name    = params->{'name'};
+    my $email   = params->{'email'};
+    my $subject = params->{'subject'};
+    my $message = params->{'message'};
+
+    my $error = "[$name][$email][$subject][$message]";
+    template 'contact-us' => {
+        error => $error
+    };
+};
+
 get '/' => sub {
     template 'stats';
 };
