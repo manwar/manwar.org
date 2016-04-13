@@ -20,8 +20,9 @@ WriteMakefile(
         'Plack::Test'           => 0,
         'HTTP::Request::Common' => 0,
     },
-    PREREQ_PM     => {
-        'JSON'    => 0,
-        'Dancer2' => 0.159001,
+    PREREQ_PM        => {
+        'JSON'       => 2.90,
+        'Dancer2'    => 0.159001,
+        'MIME::Lite' => 3.030,
     },
 );

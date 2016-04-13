@@ -3,6 +3,7 @@ package manwar;
 use strict; use warnings;
 use Data::Dumper;
 use JSON;
+use MIME::Lite;
 use Dancer2;
 use Dancer2::FileUtils qw(path read_file_content);
 
@@ -12,7 +13,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.11
+Version 0.12
 
 =head1 AUTHOR
 
@@ -20,7 +21,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.11';
+$manwar::VERSION   = '0.12';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/contact-us' => sub {
@@ -33,9 +34,23 @@ post '/contact-us' => sub {
     my $subject = params->{'subject'};
     my $message = params->{'message'};
 
-    my $error = "[$name][$email][$subject][$message]";
+    my $status = 'Thank you for contacting us. I will get back to you in the next 24 hours.';
+    eval {
+        my $mailer = MIME::Lite->new(
+            From    => 'anwar.sajid@gmail.com',
+            To      => 'anwar.sajid@gmail.com',
+            Subject => "From: $name <$email>",
+            Data    => $message
+        );
+
+        $mailer->send;
+    };
+    if ($@) {
+        $status = 'Unable to send the email, please try again.';
+    }
+
     template 'contact-us' => {
-        error => $error
+        status => $status
     };
 };
 
