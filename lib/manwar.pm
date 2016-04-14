@@ -34,7 +34,7 @@ post '/contact-us' => sub {
     my $subject = params->{'subject'};
     my $message = params->{'message'};
 
-    my $status = 'Thank you for contacting us. I will get back to you in the next 24 hours.';
+    my $status;
     eval {
         my $mailer = MIME::Lite->new(
             From    => 'anwar.sajid@gmail.com',
@@ -44,9 +44,10 @@ post '/contact-us' => sub {
         );
 
         $mailer->send;
+        $status = 'Thank you for contacting us. We will get back to you in the next 24 hours.';
     };
     if ($@) {
-        $status = 'Unable to send the email, please try again.';
+        $status = 'Unable to submit the request, please try again.';
     }
 
     template 'contact-us' => {
