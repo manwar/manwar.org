@@ -167,7 +167,7 @@ get '/my-pullrequest' => sub {
     template 'my-pullrequest';
 };
 
-get '/my-pullrequest/2015' => sub {
+get '/my-pullrequest/stat' => sub {
 
     my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-pullrequest.json');
     my $data = Dancer2::FileUtils::read_file_content($file);
@@ -175,10 +175,6 @@ get '/my-pullrequest/2015' => sub {
 
     content_type 'application/json';
     return to_json($stat);
-};
-
-get '/my-prc' => sub {
-    template 'my-prc';
 };
 
 get '/my-prc/stat' => sub {
