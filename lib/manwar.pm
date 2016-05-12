@@ -121,6 +121,7 @@ get '/neocpan-uploaders/50' => sub {
    return to_json($stat);
 };
 
+=head1
 get '/cpant-kwalitee' => sub {
     template 'cpant-kwalitee';
 };
@@ -134,6 +135,7 @@ get '/cpant-kwalitee/100' => sub {
    content_type 'application/json';
    return to_json($stat);
 };
+=cut
 
 get '/my-cpan' => sub {
     template 'my-cpan';
