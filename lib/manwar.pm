@@ -107,11 +107,7 @@ get '/cpan-uploaders/20' => sub {
    return to_json($stat);
 };
 
-get '/neocpan-uploaders' => sub {
-    template 'neocpan-uploaders';
-};
-
-get '/neocpan-uploaders/50' => sub {
+get '/neocpan-uploaders/20' => sub {
 
     my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'neocpan-uploaders.json');
     my $data = Dancer2::FileUtils::read_file_content($file);
