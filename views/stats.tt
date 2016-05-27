@@ -13,40 +13,11 @@
     };
 
     $(function () {
-        load_cpan_daily_stats();
-        load_cpan_weekly_stats();
-        load_cpan_monthly_stats();
+        load_stats();
     });
 
-    function load_cpan_monthly_stats() {
-        $.ajax({
-            url: "/stats/monthly",
-            dataType: "JSON",
-            success: function(data) {
-                var monthly_chart_data      = chart_data;
-                monthly_chart_data.title    = data.title;
-                monthly_chart_data.subtitle = data.subtitle;
-                monthly_chart_data.series   = data.series;
-                $('#monthly').highcharts(monthly_chart_data);
-            }
-        });
-    }
-
-    function load_cpan_weekly_stats() {
-        $.ajax({
-            url: "/stats/weekly",
-            dataType: "JSON",
-            success: function(data) {
-                var weekly_chart_data      = chart_data;
-                weekly_chart_data.title    = data.title;
-                weekly_chart_data.subtitle = data.subtitle;
-                weekly_chart_data.series   = data.series;
-                $('#weekly').highcharts(weekly_chart_data);
-            }
-        });
-    };
-
-    function load_cpan_daily_stats() {
+    function load_stats() {
+        $('#spinner').show();
         $.ajax({
             url: "/stats/daily",
             dataType: "JSON",
@@ -56,7 +27,32 @@
                 daily_chart_data.subtitle = data.subtitle;
                 daily_chart_data.series   = data.series;
                 $('#daily').highcharts(daily_chart_data);
-            }
+
+                $.ajax({
+                    url: "/stats/weekly",
+                    dataType: "JSON",
+                    success: function(data) {
+                        var weekly_chart_data      = chart_data;
+                        weekly_chart_data.title    = data.title;
+                        weekly_chart_data.subtitle = data.subtitle;
+                        weekly_chart_data.series   = data.series;
+                        $('#weekly').highcharts(weekly_chart_data);
+                    }
+                });
+
+                $.ajax({
+                    url: "/stats/monthly",
+                    dataType: "JSON",
+                    success: function(data) {
+                        var monthly_chart_data      = chart_data;
+                        monthly_chart_data.title    = data.title;
+                        monthly_chart_data.subtitle = data.subtitle;
+                        monthly_chart_data.series   = data.series;
+                        $('#monthly').highcharts(monthly_chart_data);
+                    }
+                });
+            },
+            complete: function() { $('#spinner').hide(); }
         });
     };
 
