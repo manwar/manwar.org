@@ -1,131 +1,24 @@
 {
-   "legend" : {
-      "enabled" : "false"
-   },
    "plotOptions" : {
       "series" : {
          "borderWidth" : 0
       }
    },
-   "series" : [
-      {
-         "name" : "CPAN Uploaders Summary",
-         "colorByPoint" : "true",
-         "data" : [
-            {
-               "drilldown" : "PERLANCAR",
-               "y" : 4125,
-               "name" : "PERLANCAR"
-            },
-            {
-               "y" : 3381,
-               "drilldown" : "SHARYANTO",
-               "name" : "SHARYANTO"
-            },
-            {
-               "drilldown" : "RJBS",
-               "y" : 3009,
-               "name" : "RJBS"
-            },
-            {
-               "y" : 2643,
-               "drilldown" : "BINGOS",
-               "name" : "BINGOS"
-            },
-            {
-               "name" : "ADAMK",
-               "y" : 2310,
-               "drilldown" : "ADAMK"
-            },
-            {
-               "name" : "INGY",
-               "y" : 2205,
-               "drilldown" : "INGY"
-            },
-            {
-               "name" : "TOKUHIROM",
-               "y" : 2097,
-               "drilldown" : "TOKUHIROM"
-            },
-            {
-               "name" : "DROLSKY",
-               "drilldown" : "DROLSKY",
-               "y" : 2042
-            },
-            {
-               "drilldown" : "MIYAGAWA",
-               "y" : 1857,
-               "name" : "MIYAGAWA"
-            },
-            {
-               "drilldown" : "TOBYINK",
-               "y" : 1775,
-               "name" : "TOBYINK"
-            },
-            {
-               "y" : 1710,
-               "drilldown" : "ETHER",
-               "name" : "ETHER"
-            },
-            {
-               "name" : "DAGOLDEN",
-               "drilldown" : "DAGOLDEN",
-               "y" : 1683
-            },
-            {
-               "name" : "MANWAR",
-               "drilldown" : "MANWAR",
-               "y" : 1427
-            },
-            {
-               "drilldown" : "BARBIE",
-               "y" : 1346,
-               "name" : "BARBIE"
-            },
-            {
-               "y" : 1335,
-               "drilldown" : "MLEHMANN",
-               "name" : "MLEHMANN"
-            },
-            {
-               "y" : 1320,
-               "drilldown" : "PLICEASE",
-               "name" : "PLICEASE"
-            },
-            {
-               "y" : 1309,
-               "drilldown" : "PEVANS",
-               "name" : "PEVANS"
-            },
-            {
-               "name" : "KENTNL",
-               "drilldown" : "KENTNL",
-               "y" : 1281
-            },
-            {
-               "name" : "SHLOMIF",
-               "drilldown" : "SHLOMIF",
-               "y" : 1243
-            },
-            {
-               "drilldown" : "SMUELLER",
-               "y" : 1161,
-               "name" : "SMUELLER"
-            }
-         ]
-      }
-   ],
-   "subtitle" : {
-      "text" : "Click the columns to drilldown the yearly breakdown. Last updated at 2016-06-12 03:00:02 GMT"
+   "xAxis" : {
+      "type" : "category"
    },
-   "yAxis" : {
-      "title" : {
-         "text" : "Total Upload"
-      }
+   "title" : {
+      "text" : "CPAN Uploaders (TOP 20)"
+   },
+   "tooltip" : {
+      "followPointer" : "true",
+      "pointFormat" : "<span style=\"color:{point.color}\">{point.name}</span>: <b>{point.y:f}</b><br/>",
+      "headerFormat" : "<span style=\"font-size:11px\"></span>"
    },
    "drilldown" : {
       "series" : [
          {
+            "id" : "PERLANCAR",
             "data" : [
                [
                   "2014",
@@ -137,15 +30,12 @@
                ],
                [
                   "2016",
-                  1111
+                  1127
                ]
             ],
-            "id" : "PERLANCAR",
             "name" : "PERLANCAR"
          },
          {
-            "name" : "SHARYANTO",
-            "id" : "SHARYANTO",
             "data" : [
                [
                   "1999",
@@ -191,11 +81,11 @@
                   "2016",
                   3
                ]
-            ]
+            ],
+            "name" : "SHARYANTO",
+            "id" : "SHARYANTO"
          },
          {
-            "name" : "RJBS",
-            "id" : "RJBS",
             "data" : [
                [
                   "2003",
@@ -253,10 +143,11 @@
                   "2016",
                   57
                ]
-            ]
+            ],
+            "name" : "RJBS",
+            "id" : "RJBS"
          },
          {
-            "name" : "BINGOS",
             "id" : "BINGOS",
             "data" : [
                [
@@ -311,10 +202,12 @@
                   "2016",
                   52
                ]
-            ]
+            ],
+            "name" : "BINGOS"
          },
          {
             "id" : "ADAMK",
+            "name" : "ADAMK",
             "data" : [
                [
                   "2001",
@@ -368,11 +261,9 @@
                   "2013",
                   8
                ]
-            ],
-            "name" : "ADAMK"
+            ]
          },
          {
-            "name" : "INGY",
             "id" : "INGY",
             "data" : [
                [
@@ -443,11 +334,11 @@
                   "2016",
                   11
                ]
-            ]
+            ],
+            "name" : "INGY"
          },
          {
             "name" : "TOKUHIROM",
-            "id" : "TOKUHIROM",
             "data" : [
                [
                   "2005",
@@ -497,10 +388,10 @@
                   "2016",
                   9
                ]
-            ]
+            ],
+            "id" : "TOKUHIROM"
          },
          {
-            "name" : "DROLSKY",
             "data" : [
                [
                   "1999",
@@ -572,13 +463,13 @@
                ],
                [
                   "2016",
-                  100
+                  101
                ]
             ],
+            "name" : "DROLSKY",
             "id" : "DROLSKY"
          },
          {
-            "name" : "MIYAGAWA",
             "id" : "MIYAGAWA",
             "data" : [
                [
@@ -649,10 +540,11 @@
                   "2016",
                   28
                ]
-            ]
+            ],
+            "name" : "MIYAGAWA"
          },
          {
-            "id" : "TOBYINK",
+            "name" : "TOBYINK",
             "data" : [
                [
                   "2009",
@@ -679,11 +571,11 @@
                   453
                ]
             ],
-            "name" : "TOBYINK"
+            "id" : "TOBYINK"
          },
          {
-            "name" : "ETHER",
             "id" : "ETHER",
+            "name" : "ETHER",
             "data" : [
                [
                   "2010",
@@ -716,6 +608,8 @@
             ]
          },
          {
+            "id" : "DAGOLDEN",
+            "name" : "DAGOLDEN",
             "data" : [
                [
                   "2003",
@@ -773,13 +667,10 @@
                   "2016",
                   69
                ]
-            ],
-            "id" : "DAGOLDEN",
-            "name" : "DAGOLDEN"
+            ]
          },
          {
             "name" : "MANWAR",
-            "id" : "MANWAR",
             "data" : [
                [
                   "2010",
@@ -809,9 +700,11 @@
                   "2016",
                   167
                ]
-            ]
+            ],
+            "id" : "MANWAR"
          },
          {
+            "name" : "BARBIE",
             "data" : [
                [
                   "2003",
@@ -870,11 +763,9 @@
                   11
                ]
             ],
-            "id" : "BARBIE",
-            "name" : "BARBIE"
+            "id" : "BARBIE"
          },
          {
-            "id" : "MLEHMANN",
             "data" : [
                [
                   "1998",
@@ -953,10 +844,11 @@
                   13
                ]
             ],
-            "name" : "MLEHMANN"
+            "name" : "MLEHMANN",
+            "id" : "MLEHMANN"
          },
          {
-            "name" : "PLICEASE",
+            "id" : "PLICEASE",
             "data" : [
                [
                   "2012",
@@ -979,11 +871,11 @@
                   134
                ]
             ],
-            "id" : "PLICEASE"
+            "name" : "PLICEASE"
          },
          {
-            "name" : "PEVANS",
             "id" : "PEVANS",
+            "name" : "PEVANS",
             "data" : [
                [
                   "2006",
@@ -1032,7 +924,6 @@
             ]
          },
          {
-            "name" : "KENTNL",
             "data" : [
                [
                   "2009",
@@ -1067,6 +958,7 @@
                   46
                ]
             ],
+            "name" : "KENTNL",
             "id" : "KENTNL"
          },
          {
@@ -1132,10 +1024,12 @@
                   44
                ]
             ],
-            "id" : "SHLOMIF",
-            "name" : "SHLOMIF"
+            "name" : "SHLOMIF",
+            "id" : "SHLOMIF"
          },
          {
+            "id" : "SMUELLER",
+            "name" : "SMUELLER",
             "data" : [
                [
                   "2002",
@@ -1193,24 +1087,130 @@
                   "2015",
                   11
                ]
-            ],
-            "id" : "SMUELLER",
-            "name" : "SMUELLER"
+            ]
          }
       ]
    },
-   "tooltip" : {
-      "followPointer" : "true",
-      "headerFormat" : "<span style=\"font-size:11px\"></span>",
-      "pointFormat" : "<span style=\"color:{point.color}\">{point.name}</span>: <b>{point.y:f}</b><br/>"
+   "yAxis" : {
+      "title" : {
+         "text" : "Total Upload"
+      }
    },
-   "xAxis" : {
-      "type" : "category"
+   "legend" : {
+      "enabled" : "false"
    },
+   "series" : [
+      {
+         "name" : "CPAN Uploaders Summary",
+         "data" : [
+            {
+               "name" : "PERLANCAR",
+               "y" : 4141,
+               "drilldown" : "PERLANCAR"
+            },
+            {
+               "drilldown" : "SHARYANTO",
+               "y" : 3381,
+               "name" : "SHARYANTO"
+            },
+            {
+               "name" : "RJBS",
+               "y" : 3009,
+               "drilldown" : "RJBS"
+            },
+            {
+               "drilldown" : "BINGOS",
+               "y" : 2643,
+               "name" : "BINGOS"
+            },
+            {
+               "drilldown" : "ADAMK",
+               "y" : 2310,
+               "name" : "ADAMK"
+            },
+            {
+               "drilldown" : "INGY",
+               "y" : 2205,
+               "name" : "INGY"
+            },
+            {
+               "name" : "TOKUHIROM",
+               "y" : 2097,
+               "drilldown" : "TOKUHIROM"
+            },
+            {
+               "name" : "DROLSKY",
+               "y" : 2043,
+               "drilldown" : "DROLSKY"
+            },
+            {
+               "drilldown" : "MIYAGAWA",
+               "name" : "MIYAGAWA",
+               "y" : 1857
+            },
+            {
+               "name" : "TOBYINK",
+               "y" : 1775,
+               "drilldown" : "TOBYINK"
+            },
+            {
+               "drilldown" : "ETHER",
+               "y" : 1710,
+               "name" : "ETHER"
+            },
+            {
+               "drilldown" : "DAGOLDEN",
+               "name" : "DAGOLDEN",
+               "y" : 1683
+            },
+            {
+               "drilldown" : "MANWAR",
+               "name" : "MANWAR",
+               "y" : 1427
+            },
+            {
+               "drilldown" : "BARBIE",
+               "name" : "BARBIE",
+               "y" : 1346
+            },
+            {
+               "name" : "MLEHMANN",
+               "y" : 1335,
+               "drilldown" : "MLEHMANN"
+            },
+            {
+               "y" : 1320,
+               "name" : "PLICEASE",
+               "drilldown" : "PLICEASE"
+            },
+            {
+               "y" : 1309,
+               "name" : "PEVANS",
+               "drilldown" : "PEVANS"
+            },
+            {
+               "name" : "KENTNL",
+               "y" : 1281,
+               "drilldown" : "KENTNL"
+            },
+            {
+               "drilldown" : "SHLOMIF",
+               "y" : 1243,
+               "name" : "SHLOMIF"
+            },
+            {
+               "drilldown" : "SMUELLER",
+               "y" : 1161,
+               "name" : "SMUELLER"
+            }
+         ],
+         "colorByPoint" : "true"
+      }
+   ],
    "chart" : {
       "type" : "column"
    },
-   "title" : {
-      "text" : "CPAN Uploaders (TOP 20)"
+   "subtitle" : {
+      "text" : "Click the columns to drilldown the yearly breakdown. Last updated at 2016-06-12 17:00:02 GMT"
    }
 }
