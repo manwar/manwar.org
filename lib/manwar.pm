@@ -13,7 +13,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.12
+Version 0.13
 
 =head1 AUTHOR
 
@@ -21,7 +21,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.12';
+$manwar::VERSION   = '0.13';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/contact-us' => sub {
@@ -117,29 +117,23 @@ get '/neocpan-uploaders/20' => sub {
    return to_json($stat);
 };
 
-=head1
-get '/cpant-kwalitee' => sub {
-    template 'cpant-kwalitee';
+get '/my-distributions' => sub {
+    template 'my-distributions';
 };
 
-get '/cpant-kwalitee/100' => sub {
+get '/my-distributions-1' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'cpant-kwalitee.json');
+    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-distributions-1.json');
     my $data = Dancer2::FileUtils::read_file_content($file);
     my $stat = JSON->new->decode($data);
 
-   content_type 'application/json';
-   return to_json($stat);
-};
-=cut
-
-get '/my-cpan' => sub {
-    template 'my-cpan';
+    content_type 'application/json';
+    return to_json($stat);
 };
 
-get '/my-cpan/stat' => sub {
+get '/my-distributions-2' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-cpan.json');
+    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-distributions-2.json');
     my $data = Dancer2::FileUtils::read_file_content($file);
     my $stat = JSON->new->decode($data);
 
