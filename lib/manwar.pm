@@ -133,7 +133,7 @@ get '/my-gitcommits' => sub {
     template 'my-gitcommits';
 };
 
-get '/my-gitcommits/2014-15' => sub {
+get '/my-gitcommits/2014-16' => sub {
 
     return send_data(path(setting('appdir'), 'public', 'stats', 'my-gitcommits.json'));
 };
