@@ -17,6 +17,12 @@ BEGIN {
     use Digest::base;
     use Digest::SHA;
     use MIME::Base64;
+    use Dancer2::Core::Role::Template;
+    use Dancer2::Session::Simple;
+    use Dancer2::Logger::Console;
+    use Dancer2::Template::TemplateToolkit;
+    use Dancer2::Core::Session;
+    use Dancer2::Core::Role::SessionFactory;
 
     require Plack::Handler::Apache2;
 

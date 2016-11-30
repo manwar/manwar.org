@@ -13,7 +13,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.13
+Version 0.14
 
 =head1 AUTHOR
 
@@ -21,7 +21,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.13';
+$manwar::VERSION   = '0.14';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/contact-us' => sub {
@@ -65,32 +65,17 @@ get '/cpan-regulars' => sub {
 
 get '/stats/monthly' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'monthly.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'monthly.json'));
 };
 
 get '/stats/weekly' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'weekly.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'weekly.json'));
 };
 
 get '/stats/daily' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'daily.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-   content_type 'application/json';
-   return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'daily.json'));
 };
 
 get '/cpan-uploaders' => sub {
@@ -99,22 +84,12 @@ get '/cpan-uploaders' => sub {
 
 get '/cpan-uploaders/20' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'cpan-uploaders.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-   content_type 'application/json';
-   return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'cpan-uploaders.json'));
 };
 
 get '/neocpan-uploaders/20' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'neocpan-uploaders.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-   content_type 'application/json';
-   return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'neocpan-uploaders.json'));
 };
 
 get '/my-distributions' => sub {
@@ -123,22 +98,12 @@ get '/my-distributions' => sub {
 
 get '/my-distributions-1' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-distributions-1.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-distributions-1.json'));
 };
 
 get '/my-distributions-2' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-distributions-2.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-distributions-2.json'));
 };
 
 get '/my-adopted-cpan' => sub {
@@ -147,12 +112,7 @@ get '/my-adopted-cpan' => sub {
 
 get '/my-adopted-cpan/stat' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-adopted-cpan.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-adopted-cpan.json'));
 };
 
 get '/my-pullrequest' => sub {
@@ -161,22 +121,12 @@ get '/my-pullrequest' => sub {
 
 get '/my-pullrequest/stat' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-pullrequest.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-pullrequest.json'));
 };
 
 get '/my-prc/stat' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-prc.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-prc.json'));
 };
 
 get '/my-gitcommits' => sub {
@@ -185,12 +135,7 @@ get '/my-gitcommits' => sub {
 
 get '/my-gitcommits/2014-15' => sub {
 
-    my $file = Dancer2::FileUtils::path(setting('appdir'), 'public', 'stats', 'my-gitcommits.json');
-    my $data = Dancer2::FileUtils::read_file_content($file);
-    my $stat = JSON->new->decode($data);
-
-    content_type 'application/json';
-    return to_json($stat);
+    return send_data(path(setting('appdir'), 'public', 'stats', 'my-gitcommits.json'));
 };
 
 get '/my-job' => sub {
@@ -200,5 +145,12 @@ get '/my-job' => sub {
 get '/my-activities' => sub {
     template 'my-activities';
 };
+
+sub send_data {
+    my ($path) = @_;
+
+    content_type 'application/json';
+    return read_file_content($path);
+}
 
 1;
