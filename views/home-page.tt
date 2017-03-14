@@ -1,0 +1,22 @@
+<div id="calwrapper">
+    <div id="calheader"><h1><% title %></h1></div>
+    <p id="caltagline"><% sub_title %></p>
+
+    <div id="calcontent">
+
+<table class="calendar">
+
+   <% FOREACH row IN rows %>
+      <tr>
+      <% FOREACH col IN row %>
+         <td id="<% col.id %>" class="CellWithComment <% col.class %>">
+         <a target='_blank' class='article' title='<% col.tooltip %>' href='<% col.link %>'><% col.name %></a>
+         </td>
+      <% END %>
+      </tr>
+  <% END %>
+
+</table>
+
+    </div>
+</div>
