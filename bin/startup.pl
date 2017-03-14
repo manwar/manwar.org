@@ -26,7 +26,7 @@ BEGIN {
 
     require Plack::Handler::Apache2;
 
-    my @psgis = ('/home/pi/github/www.manwar.org/bin/app.psgi');
+    my @psgis = ($ENV{PSGI_APP_PATH});
     foreach my $psgi (@psgis) {
         Plack::Handler::Apache2->preload($psgi);
     }
