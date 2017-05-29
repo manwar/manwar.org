@@ -29,10 +29,12 @@ $(function() {
 });
 
 $("#ds").click(function() {
+    $('#cr-spinner').show();
     $.ajax({
         url: "/stats/daily",
         dataType: "JSON",
         success: function(data) {
+            $('#cr-spinner').hide();
             var daily_chart_data      = chart_data;
             daily_chart_data.title    = data.title;
             daily_chart_data.subtitle = data.subtitle;
@@ -43,10 +45,12 @@ $("#ds").click(function() {
 });
 
 $("#ws").click(function() {
+    $('#cr-spinner').show();
     $.ajax({
         url: "/stats/weekly",
         dataType: "JSON",
         success: function(data) {
+            $('#cr-spinner').hide();
             var weekly_chart_data      = chart_data;
             weekly_chart_data.title    = data.title;
             weekly_chart_data.subtitle = data.subtitle;
@@ -57,10 +61,12 @@ $("#ws").click(function() {
 });
 
 $("#ms").click(function() {
+    $('#cr-spinner').show();
     $.ajax({
         url: "/stats/monthly",
         dataType: "JSON",
         success: function(data) {
+            $('#cr-spinner').hide();
             var monthly_chart_data      = chart_data;
             monthly_chart_data.title    = data.title;
             monthly_chart_data.subtitle = data.subtitle;
@@ -71,15 +77,18 @@ $("#ms").click(function() {
 });
 
 $("#cus").click(function() {
+    $('#cu-spinner').show();
     $.ajax({
         url: "/cpan-uploaders/20",
         dataType: "JSON",
         success: function(data) {
+            $('#cu-spinner').hide();
             $('#cpan_uploaders_stats').highcharts(data);
         }
     });
 });
 $("#nus").click(function() {
+    $('#cu-spinner').show();
     var categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
                       '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
     var chart_data = {
@@ -102,6 +111,7 @@ $("#nus").click(function() {
         url: "/neocpan-uploaders/20",
         dataType: "JSON",
         success: function(data) {
+            $('#cu-spinner').hide();
             chart_data.title    = data.title;
             chart_data.subtitle = data.subtitle;
             chart_data.series   = data.series;
@@ -111,150 +121,180 @@ $("#nus").click(function() {
 });
 
 $("#ad").click(function() {
+    $('#cd-spinner').show();
     $.ajax({
         url: "/adopted-distributions",
         dataType: "JSON",
         success: function(data) {
+            $('#cd-spinner').hide();
             $('#ad_stats').highcharts(data);
         }
     });
 });
 
 $("#pd-1-20").click(function() {
+    $('#cd-spinner').show();
     $.ajax({
         url: "/personal-distributions/1/20",
         dataType: "JSON",
         success: function(data) {
+            $('#cd-spinner').hide();
             $('#pd_1_20_stats').highcharts(data);
         }
     });
 });
 
 $("#pd-21-40").click(function() {
+    $('#cd-spinner').show();
     $.ajax({
         url: "/personal-distributions/21/40",
         dataType: "JSON",
         success: function(data) {
+            $('#cd-spinner').hide();
             $('#pd_21_40_stats').highcharts(data);
         }
     });
 });
 
 $("#pd-41-60").click(function() {
+    $('#cd-spinner').show();
     $.ajax({
         url: "/personal-distributions/41/60",
         dataType: "JSON",
         success: function(data) {
+            $('#cd-spinner').hide();
             $('#pd_41_60_stats').highcharts(data);
         }
     });
 });
 
 $("#pd-61-80").click(function() {
+    $('#cd-spinner').show();
     $.ajax({
         url: "/personal-distributions/61/80",
         dataType: "JSON",
         success: function(data) {
+            $('#cd-spinner').hide();
             $('#pd_61_80_stats').highcharts(data);
         }
     });
 });
 
 $("#pr_2017").click(function() {
+    $('#pr-spinner').show();
     $.ajax({
         url: "/pullrequest/2017",
         dataType: "JSON",
         success: function(data) {
+            $('#pr-spinner').hide();
             $('#pr_2017_stats').highcharts(data);
         }
     });
 });
 
 $("#pr_2016").click(function() {
+    $('#pr-spinner').show();
     $.ajax({
         url: "/pullrequest/2016",
         dataType: "JSON",
         success: function(data) {
+            $('#pr-spinner').hide();
             $('#pr_2016_stats').highcharts(data);
         }
     });
 });
 
 $("#pr_2015").click(function() {
+    $('#pr-spinner').show();
     $.ajax({
         url: "/pullrequest/2015",
         dataType: "JSON",
         success: function(data) {
+            $('#pr-spinner').hide();
             $('#pr_2015_stats').highcharts(data);
         }
     });
 });
 
 $("#prc_2017").click(function() {
+    $('#prc-spinner').show();
     $.ajax({
         url: "/pullrequest-challenge/2017",
         dataType: "JSON",
         success: function(data) {
+            $('#prc-spinner').hide();
             $('#prc_2017_stats').highcharts(data);
         }
     });
 });
 
 $("#prc_2016").click(function() {
+    $('#prc-spinner').show();
     $.ajax({
         url: "/pullrequest-challenge/2016",
         dataType: "JSON",
         success: function(data) {
+            $('#prc-spinner').hide();
             $('#prc_2016_stats').highcharts(data);
         }
     });
 });
 
 $("#prc_2015").click(function() {
+    $('#prc-spinner').show();
     $.ajax({
         url: "/pullrequest-challenge/2015",
         dataType: "JSON",
         success: function(data) {
+            $('#prc-spinner').hide();
             $('#prc_2015_stats').highcharts(data);
         }
     });
 });
 
 $("#gc_2017").click(function() {
+    $('#gc-spinner').show();
     $.ajax({
         url: "/git-commits/2017",
         dataType: "JSON",
         success: function(data) {
+            $('#gc-spinner').hide();
             $('#gc_2017_stats').highcharts(data);
         }
     });
 });
 
 $("#gc_2016").click(function() {
+    $('#gc-spinner').show();
     $.ajax({
         url: "/git-commits/2016",
         dataType: "JSON",
         success: function(data) {
+            $('#gc-spinner').hide();
             $('#gc_2016_stats').highcharts(data);
         }
     });
 });
 
 $("#gc_2015").click(function() {
+    $('#gc-spinner').show();
     $.ajax({
         url: "/git-commits/2015",
         dataType: "JSON",
         success: function(data) {
+            $('#gc-spinner').hide();
             $('#gc_2015_stats').highcharts(data);
         }
     });
 });
 
 $("#gc_2014").click(function() {
+    $('#gc-spinner').show();
     $.ajax({
         url: "/git-commits/2014",
         dataType: "JSON",
         success: function(data) {
+            $('#gc-spinner').hide();
             $('#gc_2014_stats').highcharts(data);
         }
     });

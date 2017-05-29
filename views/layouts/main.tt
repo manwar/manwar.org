@@ -28,6 +28,21 @@
         padding-left: 0;
 	padding-right: 0;
     }
+
+    .spinner {
+        display: none;
+        width:100px;
+        height: 100px;
+        position: fixed;
+        //top: 50%;
+        //left: 50%;
+        text-align:center;
+        //margin-left: -50px;
+        //margin-top: -100px;
+        z-index:2;
+        overflow: auto;
+    }
+
 </style>
 
 <body data-spy="scroll" data-target="#my-navbar">
@@ -663,6 +678,8 @@
                <li><a id="ms" href="#monthly_stats" role="tab" data-toggle="tab">Monthly</a></li>
             </ul>
 
+            <div id="cr-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
+
             <div class="tab-content">
                <div class="tab-pane active in" id="daily_stats"></div>
                <div class="tab-pane" id="weekly_stats"></div>
@@ -684,6 +701,8 @@
                <li class="active"><a id="cus" href="#cpan_uploaders_stats" role="tab" data-toggle="tab">All Time</a></li>
                <li><a id="nus" href="#neocpan_uploaders_stats" role="tab" data-toggle="tab">NeoCPAN</a></li>
             </ul>
+
+            <div id="cu-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
 
             <div class="tab-content">
                <div class="tab-pane active in" id="cpan_uploaders_stats"></div>
@@ -708,6 +727,8 @@
                <li><a id="pd-41-60" href="#pd_41_60_stats" role="tab" data-toggle="tab">Personal (41-60)</a></li>
                <li><a id="pd-61-80" href="#pd_61_80_stats" role="tab" data-toggle="tab">Personal (61-80)</a></li>
             </ul>
+
+            <div id="cd-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
 
             <div class="tab-content">
                <div class="tab-pane active in" id="ad_stats"></div>
@@ -734,6 +755,8 @@
                <li><a id="pr_2015" href="#pr_2015_stats" role="tab" data-toggle="tab">2015</a></li>
             </ul>
 
+            <div id="pr-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
+
             <div class="tab-content">
                <div class="tab-pane active in" id="pr_2017_stats"></div>
                <div class="tab-pane" id="pr_2016_stats"></div>
@@ -756,6 +779,8 @@
                <li><a id="prc_2016" href="#prc_2016_stats" role="tab" data-toggle="tab">2016</a></li>
                <li><a id="prc_2015" href="#prc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
             </ul>
+
+            <div id="prc-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
 
             <div class="tab-content">
                <div class="tab-pane active in" id="prc_2017_stats"></div>
@@ -780,6 +805,8 @@
                <li><a id="gc_2015" href="#gc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
                <li><a id="gc_2014" href="#gc_2014_stats" role="tab" data-toggle="tab">2014</a></li>
             </ul>
+
+            <div id="gc-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
 
             <div class="tab-content">
                <div class="tab-pane active in" id="gc_2017_stats"></div>
