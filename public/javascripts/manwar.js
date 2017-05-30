@@ -34,12 +34,15 @@ $("#ds").click(function() {
         url: "/stats/daily",
         dataType: "JSON",
         success: function(data) {
-            $('#cr-spinner').hide();
             var daily_chart_data      = chart_data;
             daily_chart_data.title    = data.title;
             daily_chart_data.subtitle = data.subtitle;
             daily_chart_data.series   = data.series;
             $('#daily_stats').highcharts(daily_chart_data);
+        },
+        complete: function() {
+            $('#cr-spinner').hide();
+
         }
     });
 });
@@ -50,12 +53,14 @@ $("#ws").click(function() {
         url: "/stats/weekly",
         dataType: "JSON",
         success: function(data) {
-            $('#cr-spinner').hide();
             var weekly_chart_data      = chart_data;
             weekly_chart_data.title    = data.title;
             weekly_chart_data.subtitle = data.subtitle;
             weekly_chart_data.series   = data.series;
             $('#weekly_stats').highcharts(weekly_chart_data);
+        },
+        complete: function() {
+            $('#cr-spinner').hide();
         }
     });
 });
@@ -66,13 +71,15 @@ $("#ms").click(function() {
         url: "/stats/monthly",
         dataType: "JSON",
         success: function(data) {
-            $('#cr-spinner').hide();
             var monthly_chart_data      = chart_data;
             monthly_chart_data.title    = data.title;
             monthly_chart_data.subtitle = data.subtitle;
             monthly_chart_data.series   = data.series;
             $('#monthly_stats').highcharts(monthly_chart_data);
-         }
+        },
+        complete: function() {
+            $('#cr-spinner').hide();
+        }
     });
 });
 
@@ -82,8 +89,10 @@ $("#cus").click(function() {
         url: "/cpan-uploaders/20",
         dataType: "JSON",
         success: function(data) {
-            $('#cu-spinner').hide();
             $('#cpan_uploaders_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cu-spinner').hide();
         }
     });
 });
@@ -111,11 +120,13 @@ $("#nus").click(function() {
         url: "/neocpan-uploaders/20",
         dataType: "JSON",
         success: function(data) {
-            $('#cu-spinner').hide();
             chart_data.title    = data.title;
             chart_data.subtitle = data.subtitle;
             chart_data.series   = data.series;
             $('#neocpan_uploaders_stats').highcharts(chart_data);
+        },
+        complete: function() {
+            $('#cu-spinner').hide();
         }
     });
 });
@@ -126,8 +137,10 @@ $("#ad").click(function() {
         url: "/adopted-distributions",
         dataType: "JSON",
         success: function(data) {
-            $('#cd-spinner').hide();
             $('#ad_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
@@ -138,8 +151,10 @@ $("#pd-1-20").click(function() {
         url: "/personal-distributions/1/20",
         dataType: "JSON",
         success: function(data) {
-            $('#cd-spinner').hide();
             $('#pd_1_20_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
@@ -150,8 +165,10 @@ $("#pd-21-40").click(function() {
         url: "/personal-distributions/21/40",
         dataType: "JSON",
         success: function(data) {
-            $('#cd-spinner').hide();
             $('#pd_21_40_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
@@ -162,8 +179,10 @@ $("#pd-41-60").click(function() {
         url: "/personal-distributions/41/60",
         dataType: "JSON",
         success: function(data) {
-            $('#cd-spinner').hide();
             $('#pd_41_60_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
@@ -174,8 +193,10 @@ $("#pd-61-80").click(function() {
         url: "/personal-distributions/61/80",
         dataType: "JSON",
         success: function(data) {
-            $('#cd-spinner').hide();
             $('#pd_61_80_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
@@ -186,8 +207,10 @@ $("#pr_2017").click(function() {
         url: "/pullrequest/2017",
         dataType: "JSON",
         success: function(data) {
-            $('#pr-spinner').hide();
             $('#pr_2017_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
         }
     });
 });
@@ -198,8 +221,10 @@ $("#pr_2016").click(function() {
         url: "/pullrequest/2016",
         dataType: "JSON",
         success: function(data) {
-            $('#pr-spinner').hide();
             $('#pr_2016_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
         }
     });
 });
@@ -210,8 +235,10 @@ $("#pr_2015").click(function() {
         url: "/pullrequest/2015",
         dataType: "JSON",
         success: function(data) {
-            $('#pr-spinner').hide();
             $('#pr_2015_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
         }
     });
 });
@@ -222,8 +249,10 @@ $("#prc_2017").click(function() {
         url: "/pullrequest-challenge/2017",
         dataType: "JSON",
         success: function(data) {
-            $('#prc-spinner').hide();
             $('#prc_2017_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prc-spinner').hide();
         }
     });
 });
@@ -234,8 +263,10 @@ $("#prc_2016").click(function() {
         url: "/pullrequest-challenge/2016",
         dataType: "JSON",
         success: function(data) {
-            $('#prc-spinner').hide();
             $('#prc_2016_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prc-spinner').hide();
         }
     });
 });
@@ -246,8 +277,10 @@ $("#prc_2015").click(function() {
         url: "/pullrequest-challenge/2015",
         dataType: "JSON",
         success: function(data) {
-            $('#prc-spinner').hide();
             $('#prc_2015_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prc-spinner').hide();
         }
     });
 });
@@ -258,8 +291,10 @@ $("#gc_2017").click(function() {
         url: "/git-commits/2017",
         dataType: "JSON",
         success: function(data) {
-            $('#gc-spinner').hide();
             $('#gc_2017_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
         }
     });
 });
@@ -270,8 +305,10 @@ $("#gc_2016").click(function() {
         url: "/git-commits/2016",
         dataType: "JSON",
         success: function(data) {
-            $('#gc-spinner').hide();
             $('#gc_2016_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
         }
     });
 });
@@ -282,8 +319,10 @@ $("#gc_2015").click(function() {
         url: "/git-commits/2015",
         dataType: "JSON",
         success: function(data) {
-            $('#gc-spinner').hide();
             $('#gc_2015_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
         }
     });
 });
@@ -294,8 +333,10 @@ $("#gc_2014").click(function() {
         url: "/git-commits/2014",
         dataType: "JSON",
         success: function(data) {
-            $('#gc-spinner').hide();
             $('#gc_2014_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
         }
     });
 });
