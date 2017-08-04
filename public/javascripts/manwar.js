@@ -145,13 +145,13 @@ $("#ad").click(function() {
     });
 });
 
-$("#pd-1-20").click(function() {
+$("#pd-a-c").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/1/20",
+        url: "/personal-distributions/a/c",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_1_20_stats').highcharts(data);
+            $('#pd_a_c_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();
@@ -159,13 +159,13 @@ $("#pd-1-20").click(function() {
     });
 });
 
-$("#pd-21-40").click(function() {
+$("#pd-d-h").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/21/40",
+        url: "/personal-distributions/d/h",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_21_40_stats').highcharts(data);
+            $('#pd_d_h_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();
@@ -173,13 +173,13 @@ $("#pd-21-40").click(function() {
     });
 });
 
-$("#pd-41-60").click(function() {
+$("#pd-i-p").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/41/60",
+        url: "/personal-distributions/i/p",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_41_60_stats').highcharts(data);
+            $('#pd_i_p_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();
@@ -187,13 +187,13 @@ $("#pd-41-60").click(function() {
     });
 });
 
-$("#pd-61-80").click(function() {
+$("#pd-q-z").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/61/80",
+        url: "/personal-distributions/q/z",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_61_80_stats').highcharts(data);
+            $('#pd_q_z_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();
