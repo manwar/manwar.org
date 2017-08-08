@@ -21,7 +21,7 @@ var chart_data = {
 
 $(function() {
     $("#ds").click();
-    $("#pr_2017").click();
+    $("#pr_summary").click();
     $("#prc_2017").click();
     $("#gc_2017").click();
     $("#cus").click();
@@ -197,6 +197,20 @@ $("#pd-q-z").click(function() {
         },
         complete: function() {
             $('#cd-spinner').hide();
+        }
+    });
+});
+
+$("#pr_summary").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/summary",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
         }
     });
 });
