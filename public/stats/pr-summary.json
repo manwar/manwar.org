@@ -1,33 +1,37 @@
 {
-       "title": { "text": "GitHub<br>PullRequest<br>2015 - 2017",
-                  "align": "center",
-                  "verticalAlign": "middle",
-                  "y": 90
-                },
-    "subtitle": { "text": "<br>Last updated at 2017-08-17 15:15:00 GMT" },
-      "series": [
-                    {
-                        "type": "pie",
-                        "name": "Pull Request Stats",
-                        "innerSize": "50%",
-                        "data": [
-                            [ "Open [84]", 16.2 ],
-                            [ "Merged (closed) [334]", 64.5 ],
-                            [ "Unmerged (closed) [100]", 19.3 ]
-                        ]
-                    }
-                ],
-       "chart": { "plotBackgroundColor": null, "plotBorderWidth": 0, "plotShadow": false },
-     "tooltip": { "pointFormat": "<b>{point.percentage:.1f}%</b>" },
- "plotOptions": { "pie":
-                  {
-                     "dataLabels": { "enabled": true,
-                                     "distance": -50,
-                                     "style": { "fontWeight": "bold", "color": "red" }
-                                   },
-                     "startAngle": -90,
-                     "endAngle": 90,
-                     "center": ["50%", "75%"]
-                  }
-                }
+    "chart": { "type": "bar" },
+    "title": { "text": "GitHub PullRequest [2015 - 2017]" },
+    "subtitle": { "text": "Last updated at 2017-08-17 15:45:00 GMT" },
+    "xAxis": { "categories": [""] },
+    "yAxis": {
+        "min": 0,
+        "title": { "text": "", "align": "high" },
+        "labels": { "overflow": "justify" }
+    },
+    "plotOptions": { "bar": { "dataLabels": { "enabled": true } } },
+    "legend": {
+        "layout": "vertical",
+        "align": "right",
+        "verticalAlign": "top",
+        "x": -40,
+        "y": 80,
+        "floating": true,
+        "borderWidth": 1,
+        "backgroundColor": "#FFFFFF",
+        "shadow": true
+    },
+    "series": [
+    {
+        "name": "Merged (Close)",
+        "data": [334]
+    },
+    {
+        "name": "Unmerged (Close)",
+        "data": [100]
+    },
+    {
+        "name": "Open",
+        "data": [84]
+    }
+    ]
 }
