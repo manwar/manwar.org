@@ -22,7 +22,7 @@ var chart_data = {
 $(function() {
     $("#ds").click();
     $("#pr_summary").click();
-    $("#prc_2017").click();
+    $("#prc_summary").click();
     $("#gc_2017").click();
     $("#cus").click();
     $("#ad").click();
@@ -253,6 +253,20 @@ $("#pr_2015").click(function() {
         },
         complete: function() {
             $('#pr-spinner').hide();
+        }
+    });
+});
+
+$("#prc_summary").click(function() {
+    $('#prc-spinner').show();
+    $.ajax({
+        url: "/pullrequest-challenge/summary",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prc_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prc-spinner').hide();
         }
     });
 });
