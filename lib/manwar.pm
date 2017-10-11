@@ -100,6 +100,21 @@ get '/personal-distributions/:start/:end' => sub {
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
 };
 
+use Map::Tube::London;
+post '/tube-map/v1' => sub {
+    my $body  = params;
+    my $map   = $body->{'map'};
+    my $start = $body->{'start'};
+    my $end   = $body->{'end'};
+
+    if ($map =~ /london/i) {
+        my $map   = Map::Tube::London->new;
+        my $route = $map->get_shortest_route($start, $end);
+        content_type 'application/json';
+        return to_json([ map { sprintf("%s", $_) } @{$route->nodes} ]);
+    }
+};
+
 post '/contact' => sub {
     my $name    = params->{'uname'};
     my $email   = params->{'uemail'};
