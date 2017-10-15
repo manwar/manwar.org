@@ -4,7 +4,7 @@ use strict; use warnings;
 use Data::Dumper;
 use JSON;
 use MIME::Lite;
-use Dancer2 appname => 'manwar';
+use Dancer2;
 use Dancer2::FileUtils qw(path read_file_content);
 
 =head1 NAME
@@ -145,6 +145,7 @@ get '/my-reading-links' => sub {
     template 'my-reading-links';
 };
 =cut
+
 #
 #
 # LOCAL METHODS
