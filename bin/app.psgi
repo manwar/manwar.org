@@ -5,7 +5,7 @@ use warnings;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
 use manwar;
-use Map::Tube::API;
+use Map::Tube::Server;
 use Plack::Builder;
 
 my $start_inc = { %INC };
@@ -25,5 +25,5 @@ END {
 
 builder {
     mount '/'            => manwar->to_app;
-    mount '/map-tube/v1' => Map::Tube::API->to_app;
+    mount '/map-tube/v1' => Map::Tube::Server->to_app;
 };
