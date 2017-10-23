@@ -13,7 +13,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.19
+Version 0.20
 
 =head1 AUTHOR
 
@@ -21,7 +21,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.19';
+$manwar::VERSION   = '0.20';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
@@ -98,21 +98,6 @@ get '/personal-distributions/:start/:end' => sub {
     my $end   = params->{end};
     my $file  = sprintf("pd_%s_to_%s.json", $start, $end);
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
-};
-
-use Map::Tube::London;
-post '/tube-map/v1' => sub {
-    my $body  = params;
-    my $map   = $body->{'map'};
-    my $start = $body->{'start'};
-    my $end   = $body->{'end'};
-
-    if ($map =~ /london/i) {
-        my $map   = Map::Tube::London->new;
-        my $route = $map->get_shortest_route($start, $end);
-        content_type 'application/json';
-        return to_json([ map { sprintf("%s", $_) } @{$route->nodes} ]);
-    }
 };
 
 post '/contact' => sub {
