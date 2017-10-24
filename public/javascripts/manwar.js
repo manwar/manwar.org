@@ -23,7 +23,7 @@ $(function() {
     $("#ds").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
-    $("#gc_2017").click();
+    $("#gc_summary").click();
     $("#cus").click();
     $("#ad").click();
 });
@@ -309,6 +309,20 @@ $("#prc_2015").click(function() {
         },
         complete: function() {
             $('#prc-spinner').hide();
+        }
+    });
+});
+
+$("#gc_summary").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/summary",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
         }
     });
 });
