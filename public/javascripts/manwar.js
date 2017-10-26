@@ -19,6 +19,59 @@ var chart_data = {
     }
 };
 
+$('#map_name').change(function() {
+    var map = $("#map_name option:selected").val();
+    if (!map) {
+        $("#start").html('');
+        $("#end").html('');
+        return;
+    }
+
+    $('#map-tube-spinner').show();
+    $.ajax({
+        url: "/stations/" + map,
+        dataType: "HTML",
+        success: function(data) {
+            $("#start").html(data);
+            $("#end").html(data);
+        },
+        complete: function() {
+            $('#map-tube-spinner').hide();
+        }
+    });
+});
+
+$('#map_tube_button').click(function() {
+    var map = $("#map_name option:selected").val();
+    if (!map) {
+        alert("Please select the map.");
+    }
+
+    var start_station = $("#start option:selected").val();
+    if (!start_station) {
+        alert("Please select start station.");
+        return;
+    }
+
+    var end_station = $("#end option:selected").val();
+    if (!end_station) {
+        alert("Please select end station.");
+        return;
+    }
+
+    $('#map-tube-spinner').show();
+    $.ajax({
+        url: "/shortest-route/" + map + "/" + start_station + "/" + end_station,
+        dataType: "HTML",
+        success: function(data) {
+            $("#shortest-route-result").html(data);
+        },
+        complete: function() {
+            $('#map-tube-spinner').hide();
+        }
+    });
+});
+
 $(function() {
     $("#ds").click();
     $("#pr_summary").click();
@@ -42,7 +95,6 @@ $("#ds").click(function() {
         },
         complete: function() {
             $('#cr-spinner').hide();
-
         }
     });
 });
