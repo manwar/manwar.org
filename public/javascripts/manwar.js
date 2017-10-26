@@ -27,6 +27,7 @@ $('#map_name').change(function() {
         return;
     }
 
+    $("#shortest-route-result").html('');
     $('#map-tube-spinner').show();
     $.ajax({
         url: "/stations/" + map,
