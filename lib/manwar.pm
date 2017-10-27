@@ -14,7 +14,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.21
+Version 0.22
 
 =head1 AUTHOR
 
@@ -22,7 +22,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.21';
+$manwar::VERSION   = '0.22';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 get '/' => sub {
@@ -30,12 +30,7 @@ get '/' => sub {
     my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'cpan-recent.json'));
     my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
 
-    my $map_api = Map::Tube::API->new;
-    my $maps = $map_api->available_maps;
-    foreach my $map (@$maps) {
-        push @{$data->{maps}}, { name => $map };
-    }
-
+    $data->{maps}  = get_maps();
     $data->{dists} = get_dists();
 
     template 'index' => $data;
@@ -196,6 +191,18 @@ sub send_data {
 
     content_type 'application/json';
     return read_file_content($path);
+}
+
+sub get_maps {
+
+    my $map_api = Map::Tube::API->new;
+    my $available_maps = $map_api->available_maps;
+    my $maps = [];
+    foreach my $map (@$maps) {
+        push @{$maps}, { name => $map };
+    }
+
+    return $maps;
 }
 
 sub get_dists {

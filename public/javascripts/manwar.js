@@ -27,6 +27,8 @@ $('#map_name').change(function() {
         return;
     }
 
+    $("#start").html('');
+    $("#end").html('');
     $("#shortest-route-result").html('');
     $('#map-tube-spinner').show();
     $.ajax({
