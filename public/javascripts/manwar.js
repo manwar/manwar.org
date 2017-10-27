@@ -22,6 +22,7 @@ var chart_data = {
 $('#map_name').change(function() {
     var map = $("#map_name option:selected").val();
     if (!map) {
+        $("#shortest-route-result").html('');
         $("#start").html('');
         $("#end").html('');
         return;
