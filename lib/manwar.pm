@@ -198,7 +198,7 @@ sub get_maps {
     my $map_api = Map::Tube::API->new;
     my $available_maps = $map_api->available_maps;
     my $maps = [];
-    foreach my $map (@$maps) {
+    foreach my $map (@$available_maps) {
         push @{$maps}, { name => $map };
     }
 
