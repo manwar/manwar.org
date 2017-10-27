@@ -55,6 +55,7 @@
   					<span class="icon-bar"></span>
   					<span class="icon-bar"></span>
   					<span class="icon-bar"></span>
+  					<span class="icon-bar"></span>
   				</button>
                                 <a href="#" class="navbar-brand">HOME</a>
   			</div><!-- Navbar Header-->
@@ -71,7 +72,7 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">CPAN <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">CPAN<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#cpan-recent">Recent Uploads</a></li>
                                         <li><a href="#cpan-regulars">Regular Uploads</a></li>
@@ -80,11 +81,17 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#github-pullrequest">Pull Request</a></li>
                                         <li><a href="#pullrequest-challenge">Pull Request Challenge</a></li>
                                         <li><a href="#git-commits">Git Commits</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#map-tube">Map::Tube</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -895,6 +902,98 @@
                <div class="tab-pane" id="pr_2017_stats"></div>
                <div class="tab-pane" id="pr_2016_stats"></div>
                <div class="tab-pane" id="pr_2015_stats"></div>
+            </div>
+          </section>
+  	</div> <!--End Container-->
+
+        <!-- Map::Tube Section -->
+	<hr id="map-tube"/>
+
+	<div class="container">
+          <section>
+  	    <div class="page-header">
+  		<h1>Map::Tube</h1>
+  	    </div>
+
+            <ul class="nav nav-tabs" role="tablist">
+               <li class="active"><a id="map_tube_summary" href="#map_tube_summary_details" role="tab" data-toggle="tab">Summary</a></li>
+               <li><a id="map_tube_demo" href="#map_tube_demo_live" role="tab" data-toggle="tab">Try Me</a></li>
+            </ul>
+
+            <div id="map-tube-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
+
+            <div class="tab-content">
+               <div class="tab-pane active in" id="map_tube_summary_details">
+                  <div class="panel-group">
+                     <div class="panel panel-success text-center">
+                         <div class="panel-heading">
+                           <strong>
+                             <a href="http://www.ntt.com">Map::Tube - Lightweight Routing Framework</a>
+                           </strong>
+                         </div>
+                         <div class="panel-body">
+                             <small>
+                                 <p class="text-justify text-primary">
+                                     <a target="_blank" title="Map::Tube" href="https://metacpan.org/pod/Map::Tube"><strong>Map::Tube</strong></a>
+                                     is one of my favourite distributions published to <strong>CPAN</strong>. It was first released on <strong>26th Oct 2010</strong>.
+                                     As of Map::Tube <strong>v3.36</strong>, there have been <strong>148</strong> public releases so far. In the
+                                     long journey so far, I have made many friends all along. Some even became contributors as well, which made it
+                                     more fun to work on. There are around <strong>33</strong> maps created using the framework as listed below.
+                                 </p>
+                             </small>
+
+                             <% FOREACH dist_row IN dists %>
+                             <div class="row">
+                               <% FOREACH dist_col IN dist_row%>
+                               <div class="col-md-2">
+                                 <div class="thumbnail">
+                                   <a target="_blank" title="<% dist_col.title %>" href="https://metacpan.org/pod/<% dist_col.name %>"><% dist_col.title %></a>
+                                 </div>
+                               </div>
+                               <% END %>
+                             </div>
+                             <% END %>
+                         </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="tab-pane" id="map_tube_demo_live">
+                 <form class="form-horizontal">
+                   <div class="form-group">
+                     <label for="map_name" class="col-sm-3 control-label">Please select map:</label>
+                     <div class="col-sm-9">
+                       <select id="map_name" class="form-control">
+                         <option value="">--Select--</option>
+                         <% FOREACH map IN maps %>
+                         <option value="<% map.name %>"><% map.name %></option>
+                         <% END %>
+                       </select>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="start" class="col-sm-3 control-label">Please select start station:</label>
+                     <div class="col-sm-9">
+                       <select id="start" class="form-control"></select>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <label for="end" class="col-sm-3 control-label">Please select end station:</label>
+                     <div class="col-sm-9">
+                       <select id="end" class="form-control"></select>
+                     </div>
+                   </div>
+                   <div class="form-group">
+                     <div class="col-sm-offset-3 col-sm-9">
+                       <button id="map_tube_button" type="button" class="btn btn-default">Find Shortest Route</button>
+                     </div>
+                   </div>
+                 </form>
+
+                 <div id="shortest-route-result" class="panel-body text-primary"></div>
+
+               </div>
+
             </div>
           </section>
   	</div> <!--End Container-->
