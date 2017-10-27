@@ -50,7 +50,7 @@ get '/stations/:map' => sub {
     };
 
     my $stations = $map_api->map_stations({ map => $map });
-    my $data = '';
+    my $data = "<option value=''>--Select station--</option>\n";
     foreach my $station (@$stations) {
         $data .= sprintf("<option value='%s'>%s</option>\n", $get_name->($station), $station);
     }
