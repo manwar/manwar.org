@@ -47,19 +47,40 @@ $('#map_name').change(function() {
 $('#map_tube_button').click(function() {
     var map = $("#map_name option:selected").val();
     if (!map) {
-        alert("Please select the map.");
+        return BootstrapDialog.show({
+            title: 'ERROR',
+            message: 'Please select the map.',
+            buttons: [{
+                label: 'Close',
+                action: function(dialogItself){ dialogItself.close(); }
+            }]
+        });
     }
 
     var start_station = $("#start option:selected").val();
     if (!start_station) {
-        alert("Please select start station.");
+        return BootstrapDialog.show({
+            title: 'ERROR',
+            message: 'Please select the start station.',
+            buttons: [{
+                label: 'Close',
+                action: function(dialogItself){ dialogItself.close(); }
+            }]
+        });
+
         return;
     }
 
     var end_station = $("#end option:selected").val();
     if (!end_station) {
-        alert("Please select end station.");
-        return;
+        return BootstrapDialog.show({
+            title: 'ERROR',
+            message: 'Please select the end station.',
+            buttons: [{
+                label: 'Close',
+                action: function(dialogItself){ dialogItself.close(); }
+            }]
+        });
     }
 
     $('#map-tube-spinner').show();
