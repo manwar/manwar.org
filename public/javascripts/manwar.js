@@ -100,7 +100,7 @@ $('#map_tube_button').click(function() {
 
     var txt_captcha = $('#txt_captcha').text();
     var txt_captcha_response = $('#txt_captcha_response').val();
-    if (!(txt_captcha.replace(/\s+/, "") == txt_captcha_response.replace(/\s+/, ""))) {
+    if (!(txt_captcha.replace(/\s+/g, "") == txt_captcha_response.replace(/\s+/g, ""))) {
         return BootstrapDialog.show({
             title: 'ERROR',
             message: 'Captcha mismatched,',
