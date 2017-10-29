@@ -10,6 +10,11 @@ use Plack::Builder;
 
 my $start_inc = { %INC };
 
+builder {
+    mount '/'            => manwar->to_app;
+    mount '/map-tube/v1' => Map::Tube::Server->to_app;
+};
+
 END {
     my @m;
     foreach my $m (keys %INC) {
@@ -23,7 +28,3 @@ END {
     }
 }
 
-builder {
-    mount '/'            => manwar->to_app;
-    mount '/map-tube/v1' => Map::Tube::Server->to_app;
-};
