@@ -19,12 +19,26 @@ var chart_data = {
     }
 };
 
+function get_captcha() {
+
+    var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+    var a = alpha[Math.floor(Math.random() * alpha.length)];
+    var b = alpha[Math.floor(Math.random() * alpha.length)];
+    var c = alpha[Math.floor(Math.random() * alpha.length)];
+    var d = alpha[Math.floor(Math.random() * alpha.length)];
+    var e = alpha[Math.floor(Math.random() * alpha.length)];
+    var captcha = a + b + c + d + e;
+
+    return captcha;
+}
+
 $('#map_name').change(function() {
     var map = $("#map_name option:selected").val();
     if (!map) {
         $("#shortest-route-result").html('');
         $("#start").html('');
         $("#end").html('');
+        $('#txt_captcha_response').val('');
         return;
     }
 
@@ -32,6 +46,8 @@ $('#map_name').change(function() {
     $("#end").html('');
     $("#shortest-route-result").html('');
     $('#map-tube-spinner').show();
+    $('#txt_captcha').html(get_captcha());
+    $('#txt_captcha_response').val('');
     $.ajax({
         url: "/stations/" + map,
         dataType: "HTML",
@@ -68,8 +84,6 @@ $('#map_tube_button').click(function() {
                 action: function(dialogItself){ dialogItself.close(); }
             }]
         });
-
-        return;
     }
 
     var end_station = $("#end option:selected").val();
@@ -77,6 +91,19 @@ $('#map_tube_button').click(function() {
         return BootstrapDialog.show({
             title: 'ERROR',
             message: 'Please select the end station.',
+            buttons: [{
+                label: 'Close',
+                action: function(dialogItself){ dialogItself.close(); }
+            }]
+        });
+    }
+
+    var txt_captcha = $('#txt_captcha').text();
+    var txt_captcha_response = $('#txt_captcha_response').val();
+    if (!(txt_captcha == txt_captcha_response)) {
+        return BootstrapDialog.show({
+            title: 'ERROR',
+            message: 'Captcha mismatched,',
             buttons: [{
                 label: 'Close',
                 action: function(dialogItself){ dialogItself.close(); }
