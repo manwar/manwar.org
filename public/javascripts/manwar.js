@@ -27,7 +27,7 @@ function get_captcha() {
     var c = alpha[Math.floor(Math.random() * alpha.length)];
     var d = alpha[Math.floor(Math.random() * alpha.length)];
     var e = alpha[Math.floor(Math.random() * alpha.length)];
-    var captcha = a + b + c + d + e;
+    var captcha = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e;
 
     return captcha;
 }
@@ -100,7 +100,7 @@ $('#map_tube_button').click(function() {
 
     var txt_captcha = $('#txt_captcha').text();
     var txt_captcha_response = $('#txt_captcha_response').val();
-    if (!(txt_captcha == txt_captcha_response)) {
+    if (!(txt_captcha.replace(/\s+/, "") == txt_captcha_response.replace(/\s+/, ""))) {
         return BootstrapDialog.show({
             title: 'ERROR',
             message: 'Captcha mismatched,',
@@ -131,6 +131,7 @@ $(function() {
     $("#gc_summary").click();
     $("#cus").click();
     $("#ad").click();
+    $('#txt_captcha').html(get_captcha());
 });
 
 $("#ds").click(function() {
