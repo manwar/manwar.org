@@ -66,11 +66,14 @@ get '/shortest-route/:map/:start/:end' => sub {
     my $end   = params->{end};
 
     my $stations = _get_cached_routes($map, $start, $end);
-    my $data = "<ol>\n";
-    foreach my $station (@$stations) {
-        $data .= sprintf("<li>%s</li>\n", $station);
+    my $data = '';
+    if (scalar(@$stations)) {
+        $data = "<ol>\n";
+        foreach my $station (@$stations) {
+            $data .= sprintf("<li>%s</li>\n", $station);
+        }
+        $data .= "</ol>\n";
     }
-    $data .= "</ol>\n";
 
     content_type 'text/html';
     return $data;
