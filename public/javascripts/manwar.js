@@ -118,6 +118,9 @@ $('#map_tube_button').click(function() {
         success: function(data) {
             $("#shortest-route-result").html(data);
         },
+        error: function() {
+            $("#shortest-route-result").html("<p class='bg-danger'><strong>ERROR: You have reached request limit. Please try again in a minute.</strong></p>");
+        },
         complete: function() {
             $('#map-tube-spinner').hide();
         }
