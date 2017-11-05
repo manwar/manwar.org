@@ -3,6 +3,7 @@ package manwar;
 use strict; use warnings;
 use Data::Dumper;
 use JSON;
+use HTML::Entities;
 use MIME::Lite;
 use Cache::Memcached::Fast;
 use Map::Tube::API;
@@ -15,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.24
+Version 0.25
 
 =head1 AUTHOR
 
@@ -23,7 +24,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.24';
+$manwar::VERSION   = '0.25';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 our $MEMCACHE = Cache::Memcached::Fast->new({ servers => [{ address => 'localhost:11211' }] });
@@ -52,7 +53,7 @@ get '/stations/:map' => sub {
     my $stations = _get_cached_stations($map);
     my $data = "<option value=''>--Select station--</option>\n";
     foreach my $station (@$stations) {
-        $data .= sprintf("<option value='%s'>%s</option>\n", $get_name->($station), $station);
+        $data .= sprintf("<option value='%s'>%s</option>\n", encode_entities($get_name->($station)), $station);
     }
 
     content_type 'text/html';

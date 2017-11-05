@@ -113,7 +113,7 @@ $('#map_tube_button').click(function() {
 
     $('#map-tube-spinner').show();
     $.ajax({
-        url: "/shortest-route/" + map + "/" + start_station + "/" + end_station,
+        url: "/shortest-route/" + encodeURIComponent(map) + "/" + encodeURIComponent(start_station) + "/" + encodeURIComponent(end_station),
         dataType: "HTML",
         success: function(data) {
             $("#shortest-route-result").html(data);
