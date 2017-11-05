@@ -135,6 +135,7 @@ $(function() {
     $("#cus").click();
     $("#ad").click();
     $('#txt_captcha').html(get_captcha());
+    $("#map_name").val($("#map_name option:first").val());
 });
 
 $("#ds").click(function() {
