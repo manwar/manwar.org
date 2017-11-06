@@ -203,7 +203,7 @@
                <% END %>
 
              </section>
-        </div><!-- End Container for Work -->
+        </div><!-- End Container for "Work" -->
 	<br/>
 	<br/>
 
@@ -218,232 +218,34 @@
                 <div id="what-is-new-slides" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#what-is-new-slides" data-slide-to="0" class="active"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="1"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="2"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="3"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="4"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="5"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="6"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="7"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="8"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="9"></li>
-                        <li data-target="#what-is-new-slides" data-slide-to="10"></li>
+                        <% FOREACH win_indicator IN win_indicators %>
+                        <li data-target="#what-is-new-slides"
+                            data-slide-to="<% win_indicator.slide_to %>" <% win_indicator.class %>>
+                        </li>
+                        <% END %>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-
-                        <!-- Slide 1 -->
-                        <div class="item active">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>21st August 2017</strong></div>
+                        <% FOREACH what_is_new_row IN what_is_new %>
+                        <div class="item<% what_is_new_row.active %>">
+                            <div class="panel text-center <% what_is_new_row.header_class %>">
+                                <div class="panel-heading"><strong><% what_is_new_row.title %></strong></div>
                                 <div class="panel-body">
                                     <small>
                                         <p class="text-success">
                                             <strong>
-                                            <a href="http://perlweekly.com/archive/317.html" target="_blank">Perl Weekly Issue #317</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong>Perl weekly newsletter issue <a href="http://perlweekly.com/archive/317.html">#317</a>, mentioned my <a href="http://blogs.perl.org/users/mohammad_s_anwar/2017/08/lets-celebrate-cpan-day-in-a-special-way.html">blog</a> about celebrating CPAN day and release of new map Map::Tube::Kolkatta.</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 1 -->
-
-                        <!-- Slide 2 -->
-                        <div class="item">
-                            <div class="panel panel-warning text-center">
-                                <div class="panel-heading"><strong>3rd August 2017</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/what-s-new-on-cpan---july-2017/" target="_blank">What's new on CPAN - July 2017</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong><a href="https://metacpan.org/release/Calendar-Julian" target="_blank">Calendar::Julian</a></strong> is reported under the category <strong>"Language & International"</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 2 -->
-
-                        <!-- Slide 3 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>24th July 2017</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perlweekly.com/archive/313.html" target="_blank">Perl Weekly Issue #313</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong>Perl weekly newsletter issue <a href="http://perlweekly.com/archive/313.html">#313</a>, editorial talking about my 1000th consecutive days releasing to CPAN.</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 3 -->
-
-                        <!-- Slide 4 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>23rd July 2017</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://blogs.perl.org/users/mohammad_s_anwar/2017/07/1000th-consecutive-days-releasing-to-cpan.html" target="_blank">1000th consecutive days releasing to CPAN</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong>To celebrate the special day, I released new distributions i.e. Date::Hebrew::Simple, Date::Julian::Simple, Calendar::Hebrew and Calendar::Julian.</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 4 -->
-
-                        <!-- Slide 5 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>13th March 2017</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/what-s-new-on-cpan---february-2017/" target="_blank">
-                                                What's new on CPAN - February 2017
+                                            <a href="<% what_is_new_row.sub_title_url %>" target="_blank">
+                                              <% what_is_new_row.sub_title_name %>
                                             </a>
                                             </strong>
                                         </p>
-                                        <p class="text-primary">
-                                            <strong><a href="https://metacpan.org/release/CPANTS-Kwalitee-Report" target="_blank">CPANTS::Kwalitee::Report</a></strong> is reported under the category <strong>"Config & Devops"</strong>.
-                                        </p>
+                                        <p class="text-primary"><% what_is_new_row.body %></p>
                                     </small>
                                 </div>
                             </div>
-                        </div><!-- End of Slide 5 -->
-
-                        <!-- Slide 6 -->
-                        <div class="item">
-                            <div class="panel panel-info text-center">
-                                <div class="panel-heading"><strong>25th December 2016</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://24pullrequests.com/users/manwar" target="_blank">24 PullRequest Challenge</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            Completed the 24 PullRequest Challenge for the year 2016 and submitted <strong>66</strong> pull requests. In previous year, 2015, I submitted <strong>44</strong> pull requests.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 6 -->
-
-                        <!-- Slide 7 -->
-                        <div class="item">
-                            <div class="panel panel-danger text-center">
-                                <div class="panel-heading"><strong>3rd December 2016</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://blogs.perl.org/users/mohammad_s_anwar/2016/12/my-first-ever-talk-at-london-perl-workshop-2016.html">London Perl Workshop 2016</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            Presented talk at <strong>LPW 2016</strong>. Topic was <strong>Journey: CPAN user to CPAN contributor</strong>.<a href="/talks/LPW2016.pdf" target="_blank">[Slides]</a>
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 7 -->
-
-                        <!-- Slide 8 -->
-                        <div class="item">
-                            <div class="panel panel-warning text-center">
-                                <div class="panel-heading"><strong>25th September 2016</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="https://code-maven.com/cmos-11-mohammad-s-anwar" target="_blank">CMOS #11: Interviewed by Gabor Szabo</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong>Interviewed by Gabor with regard to my journey as a CPAN contributor. [<a href="https://www.youtube.com/watch?v=hS0LRP3uwW4" target="_blank">VIDEO</a>]</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 8 -->
-
-                        <!-- Slide 9 -->
-                        <div class="item">
-                            <div class="panel panel-warning text-center">
-                                <div class="panel-heading"><strong>6th April 2016</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/what-s-new-on-cpan---march-2016/" target="_blank">What's new on CPAN - March 2016</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong><a href="https://metacpan.org/release/Calendar-Gregorian" target="_blank">Calendar::Gregorian</a></strong> is reported under the category <strong>"Data"</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 9 -->
-
-                        <!-- Slide 10 -->
-                        <div class="item">
-                            <div class="panel panel-default text-center">
-                                <div class="panel-heading"><strong>2nd December 2014</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/137/2014/12/2/What-s-new-on-CPAN---November-2014/" target="_blank">What's new on CPAN - November 2014</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong><a href="https://metacpan.org/release/Crypt-Trifid" target="_blank">Crypt::Trifid</a></strong> is reported under the category <strong>"Games & Entertainment"</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 10 -->
-
-                        <!-- Slide 11 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>1st August 2014</strong></div>
-                                <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/106/2014/8/1/What-s-new-on-CPAN-July-2014/" target="_blank">What's new on CPAN - July 2014</a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary">
-                                            <strong><a href="https://metacpan.org/release/Map-Tube-London" target="_blank">Map::Tube::London</a></strong> is reported under the category <strong>"Fun"</strong>.
-                                        </p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 11 -->
+                        </div>
+                        <% END %>
                     </div><!-- End of Wrapper for Slides -->
 
                     <!-- Left and right controls -->
@@ -457,7 +259,7 @@
                     </a>
                 </div>
             </section>
-        </div><!-- End container -->
+        </div><!-- End container for "What is new?"-->
 
 	<br/>
 	<br/>

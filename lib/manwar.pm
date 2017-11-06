@@ -34,11 +34,14 @@ get '/' => sub {
     my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'cpan-recent.json'));
     my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
 
-    $data->{maps}     = get_maps();
-    $data->{dists}    = get_dists();
-    $data->{who_am_i} = get_who_am_i();
-    $data->{work}     = get_work();
-    $data->{current}  = get_current();
+    $data->{maps}        = get_maps();
+    $data->{dists}       = get_dists();
+    $data->{who_am_i}    = get_who_am_i();
+    $data->{work}        = get_work();
+    $data->{current}     = get_current();
+    $data->{what_is_new} = get_what_is_new();
+    $data->{win_indicators} = get_what_is_new_indicators();
+
 
     template 'index' => $data;
 };
@@ -319,6 +322,31 @@ sub get_current {
     my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'work.json'));
     my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
     return $data->{current};
+}
+
+sub get_what_is_new {
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'what-is-new.json'));
+    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+    return $data;
+}
+
+sub get_what_is_new_indicators {
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'what-is-new.json'));
+    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+
+    my $indicators = [];
+    my $index = 0;
+    foreach (@$data) {
+        if ($index == 0) {
+            push @$indicators, { slide_to => $index, class => "class=\"active\"" };
+        }
+        else {
+            push @$indicators, { slide_to => $index };
+        }
+        $index++;
+    }
+
+    return $indicators;
 }
 
 sub get_total_dists {
