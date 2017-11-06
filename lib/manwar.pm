@@ -28,13 +28,17 @@ $manwar::VERSION   = '0.25';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 our $MEMCACHE = Cache::Memcached::Fast->new({ servers => [{ address => 'localhost:11211' }] });
+
 get '/' => sub {
 
     my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'cpan-recent.json'));
     my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
 
-    $data->{maps}  = get_maps();
-    $data->{dists} = get_dists();
+    $data->{maps}     = get_maps();
+    $data->{dists}    = get_dists();
+    $data->{who_am_i} = get_who_am_i();
+    $data->{work}     = get_work();
+    $data->{current}  = get_current();
 
     template 'index' => $data;
 };
@@ -297,6 +301,24 @@ sub get_dists {
     push @$dists, $row;
 
     return $dists;
+}
+
+sub get_who_am_i {
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'who-am-i.json'));
+    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+    return $data->{who_am_i};
+}
+
+sub get_work {
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'work.json'));
+    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+    return $data->{work};
+}
+
+sub get_current {
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'work.json'));
+    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+    return $data->{current};
 }
 
 sub get_total_dists {

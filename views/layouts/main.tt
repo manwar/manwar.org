@@ -78,7 +78,7 @@
 
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav">
-			        <li><a href="#recommendations">Who am I?</a>
+			        <li><a href="#who-am-I">Who am I?</a>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Latest...<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
@@ -126,230 +126,84 @@
             </div>
         </div>
 
-  	<!-- Recommendations -->
-	<hr  id="recommendations"/>
+  	<!-- Who am I? -->
+	<hr  id="who-am-I"/>
   	<div class="container">
   	    <section>
   	        <div class="page-header">
   		    <h1><span class="rainbow">Who am I?</span></h1>
   		</div>
 
-  		<div class="row">
-  		    <div class="col-md-4 text-justify">
-  		        <img src="/images/lance_walton.jpg" title="Lance Walton, Partner at Underscore Consulting." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Lance Walton">
-    			<br/>
-			<small>
-                        Mohammad is a determined and proficient developer with an enthusiasm for learning new techniques and languages. He inherited a nasty legacy codebase and was always eager to help when problems surfaced, not resting until the immediate problem had been solved and the cause of the problem removed...
-  			</small>
-  		    </div>
-  		    <div class="col-md-4 text-justify">
-  			<img src="/images/ronnie_stafford.jpg" title="Ronnie Stafford, PhD Research." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Ronnie Stafford">
-			<br/>
-			<small>
-                        Mohammad worked closely with me maintaining and developing one of SunGard APT's Risk Reporting platforms. He is an incredibly proficient Perl developer and is a very skilful problem solver. His vital contribution to the team enabled us to implement critical enhancements and modernisation to the product while maintaining customer service...
-			</small>
-  		    </div>
-  		    <div class="col-md-4 text-justify">
-  			<img src="/images/abdul_kamaly.jpg" title="Abdul Kamaly, Enterprise Data Architecture." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Abdul Kamaly">
-    		        <br/>
-			<small>
-                        Mohammed is a very hard working individual. He has developed the Work Order workflow process on the NBOSS system, which is developed and maintained in house. We used his workflow to transfer our existing work order process on to NBOSS. The workflow really streamlined our business unit's work order process...
-  		        </small>
-  		    </div>
-  		</div><!-- End row -->
-
-		<br/>
-
-		<div class="row">
-   		    <div class="col-md-4 text-justify">
-  			<img src="/images/paul_gowers.jpg" title="Paul Gowers, Technical Analyst." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Paul Gowers">
-			<br/>
-			<small>
-                        I worked on the same team as Mohammad and we were writing SMS sender modules in Perl. He had produced much of the core of the Perl SMS sub-system using object oriented class modules when I joined. I enjoyed working with Mohammad and he was very helpful in getting me started into the job....
-			</small>
-  		    </div>
-  		    <div class="col-md-4 text-justify">
-  			<img src="/images/ryan_harper.jpg" title="Ryan Harper, Senior Devops Consultant." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Ryan Harper">
-    		        <br/>
-			<small>
-                        Mohammad is the quiet genius that sits in the corner. He has an uncanny ability to resolve complex issues in rapid time. He has a great aptitude and never gets phased by anything. He just gets on with it. He is an absolute pleasure to work with...
-  			</small>
-  		    </div>
-  		    <div class="col-md-4 text-justify">
-  			<img src="/images/raj_patel.jpg" title="Raj Patel, Technical Architect." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Raj Patel">
-			<br/>
-    		        <small>
-                        Mohammad is a great software engineer who gets on the job without fuss and delivers great code. On top of this, he is a very personable chap and it was a pleasure working with along side him....
-   	                </small>
-  		    </div>
-  		</div><!-- End row -->
-
-		<br/>
-
-		<div class="row">
-		    <div class="col-md-4 text-justify">
-  			<img src="/images/syed_raza_shahid.jpg" title="Syed Raza Shahid, Senior Language Modelling Scientist." class="img-responsive img-circle margin" style="display:inline" width="50" height="50" alt="Paul Gowers">
-			<br/>
-			<small>
-                        Muhammad was a first person to contact if I have problems in perl or related. Although, we were working in different teams but at times we collaborated on certain tasks. He is a good teacher. I learnt a lot from him....
-			</small>
-  		    </div>
-		</div>
+                <% FOREACH who_am_i_row IN who_am_i %>
+                <div class="row">
+                    <% FOREACH who_am_i_col IN who_am_i_row %>
+                        <div class="col-md-4 text-justify">
+                            <img src="<% who_am_i_col.img_src %>"
+                                 title="<% who_am_i_col.img_title %>"
+                                 class="img-responsive img-circle margin"
+                                 style="display:inline" width="50" height="50"
+                                 alt="<% who_am_i_col.img_alt %>">
+                            <br/>
+                            <small><% who_am_i_col.description %></small>
+                        </div>
+                    <% END %>
+                </div>
+                <br/>
+                <% END %>
 
 	    </section>
-  	</div> <!--End Container-->
+  	</div> <!--End Container for Who am I? -->
+
 	<br/><br/>
 
         <!-- Work -->
 	<hr id="work"/>
 	<div class="container">
              <section>
-                 <div class="page-header">
-                     <h1><span class="rainbow">Work...</span></h1>
+               <div class="page-header">
+                   <h1><span class="rainbow">Work...</span></h1>
+               </div>
+
+               <% FOREACH current_row IN current %>
+               <div class="panel-group">
+                 <% FOREACH current_col IN current_row %>
+                 <div class="panel panel-success text-center">
+                   <div class="panel-heading">
+                     <strong><a href="<% current_col.company_url %>"><% current_col.company_name %></a></strong>
+                   </div>
+                   <div class="panel-body">
+                     <small>
+                       <p class="text-success"><% current_col.job_title %></p>
+                       <p class="text-center text-primary"><% current_col.job_description %></p>
+                     </small>
+                   </div>
                  </div>
-                 <div class="panel-group">
-                     <div class="panel panel-success text-center">
-                         <div class="panel-heading">
-                           <strong>
-                             <a href="http://www.ntt.com">NTT Europe Ltd, London</a>
-                           </strong>
-                         </div>
-                         <div class="panel-body">
-                             <small>
-                                 <p class="text-success">
-                                     Systems Developer (Sep 2012 - Present)
-                                 </p>
-                                 <p class="text-center text-primary">
-                                     Design, implement and maintain additional features and functionality within the Operational Support Systems (OSS), web based application, platforms.</p>
-                             </small>
-                         </div>
+                 <% END %>
+               </div>
+               <% END %>
+
+               <% FOREACH work_row IN work %>
+               <div class="row">
+                 <% FOREACH work_col IN work_row %>
+                 <div class="col-sm-4">
+                   <div class="panel text-center <% work_col.header_class %>">
+                     <div class="panel-heading">
+                       <strong><a href="<% work_col.company_url %>"><% work_col.company_name %></a></strong>
                      </div>
+                     <div class="panel-body">
+                       <small><p class="text-success"><% work_col.job_title %></p>
+                         <p class="text-justify text-primary"><% work_col.job_description %></p>
+                       </small>
+                       <br/>
+                     </div>
+                   </div>
                  </div>
-
-                 <div class="row">
-                     <div class="col-sm-4">
-                         <div class="panel panel-default text-center">
-                             <div class="panel-heading">
-                               <strong>
-                                 <a href="http://www.sungard.com">SunGard System, London</a>
-                               </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Software Developer (May 2010 - Jul 2012)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                         Developed and maintained APT Raptor, Risk reporting tool for high volumes of portfolios.
-                                     </p>
-                                 </small>
-                                 <br/>
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="col-sm-4">
-                         <div class="panel panel-info text-center">
-                             <div class="panel-heading">
-                               <strong>
-                                 <a href="http://www.odls.com">ODL Securities, London</a>
-                               </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Dev Support Engineer, London (Feb 2008 - Apr 2010)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                         Developed and maintained realtime trading application. Integrated with LIFFE Connect to make cross border trading easier and cheaper.</p>
-                                 </small>
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="col-sm-4">
-                         <div class="panel panel-warning text-center">
-                             <div class="panel-heading">
-                               <strong>
-                                 <a href="http://www.spinvox.com">SpinVox Ltd, Marlow</a>
-                               </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Software Engineer (Mar 2006 - Jan 2008)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                         Designed and developed SMS System. Integrated with Telstra, AllTel, Telefonica, Vodafone, Vodacom, Cincinnati Bell using SMPP technology.</p>
-                                 </small>
-                             </div>
-                         </div>
-                     </div>
-                 </div><!-- end row -->
-
-                 <div class="row">
-                     <div class="col-sm-4">
-                         <div class="panel panel-danger text-center">
-                             <div class="panel-heading">
-                               <strong>
-                                 <a href="http://www.tuskerdirect.com">Tuskerdirect Ltd, Watford</a>
-                               </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Software Engineer (Jan 2001 - Feb 2006)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                     Involved in the design and development of in-house web application, Fleet Manager, using Perl, CGI and Oracle 9i.
-                                     </p>
-                                     <br/>
-                                 </small>
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="col-sm-4">
-                         <div class="panel panel-success text-center">
-                             <div class="panel-heading">
-                                 <strong>
-                                   <a href="http://www.orientindia.com">Orient Technology Ltd, London</a>
-                                 </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Software Engineer, London (Nov 1999 - Dec 2000)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                     Worked as consultant for various clients like GSM Vodafone, Tamar, Torrington Interactive and 2WebPages. Used Perl, CGI, MySQL and Oracle.</p>
-                                 </small>
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class="col-sm-4">
-                         <div class="panel panel-info text-center">
-                             <div class="panel-heading">
-                               <strong>
-                                 <a href="http://www.infofin.com">Infotech Financial Ltd, Mumbai</a>
-                               </strong>
-                             </div>
-                             <div class="panel-body">
-                                 <small>
-                                     <p class="text-success">
-                                         Software Engineer (Jan 1998 - Oct 1999)
-                                     </p>
-                                     <p class="text-justify text-primary">
-                                         Involved in design and development of web based application I-Fund for IDBI Mutual Fund using Perl, CGI and MySQL.</p>
-                                 </small>
-                             </div>
-                         </div>
-  		     </div>
-                 </div><!-- end row -->
+                 <% END %>
+               </div>
+               <% END %>
 
              </section>
-        </div><!-- End Container -->
+        </div><!-- End Container for Work -->
 	<br/>
 	<br/>
 
