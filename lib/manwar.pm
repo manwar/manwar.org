@@ -29,21 +29,32 @@ $manwar::AUTHORITY = 'cpan:MANWAR';
 
 our $MEMCACHE = Cache::Memcached::Fast->new({ servers => [{ address => 'localhost:11211' }] });
 
+sub get_template_data {
+
+    my $cpan_recent      = get_source_data('cpan-recent.json');
+    my $what_is_new      = get_source_data('what-is-new.json');
+    my $favourite_topics = get_source_data('favourite-topics.json');
+    my $work             = get_source_data('work.json');
+
+    return {
+        cr             => $cpan_recent->{rows},
+        cr_title       => $cpan_recent->{title},
+        cr_sub_title   => $cpan_recent->{sub_title},
+        maps           => get_maps(),
+        dists          => get_dists(),
+        who_am_i       => get_source_data('who-am-i.json'),
+        work           => $work->{work},
+        current        => $work->{current},
+        win            => $what_is_new,
+        win_indicators => get_indicators($what_is_new),
+        ft             => $favourite_topics,
+        ft_indicators  => get_indicators($favourite_topics),
+    };
+}
+
 get '/' => sub {
 
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'cpan-recent.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
-
-    $data->{maps}        = get_maps();
-    $data->{dists}       = get_dists();
-    $data->{who_am_i}    = get_who_am_i();
-    $data->{work}        = get_work();
-    $data->{current}     = get_current();
-    $data->{what_is_new} = get_what_is_new();
-    $data->{win_indicators} = get_what_is_new_indicators();
-
-
-    template 'index' => $data;
+    template 'index' => get_template_data();
 };
 
 get '/stations/:map' => sub {
@@ -306,33 +317,15 @@ sub get_dists {
     return $dists;
 }
 
-sub get_who_am_i {
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'who-am-i.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
-    return $data->{who_am_i};
+sub get_source_data {
+    my ($file_name) = @_;
+
+    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', $file_name));
+    return JSON->new->allow_nonref->utf8(1)->decode($file);
 }
 
-sub get_work {
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'work.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
-    return $data->{work};
-}
-
-sub get_current {
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'work.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
-    return $data->{current};
-}
-
-sub get_what_is_new {
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'what-is-new.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
-    return $data;
-}
-
-sub get_what_is_new_indicators {
-    my $file = read_file_content(path(setting('appdir'), 'public', 'stats', 'what-is-new.json'));
-    my $data = JSON->new->allow_nonref->utf8(1)->decode($file);
+sub get_indicators {
+    my ($data) = @_;
 
     my $indicators = [];
     my $index = 0;

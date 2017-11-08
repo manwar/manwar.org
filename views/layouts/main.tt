@@ -227,21 +227,17 @@
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        <% FOREACH what_is_new_row IN what_is_new %>
-                        <div class="item<% what_is_new_row.active %>">
-                            <div class="panel text-center <% what_is_new_row.header_class %>">
-                                <div class="panel-heading"><strong><% what_is_new_row.title %></strong></div>
+                        <% FOREACH win_row IN win %>
+                        <div class="item<% win_row.active %>">
+                            <div class="panel text-center <% win_row.header_class %>">
+                                <div class="panel-heading"><strong><% win_row.title %></strong></div>
                                 <div class="panel-body">
-                                    <small>
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="<% what_is_new_row.sub_title_url %>" target="_blank">
-                                              <% what_is_new_row.sub_title_name %>
-                                            </a>
-                                            </strong>
-                                        </p>
-                                        <p class="text-primary"><% what_is_new_row.body %></p>
-                                    </small>
+                                  <small>
+                                    <p class="text-success">
+                                      <strong><a href="<% win_row.sub_title_url %>" target="_blank"><% win_row.sub_title_name %></a></strong>
+                                    </p>
+                                    <p class="text-primary"><% win_row.body %></p>
+                                  </small>
                                 </div>
                             </div>
                         </div>
@@ -276,163 +272,27 @@
                 <div id="favourite-topics-slides" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#favourite-topics-slides" data-slide-to="0" class="active"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="1"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="2"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="3"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="4"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="5"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="6"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="7"></li>
-                        <li data-target="#favourite-topics-slides" data-slide-to="8"></li>
+                        <% FOREACH ft_indicator IN ft_indicators %>
+                        <li data-target="#favourite-topics-slides"
+                            data-slide-to="<% ft_indicator.slide_to %>" <% ft_indicator.class %>>
+                        </li>
+                        <% END %>
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        <!-- Slide 1 -->
-                        <div class="item active">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>14th September 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="https://perlgeek.de/en/article/encodings-and-unicode" target="_blank">
-                                                Character Encodings in Perl
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
+                        <% FOREACH ft_row IN ft %>
+                        <div class="item<% ft_row.active %>">
+                            <div class="panel text-center <% ft_row.header_class %>">
+                              <div class="panel-heading"><strong><% ft_row.title %></strong></div>
+                              <div class="panel-body">
+                                <p class="text-success">
+                                  <strong><a href="<% ft_row.sub_title_url %>" target="_blank"><% ft_row.sub_title_name %></a></strong>
+                                </p>
+                              </div>
                             </div>
-                        </div><!-- End of Slide 1 -->
-
-                        <!-- Slide 2 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>20th July 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://friedo.com/blog/2013/07/arrays-vs-lists-in-perl" target="_blank">
-                                                Arrays vs. Lists in Perl: What's the Difference?
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 2 -->
-
-                        <!-- Slide 3 -->
-                        <div class="item">
-                            <div class="panel panel-success text-center">
-                                <div class="panel-heading"><strong>26th April 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="https://xenoterracide.com/post/inversion-of-control-principle/" target="_blank">
-                                                Inversion of Control Principle
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 3 -->
-
-                        <!-- Slide 4 -->
-                        <div class="item">
-                            <div class="panel panel-info text-center">
-                                <div class="panel-heading"><strong>19th April 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://www.mojavelinux.com/articles/javascript_hashes.html" target="_blank">
-                                                Hash Tables in Javascript
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 4 -->
-
-                        <!-- Slide 5 -->
-                        <div class="item">
-                            <div class="panel panel-danger text-center">
-                                <div class="panel-heading"><strong>19th April 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://blogs.perl.org/users/neilb/2017/04/dependency-phases-in-cpan-distribution-metadata.html" target="_blank">
-                                                Dependency phases in CPAN distribution metadata
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 5 -->
-
-                        <!-- Slide 6 -->
-                        <div class="item">
-                            <div class="panel panel-warning text-center">
-                                <div class="panel-heading"><strong>22nd February 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perladvent.org/2014/2014-12-11.html" target="_blank">
-                                                A tiny but powerful Type System
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 6 -->
-
-                        <!-- Slide 7 -->
-                        <div class="item">
-                            <div class="panel panel-default text-center">
-                                <div class="panel-heading"><strong>8th February 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://www.dagolden.com/index.php/1322/five-testmore-features-you-might-not-be-using-yet" target="_blank">
-                                                Five Test::More features you might not be using yet
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 7 -->
-
-                        <!-- Slide 8 -->
-                        <div class="item">
-                            <div class="panel panel-info text-center">
-                                <div class="panel-heading"><strong>27th January 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://www.catonmat.net/blog/secret-perl-operators" target="_blank">
-                                                Perl secret operators
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 8 -->
-
-                        <!-- Slide 9 -->
-                        <div class="item">
-                            <div class="panel panel-danger text-center">
-                                <div class="panel-heading"><strong>26th January 2017</strong></div>
-                                <div class="panel-body">
-                                        <p class="text-success">
-                                            <strong>
-                                            <a href="http://perltricks.com/article/how-to-build-a-base-module" target="_blank">
-                                                How to build a base module?
-                                            </a>
-                                            </strong>
-                                        </p>
-                                </div>
-                            </div>
-                        </div><!-- End of Slide 9 -->
-
+                        </div>
+                        <% END %>
                     </div>
 
                     <!-- Left and right controls -->
@@ -561,11 +421,11 @@
   	      <h1><span class="rainbow">CPAN Recent</span></h1>
   	    </div>
 
-            <% FOREACH row IN rows %>
+            <% FOREACH cr_row IN cr %>
                 <div class="row">
-                <% FOREACH col IN row%>
+                <% FOREACH cr_col IN cr_row %>
                     <div class="col-md-3"><div class="thumbnail">
-                        <a target="_blank" title="<% col.tooltip %>" href="<% col.link %>"><% col.name %></a>
+                        <a target="_blank" title="<% cr_col.tooltip %>" href="<% cr_col.link %>"><% cr_col.name %></a>
                     </div></div>
                 <% END %>
                 </div>
