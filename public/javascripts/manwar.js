@@ -1,3 +1,16 @@
+$(function() {
+    $("#pullrequest_24_stats").click();
+    $("#ds").click();
+    $("#pr_summary").click();
+    $("#prc_summary").click();
+    $("#gc_summary").click();
+    $("#cus").click();
+    $("#ad").click();
+    $("#hacktoberfest_stats").click();
+    $('#txt_captcha').html(get_captcha());
+    $("#map_name").val($("#map_name option:first").val());
+});
+
 var categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 var chart_data = {
     "title": null,
@@ -125,19 +138,6 @@ $('#map_tube_button').click(function() {
             $('#map-tube-spinner').hide();
         }
     });
-});
-
-$(function() {
-    $("#ds").click();
-    $("#pr_summary").click();
-    $("#prc_summary").click();
-    $("#gc_summary").click();
-    $("#cus").click();
-    $("#ad").click();
-    //$("#hacktoberfest_stats").click();
-    $("#24_pullrequest_stats").click();
-    $('#txt_captcha').html(get_captcha());
-    $("#map_name").val($("#map_name option:first").val());
 });
 
 $("#ds").click(function() {
@@ -495,7 +495,6 @@ $("#gc_2014").click(function() {
 });
 
 $("#hacktoberfest_stats").click(function() {
-    alert('hacktoberfest');
     $('#pr-events-spinner').show();
     $.ajax({
         url: "/hacktoberfest",
@@ -509,14 +508,13 @@ $("#hacktoberfest_stats").click(function() {
     });
 });
 
-$("#24_pullrequest_stats").click(function() {
-    alert('hi');
+$("#pullrequest_24_stats").click(function() {
     $('#pr-events-spinner').show();
     $.ajax({
         url: "/24pullrequest",
         dataType: "JSON",
         success: function(data) {
-            $('#24_pullrequest_stats').highcharts(data);
+            $('#pullrequest_24_stats').highcharts(data);
         },
         complete: function() {
             $('#pr-events-spinner').hide();
