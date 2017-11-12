@@ -148,6 +148,16 @@ get '/git-commits/:tag' => sub {
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
 };
 
+get '/hacktoberfest' => sub {
+
+    return send_data(path(setting('appdir'), 'public', 'stats', 'hacktoberfest.json'));
+};
+
+get '/24pullrequest' => sub {
+
+    return send_data(path(setting('appdir'), 'public', 'stats', '24-pullrequest.json'));
+};
+
 get '/cpan-uploaders/:limit' => sub {
 
     my $limit = params->{limit};
