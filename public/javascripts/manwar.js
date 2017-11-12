@@ -134,6 +134,8 @@ $(function() {
     $("#gc_summary").click();
     $("#cus").click();
     $("#ad").click();
+    //$("#hacktoberfest_stats").click();
+    $("#24_pullrequest_stats").click();
     $('#txt_captcha').html(get_captcha());
     $("#map_name").val($("#map_name option:first").val());
 });
@@ -488,6 +490,36 @@ $("#gc_2014").click(function() {
         },
         complete: function() {
             $('#gc-spinner').hide();
+        }
+    });
+});
+
+$("#hacktoberfest_stats").click(function() {
+    alert('hacktoberfest');
+    $('#pr-events-spinner').show();
+    $.ajax({
+        url: "/hacktoberfest",
+        dataType: "JSON",
+        success: function(data) {
+            $('#hacktoberfest_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-events-spinner').hide();
+        }
+    });
+});
+
+$("#24_pullrequest_stats").click(function() {
+    alert('hi');
+    $('#pr-events-spinner').show();
+    $.ajax({
+        url: "/24pullrequest",
+        dataType: "JSON",
+        success: function(data) {
+            $('#24_pullrequest_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-events-spinner').hide();
         }
     });
 });
