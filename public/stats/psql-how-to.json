@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "question": "How to create conditional constraint?",
+        "answer": "CREATE UNIQUE INDEX index_name ON table(col_1,col_2,...) WHERE col_3 IS TRUE;"
+    },
+    {
+        "id": 2,
+        "question": "How to check time overlaps?",
+        "answer": "SELECT col_1, col_2, ...<br>  FROM table_name<br>WHERE (col_3, col_4) OVERLAPS (TIMESTAMP 'timestamp', TIMESTAMP 'timestamp');"
+    },
+    {
+        "id": 3,
+        "question": "How to add/drop NOT NULL constraint?",
+        "answer": "ALTER TABLE table_name ALTER COLUMN col_name SET NOT NULL;<br><br>ALTER TABLE table_name ALTER COLUMN col_name DROP NOT NULL;"
+    },
+    {
+        "id": 4,
+        "question": "How to drop DEFAULT constraint?",
+        "answer": "ALTER TABLE table_name ALTER COLUMN col_name DROP DEFAULT;"
+    },
+    {
+        "id": 5,
+        "question": "How to rename a table?",
+        "answer": "ALTER TABLE old_table_name RENAME TO new_table_name;"
+    },
+    {
+        "id": 6,
+        "question": "How to add days to a DATE column?",
+        "answer": "NOW() + INTERVAL '20' d"
+    }
+]

@@ -93,6 +93,7 @@
 				      <li><a href="#work">Work...</a>
 				      <li><a href="#what-is-new">What is new?</a>
 				      <li><a href="#favourite-topics">Fovourite Topics</a>
+				      <li><a href="#how-to">How to ... ?</a>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -330,6 +331,65 @@
 	<br/>
 	<br/>
 	<br/>
+
+        <!-- How to ...? -->
+	<hr id="how-to"/>
+	<div class="container">
+          <section>
+  	    <div class="page-header">
+  	      <h1><span class="rainbow">How to ...?</span></h1>
+  	    </div>
+
+            <ul class="nav nav-tabs" role="tablist">
+               <li class="active"><a id="git" href="#git_how_to" role="tab" data-toggle="tab">Git</a></li>
+               <li><a id="psql" href="#psql_how_to" role="tab" data-toggle="tab">PostgreSQL</a></li>
+            </ul>
+
+            <div id="how-to-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
+
+            <div class="tab-content">
+               <div class="tab-pane active in" id="git_how_to">
+                 <form class="form-horizontal">
+                   <div class="form-group">
+                     <label for="git_topic" class="col-sm-3 control-label">Topics:</label>
+                     <div class="col-sm-9">
+                       <select id="git_topic" class="form-control">
+                         <option value="">--Select topic--</option>
+                         <% FOREACH git_topic IN git_topics %>
+                         <option value="<% git_topic.id %>"><% git_topic.question %></option>
+                         <% END %>
+                       </select>
+                     </div>
+                   </div>
+                 </form>
+                 <div id="git_how_to_response" class="panel-body text-primary"></div>
+               </div>
+
+               <div class="tab-pane" id="psql_how_to">
+                 <form class="form-horizontal">
+                   <div class="form-group">
+                     <label for="psql_topic" class="col-sm-3 control-label">Topics:</label>
+                     <div class="col-sm-9">
+                       <select id="psql_topic" class="form-control">
+                         <option value="">--Select topic--</option>
+                         <% FOREACH psql_topic IN psql_topics %>
+                         <option value="<% psql_topic.id %>"><% psql_topic.question %></option>
+                         <% END %>
+                       </select>
+                     </div>
+                   </div>
+                 </form>
+                 <div id="psql_how_to_response" class="panel-body text-primary"></div>
+               </div>
+
+            </div>
+          </section>
+        </div><!-- End container -->
+
+	<br/>
+	<br/>
+	<br/>
+
 
         <!-- Map::Tube Section -->
 	<hr id="map-tube"/>

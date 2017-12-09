@@ -16,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.25
+Version 0.26
 
 =head1 AUTHOR
 
@@ -24,7 +24,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.25';
+$manwar::VERSION   = '0.26';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 our $MEMCACHE = Cache::Memcached::Fast->new({ servers => [{ address => 'localhost:11211' }] });
@@ -42,6 +42,8 @@ sub get_template_data {
         cr_sub_title   => $cpan_recent->{sub_title},
         maps           => get_maps(),
         dists          => get_dists(),
+        git_topics     => get_source_data('git-how-to.json'),
+        psql_topics    => get_source_data('psql-how-to.json'),
         who_am_i       => get_source_data('who-am-i.json'),
         work           => $work->{work},
         current        => $work->{current},
@@ -55,6 +57,18 @@ sub get_template_data {
 get '/' => sub {
 
     template 'index' => get_template_data();
+};
+
+get '/git-how-to/:topic' => sub {
+
+    my $topic = params->{topic};
+    return _get_answer(get_source_data('git-how-to.json'), $topic);
+};
+
+get '/psql-how-to/:topic' => sub {
+
+    my $topic = params->{topic};
+    return _get_answer(get_source_data('psql-how-to.json'), $topic);
 };
 
 get '/stations/:map' => sub {
@@ -217,6 +231,17 @@ get '/my-reading-links' => sub {
 #
 #
 # LOCAL METHODS
+
+sub _get_answer {
+    my ($topics, $topic_id) = @_;
+
+    foreach my $topic (@$topics) {
+        if ($topic->{id} == $topic_id) {
+            content_type 'text/html';
+            return $topic->{answer};
+        }
+    }
+}
 
 sub _get_cached_maps {
 

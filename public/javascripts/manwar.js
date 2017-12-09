@@ -9,6 +9,8 @@ $(function() {
     $("#hacktoberfest_stats").click();
     $('#txt_captcha').html(get_captcha());
     $("#map_name").val($("#map_name option:first").val());
+    $("#git_topic").val($("#git_topic option:first").val());
+    $("#psql_topic").val($("#psql_topic option:first").val());
 });
 
 var categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -31,6 +33,48 @@ var chart_data = {
         }
     }
 };
+
+$('#git_topic').change(function() {
+    var topic_id = $("#git_topic option:selected").val();
+    if (!topic_id) {
+        $("#git_how_to_response").html('');
+        return;
+    }
+
+    $("#git_how_to_response").html('');
+    $('#how-to-spinner').show();
+    $.ajax({
+        url: "/git-how-to/" + topic_id,
+        dataType: "HTML",
+        success: function(data) {
+            $("#git_how_to_response").html(data);
+        },
+        complete: function() {
+            $('#how-to-spinner').hide();
+        }
+    });
+});
+
+$('#psql_topic').change(function() {
+    var topic_id = $("#psql_topic option:selected").val();
+    if (!topic_id) {
+        $("#psql_how_to_response").html('');
+        return;
+    }
+
+    $("#psql_how_to_response").html('');
+    $('#how-to-spinner').show();
+    $.ajax({
+        url: "/psql-how-to/" + topic_id,
+        dataType: "HTML",
+        success: function(data) {
+            $("#psql_how_to_response").html(data);
+        },
+        complete: function() {
+            $('#how-to-spinner').hide();
+        }
+    });
+});
 
 function get_captcha() {
 
