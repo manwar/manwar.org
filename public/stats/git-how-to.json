@@ -13,5 +13,135 @@
         "id": 3,
         "question": "How to tag a particular commit?",
         "answer": "$ git checkout commit_id<br>$ git tag tag_name<br>$ git push origin tag_name"
+    },
+    {
+        "id": 4,
+        "question": "How to set globla gitingore?",
+        "answer": "$ git config --global core.excludesfile '~/.gitignore'"
+    },
+    {
+        "id": 5,
+        "question": "How to setup remote upstream?",
+        "answer": "$ git remote add upstream https://github.com/xxx/xxx.git<br>$ git fetch upstream<br>$ git merge upstream/master --ff-only"
+    },
+    {
+        "id": 6,
+        "question": "How to search a string in all git branches?",
+        "answer": "$ git branch -a | tr -d \\* | sed '/->/d' | xargs git grep search_string"
+    },
+    {
+        "id": 7,
+        "question": "How to rename local branch?",
+        "answer": "$ git branch -m old_branch_name new_branch_name"
+    },
+    {
+        "id": 8,
+        "question": "How to rename remote branch?",
+        "answer": "$ git branch -m old_branch_name new_branch_name<br>$ git push origin :old_branch_name new_branch_name"
+    },
+    {
+        "id": 9,
+        "question": "How to delete remote branch?",
+        "answer": "$ git push origin remote_branch"
+    },
+    {
+        "id": 10,
+        "question": "How to setup track to remote branch?",
+        "answer": "$ git push origin -u new_branch_name"
+    },
+    {
+        "id": 11,
+        "question": "How to amend last commit?",
+        "answer": "$ git commit --amend -m new_commit_message"
+    },
+    {
+        "id": 12,
+        "question": "How to amend last commit with signoff?",
+        "answer": "$ git commit --amend -s<br>$ git push origin branch_name --force"
+    },
+    {
+        "id": 13,
+        "question": "How to find diff against stash?",
+        "answer": "$ git stash show -p stash@{0}"
+    },
+    {
+        "id": 14,
+        "question": "How to delete un-staged changes while keep stage one?",
+        "answer": "$ git stash save --keep-index<br>$ git stash drop"
+    },
+    {
+        "id": 15,
+        "question": "How to apply stashed changes and remove from the list?",
+        "answer": "$ git stash pop stash@{0}"
+    },
+    {
+        "id": 16,
+        "question": "How to apply stashed changes and keep it in the list?",
+        "answer": "$ git stash apply stash@{0}"
+    },
+    {
+        "id": 17,
+        "question": "How to look for branch locally or remotely?",
+        "answer": "$ git branch --contains branch_name<br>$ git branch -r --contains branch_name"
+    },
+    {
+        "id": 18,
+        "question": "How to delete a file from a branch?",
+        "answer": "$ git rm file_name<br>$ git commit"
+    },
+    {
+        "id": 19,
+        "question": "How to move a file to another folder?",
+        "answer": "$ git mv file_name another_folder"
+    },
+    {
+        "id": 20,
+        "question": "How to revert back merge?",
+        "answer": "$ git reset --hard last_commit_id_before_the_merge"
+    },
+    {
+        "id": 21,
+        "question": "How to revet a commit?",
+        "answer": "$ git revert commit_id"
+    },
+    {
+        "id": 22,
+        "question": "How to clone a repository?",
+        "answer": "$ git clone path_to_git_repository"
+    },
+    {
+        "id": 23,
+        "question": "How to cherry pick a commit?",
+        "answer": "$ git cherry-pick commit_id"
+    },
+    {
+        "id": 24,
+        "question": "How to find diff against cached?",
+        "answer": "$ git diff --cached file_name"
+    },
+    {
+        "id": 25,
+        "question": "How to diff against another branch?",
+        "answer": "$ git diff another_branch_name"
+    },
+    {
+        "id": 26,
+        "question": "How to diff between two commits?",
+        "answer": "$ git diff commit_id_1..commit_id_2"
+    },
+    {
+        "id": 27,
+        "question": "How to get history of file?",
+        "answer": "$ git log -- file_name"
+    },
+    {
+        "id": 28,
+        "question": "How to create formatted patch?",
+        "answer": "$ git format-patch -1 branch_1 branch_2 file_name"
+    },
+    {
+        "id": 29,
+        "question": "How to apply patch?",
+        "answer": "$ git apply --stat file.patch<br>$ git apply --check file.patch<br>$ git am --signoff < file.patch"
     }
 ]
