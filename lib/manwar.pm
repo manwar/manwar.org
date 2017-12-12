@@ -379,6 +379,7 @@ sub get_indicators {
 
 sub get_total_dists {
     return [
+        { name => "Map::Tube::Athens",          title => "Athens"           },
         { name => "Map::Tube::Barcelona",       title => "Barcelona"        },
         { name => "Map::Tube::Beijing",         title => "Beijing"          },
         { name => "Map::Tube::Berlin",          title => "Berlin"           },
@@ -396,6 +397,7 @@ sub get_total_dists {
         { name => "Map::Tube::London",          title => "London"           },
         { name => "Map::Tube::Lyon",            title => "Lyon"             },
         { name => "Map::Tube::Malaga",          title => "Malaga"           },
+        { name => "Map::Tube::Milan",           title => "Milan"            },
         { name => "Map::Tube::Minsk",           title => "Minsk"            },
         { name => "Map::Tube::Moscow",          title => "Moscow"           },
         { name => "Map::Tube::NYC",             title => "New York"         },
