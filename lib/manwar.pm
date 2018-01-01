@@ -385,6 +385,7 @@ sub get_total_dists {
         { name => "Map::Tube::Berlin",          title => "Berlin"           },
         { name => "Map::Tube::Bucharest",       title => "Bucharest"        },
         { name => "Map::Tube::Budapest",        title => "Budapest"         },
+        { name => "Map::Tube::Copenhagen",      title => "Copenhagen"       },
         { name => "Map::Tube::Delhi",           title => "Delhi"            },
         { name => "Map::Tube::Dnipropetrovsk",  title => "Dnipropetrovsk"   },
         { name => "Map::Tube::Glasgow",         title => "Glasgow"          },
