@@ -496,6 +496,20 @@ $("#gc_summary").click(function() {
     });
 });
 
+$("#gc_2018").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/2018",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_2018_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
+        }
+    });
+});
+
 $("#gc_2017").click(function() {
     $('#gc-spinner').show();
     $.ajax({
