@@ -440,6 +440,20 @@ $("#prc_summary").click(function() {
     });
 });
 
+$("#prc_2018").click(function() {
+    $('#prc-spinner').show();
+    $.ajax({
+        url: "/pullrequest-challenge/2018",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prc_2018_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prc-spinner').hide();
+        }
+    });
+});
+
 $("#prc_2017").click(function() {
     $('#prc-spinner').show();
     $.ajax({
