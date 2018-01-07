@@ -41,7 +41,7 @@ sub get_template_data {
         cr_title       => $cpan_recent->{title},
         cr_sub_title   => $cpan_recent->{sub_title},
         maps           => get_maps(),
-        dists          => get_dists(),
+        #dists          => get_dists(),
         git_topics     => get_source_data('git-how-to.json'),
         psql_topics    => get_source_data('psql-how-to.json'),
         who_am_i       => get_source_data('who-am-i.json'),
