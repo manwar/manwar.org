@@ -16,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.26
+Version 0.27
 
 =head1 AUTHOR
 
@@ -24,10 +24,8 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.26';
+$manwar::VERSION   = '0.27';
 $manwar::AUTHORITY = 'cpan:MANWAR';
-
-our $MEMCACHE = Cache::Memcached::Fast->new({ servers => [{ address => 'localhost:11211' }] });
 
 sub get_template_data {
 
@@ -82,7 +80,7 @@ get '/stations/:map' => sub {
         return $station;
     };
 
-    my $stations = _get_cached_stations($map);
+    my $stations = Map::Tube::API->new->map_stations({ map => $map });
     my $data = "<option value=''>--Select station--</option>\n";
     foreach my $station (@$stations) {
         $data .= sprintf("<option value='%s'>%s</option>\n", encode_entities($get_name->($station)), $station);
@@ -98,7 +96,7 @@ get '/shortest-route/:map/:start/:end' => sub {
     my $start = params->{start};
     my $end   = params->{end};
 
-    my $stations = _get_cached_routes($map, $start, $end);
+    my $stations = Map::Tube::API->new->shortest_route({ map => $map, start => $start, end => $end });
     my $data = '';
     if (scalar(@$stations)) {
         $data = "<ol>\n";
@@ -243,77 +241,6 @@ sub _get_answer {
     }
 }
 
-sub _get_cached_maps {
-
-    my $cached_maps = $MEMCACHE->get('maps');
-    if (defined $cached_maps) {
-        print STDERR "Retrieving cached maps ...\n";
-        return $cached_maps;
-    }
-
-    my $map_api = Map::Tube::API->new;
-    my $maps    = $map_api->available_maps;
-
-    print STDERR "Caching maps ...\n";
-    $MEMCACHE->add('maps', $maps);
-
-    return $maps;
-}
-
-sub _get_cached_stations {
-    my ($map) = @_;
-
-    my $cached_stations = $MEMCACHE->get('stations');
-    if (defined $cached_stations && (exists $cached_stations->{$map})) {
-        print STDERR "Retrieving cached map [$map] stations ...\n";
-        return $cached_stations->{$map};
-    }
-
-    my $map_api = Map::Tube::API->new;
-    my $stations = $map_api->map_stations({ map => $map });
-
-    print STDERR "Caching map [$map] stations ...\n";
-    if (defined $cached_stations) {
-        $cached_stations->{$map} = $stations;
-        $MEMCACHE->replace('stations', $cached_stations);
-    }
-    else {
-        $cached_stations->{$map} = $stations;
-        $MEMCACHE->add('stations', $cached_stations);
-    }
-
-    return $stations;
-}
-
-sub _get_cached_routes {
-    my ($map, $start, $end) = @_;
-
-    my $cached_routes = $MEMCACHE->get('routes');
-    if (defined $cached_routes
-        && (exists $cached_routes->{$map})
-        && (exists $cached_routes->{$map}->{$start})
-        && (exists $cached_routes->{$map}->{$start}->{$end})
-       ) {
-        print STDERR "Retrieving cached routes in [$map] from [$start] to [$end] ...\n";
-        return $cached_routes->{$map}->{$start}->{$end};
-    }
-
-    my $map_api = Map::Tube::API->new;
-    my $stations = $map_api->shortest_route({ map => $map, start => $start, end => $end });
-
-    print STDERR "Caching routes in [$map] from [$start] to [$end] ...\n";
-    if (defined $cached_routes) {
-        $cached_routes->{$map}->{$start}->{$end} = $stations;
-        $MEMCACHE->replace('routes', $cached_routes);
-    }
-    else {
-        $cached_routes->{$map}->{$start}->{$end} = $stations;
-        $MEMCACHE->add('routes', $cached_routes);
-    }
-
-    return $stations;
-}
-
 sub send_data {
     my ($path) = @_;
 
@@ -323,7 +250,7 @@ sub send_data {
 
 sub get_maps {
 
-    my $available_maps = _get_cached_maps();
+    my $available_maps = Map::Tube::API->new->available_maps;
     my $maps = [];
     foreach my $map (@$available_maps) {
         push @{$maps}, { name => $map };
