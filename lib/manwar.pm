@@ -59,19 +59,19 @@ get '/' => sub {
 
 get '/git-how-to/:topic' => sub {
 
-    my $topic = params->{topic};
+    my $topic = route_parameters->{topic};
     return _get_answer(get_source_data('git-how-to.json'), $topic);
 };
 
 get '/psql-how-to/:topic' => sub {
 
-    my $topic = params->{topic};
+    my $topic = route_parameters->{topic};
     return _get_answer(get_source_data('psql-how-to.json'), $topic);
 };
 
 get '/stations/:map' => sub {
 
-    my $map = params->{map};
+    my $map = route_parameters->{map};
     my $get_name = sub {
         my ($station) = @_;
         $station =~ m/(.*?\()/;
@@ -92,9 +92,9 @@ get '/stations/:map' => sub {
 
 get '/shortest-route/:map/:start/:end' => sub {
 
-    my $map   = params->{map};
-    my $start = params->{start};
-    my $end   = params->{end};
+    my $map   = route_parameters->{map};
+    my $start = route_parameters->{start};
+    my $end   = route_parameters->{end};
 
     my $stations = Map::Tube::API->new->shortest_route({ map => $map, start => $start, end => $end });
     my $data = '';
@@ -112,7 +112,7 @@ get '/shortest-route/:map/:start/:end' => sub {
 
 get '/stats/:type' => sub {
 
-    my $type = params->{type};
+    my $type = route_parameters->{type};
     my $file = sprintf("%s.json", $type);
 
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
@@ -120,7 +120,7 @@ get '/stats/:type' => sub {
 
 get '/pullrequest/:tag' => sub {
 
-    my $tag = params->{tag};
+    my $tag = route_parameters->{tag};
     my $file;
     if ($tag =~ /^\d+$/) {
         $file = sprintf("pr-%d.json", $tag);
@@ -134,7 +134,7 @@ get '/pullrequest/:tag' => sub {
 
 get '/pullrequest-challenge/:tag' => sub {
 
-    my $tag = params->{tag};
+    my $tag = route_parameters->{tag};
     my $file;
     if ($tag =~ /^\d+$/) {
         $file = sprintf("prc-%d.json", $tag);
@@ -148,7 +148,7 @@ get '/pullrequest-challenge/:tag' => sub {
 
 get '/git-commits/:tag' => sub {
 
-    my $tag = params->{tag};
+    my $tag = route_parameters->{tag};
     my $file;
     if ($tag =~ /^\d+$/) {
         $file = sprintf("gc-%d.json", $tag);
@@ -172,13 +172,13 @@ get '/24pullrequest' => sub {
 
 get '/cpan-uploaders/:limit' => sub {
 
-    my $limit = params->{limit};
+    my $limit = route_parameters->{limit};
     return send_data(path(setting('appdir'), 'public', 'stats', 'cpan-uploaders.json'));
 };
 
 get '/neocpan-uploaders/:limit' => sub {
 
-    my $limit = params->{limit};
+    my $limit = route_parameters->{limit};
     return send_data(path(setting('appdir'), 'public', 'stats', 'neocpan-uploaders.json'));
 };
 
@@ -189,17 +189,17 @@ get '/adopted-distributions' => sub {
 
 get '/personal-distributions/:start/:end' => sub {
 
-    my $start = params->{start};
-    my $end   = params->{end};
+    my $start = route_parameters->{start};
+    my $end   = route_parameters->{end};
     my $file  = sprintf("pd_%s_to_%s.json", $start, $end);
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
 };
 
 post '/contact' => sub {
-    my $name    = params->{'uname'};
-    my $email   = params->{'uemail'};
-    my $subject = params->{'usubject'};
-    my $message = params->{'umessage'};
+    my $name    = body_parameters->{'uname'};
+    my $email   = body_parameters->{'uemail'};
+    my $subject = body_parameters->{'usubject'};
+    my $message = body_parameters->{'umessage'};
 
     my $status;
     eval {
