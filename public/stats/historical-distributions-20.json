@@ -1,6 +1,29 @@
 {
+   "yAxis" : {
+      "title" : {
+         "text" : "Age (days)"
+      },
+      "min" : 0
+   },
+   "xAxis" : {
+      "labels" : {
+         "style" : {
+            "fontSize" : "13px",
+            "fontFamily" : "Verdana, sans-serif"
+         },
+         "rotation" : -45
+      },
+      "type" : "category"
+   },
+   "tooltip" : {
+      "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
+   },
+   "subtitle" : {
+      "text" : "Last updated at 2018-05-25 16:00:02 GMT"
+   },
    "series" : [
       {
+         "name" : "Distribution",
          "data" : [
             [
                "1995-08-16: Symdump (ANDK)",
@@ -84,49 +107,26 @@
             ]
          ],
          "dataLabels" : {
-            "align" : "right",
-            "rotation" : -90,
-            "style" : {
-               "fontFamily" : "Verdana, sans-serif",
-               "fontSize" : "13px"
-            },
             "enabled" : "true",
             "color" : "#FFFFFF",
+            "format" : "{point.y:.0f}",
+            "rotation" : -90,
             "y" : 10,
-            "format" : "{point.y:.0f}"
-         },
-         "name" : "Distribution"
+            "style" : {
+               "fontSize" : "13px",
+               "fontFamily" : "Verdana, sans-serif"
+            },
+            "align" : "right"
+         }
       }
    ],
-   "xAxis" : {
-      "labels" : {
-         "style" : {
-            "fontSize" : "13px",
-            "fontFamily" : "Verdana, sans-serif"
-         },
-         "rotation" : -45
-      },
-      "type" : "category"
-   },
-   "tooltip" : {
-      "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
-   },
-   "subtitle" : {
-      "text" : "Last updated at 2018-05-25 09:00:02 GMT"
+   "legend" : {
+      "enabled" : "false"
    },
    "chart" : {
       "type" : "column"
    },
-   "legend" : {
-      "enabled" : "false"
-   },
    "title" : {
       "text" : "Historical Distributions - Top 20"
-   },
-   "yAxis" : {
-      "title" : {
-         "text" : "Age (days)"
-      },
-      "min" : 0
    }
 }
