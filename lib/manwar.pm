@@ -16,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.27
+Version 0.28
 
 =head1 AUTHOR
 
@@ -24,7 +24,7 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.27';
+$manwar::VERSION   = '0.28';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 sub get_template_data {
@@ -128,6 +128,14 @@ get '/pullrequest/:tag' => sub {
     else {
         $file = sprintf("pr-%s.json", $tag);
     }
+
+    return send_data(path(setting('appdir'), 'public', 'stats', $file));
+};
+
+get '/historical-distributions/:tag' => sub {
+
+    my $tag  = route_parameters->{tag};
+    my $file = sprintf("historical-distributions-%d.json", $tag);
 
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
 };

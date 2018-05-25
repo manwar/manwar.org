@@ -3,6 +3,7 @@ $(function() {
     $("#ds").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
+    $("#hd_10").click();
     $("#gc_summary").click();
     $("#cus").click();
     $("#ad").click();
@@ -352,6 +353,48 @@ $("#pd-q-z").click(function() {
         },
         complete: function() {
             $('#cd-spinner').hide();
+        }
+    });
+});
+
+$("#hd_10").click(function() {
+    $('#hd-spinner').show();
+    $.ajax({
+        url: "/historical-distributions/10",
+        dataType: "JSON",
+        success: function(data) {
+            $('#hd_10_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#hd-spinner').hide();
+        }
+    });
+});
+
+$("#hd_20").click(function() {
+    $('#hd-spinner').show();
+    $.ajax({
+        url: "/historical-distributions/20",
+        dataType: "JSON",
+        success: function(data) {
+            $('#hd_20_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#hd-spinner').hide();
+        }
+    });
+});
+
+$("#hd_30").click(function() {
+    $('#hd-spinner').show();
+    $.ajax({
+        url: "/historical-distributions/30",
+        dataType: "JSON",
+        success: function(data) {
+            $('#hd_30_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#hd-spinner').hide();
         }
     });
 });
