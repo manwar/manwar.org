@@ -2,49 +2,36 @@
    "legend" : {
       "enabled" : "false"
    },
-   "yAxis" : {
-      "min" : 0,
-      "title" : {
-         "text" : "Age (days)"
-      }
-   },
-   "title" : {
-      "text" : "Historical Distributions - Top 30"
-   },
    "xAxis" : {
       "labels" : {
          "style" : {
-            "fontFamily" : "Verdana, sans-serif",
-            "fontSize" : "13px"
+            "fontSize" : "13px",
+            "fontFamily" : "Verdana, sans-serif"
          },
          "rotation" : -45
       },
       "type" : "category"
    },
+   "subtitle" : {
+      "text" : "Last updated at 2018-05-26 07:35:23 GMT"
+   },
    "tooltip" : {
       "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
    },
-   "subtitle" : {
-      "text" : "Last updated at 2018-05-25 23:00:02 GMT"
+   "yAxis" : {
+      "title" : {
+         "text" : "Age (days)"
+      },
+      "min" : 0
+   },
+   "title" : {
+      "text" : "Historical Distributions - Top 30"
    },
    "chart" : {
       "type" : "column"
    },
    "series" : [
       {
-         "dataLabels" : {
-            "style" : {
-               "fontSize" : "13px",
-               "fontFamily" : "Verdana, sans-serif"
-            },
-            "y" : 10,
-            "align" : "right",
-            "enabled" : "true",
-            "rotation" : -90,
-            "format" : "{point.y:.0f}",
-            "color" : "#FFFFFF"
-         },
-         "name" : "Distribution",
          "data" : [
             [
                "1995-08-16: Symdump (ANDK)",
@@ -166,7 +153,20 @@
                "1995-09-01: Roman (OZAWA)",
                8303
             ]
-         ]
+         ],
+         "name" : "Distribution",
+         "dataLabels" : {
+            "color" : "#FFFFFF",
+            "enabled" : "true",
+            "y" : 10,
+            "style" : {
+               "fontSize" : "13px",
+               "fontFamily" : "Verdana, sans-serif"
+            },
+            "format" : "{point.y:.0f}",
+            "rotation" : -90,
+            "align" : "right"
+         }
       }
    ]
 }
