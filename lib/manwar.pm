@@ -136,7 +136,7 @@ get '/historical-distributions/:tag' => sub {
 
     my $tag    = route_parameters->{tag};
     my $data   = read_file_content(path(setting('appdir'), 'public', 'stats', 'historical-distributions.json'));
-    my $source = from_json($data);
+    my $source = JSON->new->allow_nonref->utf8(1)->decode($data);
     my $series = $source->{series}->[0]->{data};
     my $index  = 0;
     my $chart  = [];
@@ -147,7 +147,7 @@ get '/historical-distributions/:tag' => sub {
     }
     $source->{series}->[0]->{data} = $chart;
 
-    return send_raw_data(to_json($source));
+    return send_raw_data(JSON->new->allow_nonref->utf8(1)->encode($source));
 };
 
 get '/pullrequest-challenge/:tag' => sub {

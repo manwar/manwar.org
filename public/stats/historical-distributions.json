@@ -1,25 +1,20 @@
 {
-   "xAxis" : {
-      "labels" : {
-         "rotation" : -45,
-         "style" : {
-            "fontFamily" : "Verdana, sans-serif",
-            "fontSize" : "13px"
-         }
-      },
-      "type" : "category"
-   },
-   "yAxis" : {
-      "title" : {
-         "text" : "Age (days)"
-      },
-      "min" : 0
-   },
-   "subtitle" : {
-      "text" : "Last updated at 2018-05-26 11:00:02 GMT"
-   },
+   "subtitle" : "Last updated at 2018-05-26 19:00:02 GMT",
    "series" : [
       {
+         "dataLabels" : {
+            "color" : "#FFFFFF",
+            "enabled" : "true",
+            "align" : "right",
+            "format" : "{point.y:.0f}",
+            "rotation" : -90,
+            "style" : {
+               "fontFamily" : "Verdana, sans-serif",
+               "fontSize" : "13px"
+            },
+            "y" : 10
+         },
+         "name" : "Distribution",
          "data" : [
             [
                "1995-08-16: Symdump (ANDK)",
@@ -100,33 +95,48 @@
             [
                "1995-08-20: MsqlPerl (ANDK)",
                8315
+            ],
+            [
+               "1995-08-20: Net-ext-a (SPIDB)",
+               8315
+            ],
+            [
+               "1995-08-20: StatisticsDescriptive (JKAST)",
+               8315
+            ],
+            [
+               "1995-08-20: UNIVERSAL (JACKS)",
+               8315
+            ],
+            [
+               "1995-08-20: Des-perl-a (MICB)",
+               8315
+            ],
+            [
+               "1995-08-22: Tk-b (NI-S)",
+               8313
+            ],
+            [
+               "1995-08-24: Safe-b (MICB)",
+               8311
+            ],
+            [
+               "1995-08-28: Filter (PMQS)",
+               8307
+            ],
+            [
+               "1995-08-29: HTML (GAND)",
+               8306
+            ],
+            [
+               "1995-08-30: perl5db-kit (ILYAZ)",
+               8305
+            ],
+            [
+               "1995-09-01: Roman (OZAWA)",
+               8303
             ]
-         ],
-         "dataLabels" : {
-            "format" : "{point.y:.0f}",
-            "y" : 10,
-            "enabled" : "true",
-            "rotation" : -90,
-            "align" : "right",
-            "style" : {
-               "fontSize" : "13px",
-               "fontFamily" : "Verdana, sans-serif"
-            },
-            "color" : "#FFFFFF"
-         },
-         "name" : "Distribution"
+         ]
       }
-   ],
-   "tooltip" : {
-      "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
-   },
-   "legend" : {
-      "enabled" : "false"
-   },
-   "title" : {
-      "text" : "Historical Distributions - Top 20"
-   },
-   "chart" : {
-      "type" : "column"
-   }
+   ]
 }
