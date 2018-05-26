@@ -1,22 +1,13 @@
 {
-   "legend" : {
-      "enabled" : "false"
-   },
    "xAxis" : {
       "labels" : {
+         "rotation" : -45,
          "style" : {
-            "fontSize" : "13px",
-            "fontFamily" : "Verdana, sans-serif"
-         },
-         "rotation" : -45
+            "fontFamily" : "Verdana, sans-serif",
+            "fontSize" : "13px"
+         }
       },
       "type" : "category"
-   },
-   "subtitle" : {
-      "text" : "Last updated at 2018-05-26 07:35:23 GMT"
-   },
-   "tooltip" : {
-      "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
    },
    "yAxis" : {
       "title" : {
@@ -24,11 +15,8 @@
       },
       "min" : 0
    },
-   "title" : {
-      "text" : "Historical Distributions - Top 20"
-   },
-   "chart" : {
-      "type" : "column"
+   "subtitle" : {
+      "text" : "Last updated at 2018-05-26 11:00:02 GMT"
    },
    "series" : [
       {
@@ -114,19 +102,31 @@
                8315
             ]
          ],
-         "name" : "Distribution",
          "dataLabels" : {
-            "color" : "#FFFFFF",
-            "enabled" : "true",
+            "format" : "{point.y:.0f}",
             "y" : 10,
+            "enabled" : "true",
+            "rotation" : -90,
+            "align" : "right",
             "style" : {
                "fontSize" : "13px",
                "fontFamily" : "Verdana, sans-serif"
             },
-            "format" : "{point.y:.0f}",
-            "rotation" : -90,
-            "align" : "right"
-         }
+            "color" : "#FFFFFF"
+         },
+         "name" : "Distribution"
       }
-   ]
+   ],
+   "tooltip" : {
+      "pointFormat" : "Age: <b>{point.y:.0f} days</b>"
+   },
+   "legend" : {
+      "enabled" : "false"
+   },
+   "title" : {
+      "text" : "Historical Distributions - Top 20"
+   },
+   "chart" : {
+      "type" : "column"
+   }
 }
