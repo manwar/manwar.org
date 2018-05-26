@@ -134,10 +134,20 @@ get '/pullrequest/:tag' => sub {
 
 get '/historical-distributions/:tag' => sub {
 
-    my $tag  = route_parameters->{tag};
-    my $file = sprintf("historical-distributions-%d.json", $tag);
+    my $tag    = route_parameters->{tag};
+    my $data   = read_file_content(path(setting('appdir'), 'public', 'stats', 'historical-distributions.json'));
+    my $source = from_json($data);
+    my $series = $source->{series}->[0]->{data};
+    my $index  = 0;
+    my $chart  = [];
+    foreach my $row (@$series) {
+        push @$chart, $row;
+        $index++;
+        last if ($index == $tag);
+    }
+    $source->{series}->[0]->{data} = $chart;
 
-    return send_data(path(setting('appdir'), 'public', 'stats', $file));
+    return send_raw_data(to_json($source));
 };
 
 get '/pullrequest-challenge/:tag' => sub {
@@ -254,6 +264,13 @@ sub send_data {
 
     content_type 'application/json';
     return read_file_content($path);
+}
+
+sub send_raw_data {
+    my ($data) = @_;
+
+    content_type 'application/json';
+    return $data;
 }
 
 sub get_maps {

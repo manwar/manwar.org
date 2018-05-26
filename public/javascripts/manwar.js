@@ -14,6 +14,20 @@ $(function() {
     $("#psql_topic").val($("#psql_topic option:first").val());
 });
 
+var historical_chart = {
+    "title"    : { "text" : null },
+    "subtitle" : { "text" : null },
+    "series"   : null,
+    "tooltip"  : { "pointFormat" : "Age: <b>{point.y:.0f} days</b>" },
+    "legend"   : { "enabled" : "false" },
+    "chart"    : { "type" : "column" },
+    "yAxis"    : { "title" : { "text" : "Age (days)" }, "min" : 0 },
+    "xAxis"    : {
+        "labels" : { "rotation" : -45, "style" : { "fontFamily" : "Verdana, sans-serif", "fontSize" : "13px" } },
+        "type"   : "category"
+    }
+};
+
 var categories = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 var chart_data = {
     "title": null,
@@ -21,7 +35,7 @@ var chart_data = {
     "series": null,
     "chart": { "type": "bar" },
     "xAxis": [ { title:{ text: "Rank" },"categories": categories, "reversed": false, "labels": { "step": 1 }},
-                   { "categories": categories, "reversed": false, "labels":{ "step": 1 }, "opposite": true, "linkedTo": 0 }
+               { "categories": categories, "reversed": false, "labels":{ "step": 1 }, "opposite": true, "linkedTo": 0 }
              ],
     "yAxis": { "title": { "text": null }, "labels": { "formatter": function () { return Math.abs(this.value); } } },
     "plotOptions": { "series": { "stacking": "normal" } },
@@ -363,7 +377,11 @@ $("#hd_10").click(function() {
         url: "/historical-distributions/10",
         dataType: "JSON",
         success: function(data) {
-            $('#hd_10_stats').highcharts(data);
+            var top_10_data = historical_chart;
+            top_10_data.title.text    = "Historical Distributions - Top 10";
+            top_10_data.subtitle.text = data.subtitle;
+            top_10_data.series = data.series;
+            $('#hd_10_stats').highcharts(top_10_data);
         },
         complete: function() {
             $('#hd-spinner').hide();
@@ -377,7 +395,11 @@ $("#hd_20").click(function() {
         url: "/historical-distributions/20",
         dataType: "JSON",
         success: function(data) {
-            $('#hd_20_stats').highcharts(data);
+            var top_20_data = historical_chart;
+            top_20_data.title.text    = "Historical Distributions - Top 20";
+            top_20_data.subtitle.text = data.subtitle;
+            top_20_data.series = data.series;
+            $('#hd_20_stats').highcharts(top_20_data);
         },
         complete: function() {
             $('#hd-spinner').hide();
@@ -391,7 +413,11 @@ $("#hd_30").click(function() {
         url: "/historical-distributions/30",
         dataType: "JSON",
         success: function(data) {
-            $('#hd_30_stats').highcharts(data);
+            var top_30_data = historical_chart;
+            top_30_data.title.text    = "Historical Distributions - Top 30";
+            top_30_data.subtitle.text = data.subtitle;
+            top_30_data.series = data.series;
+            $('#hd_30_stats').highcharts(top_30_data);
         },
         complete: function() {
             $('#hd-spinner').hide();
