@@ -1,5 +1,5 @@
 $(function() {
-    $("#pullrequest_24_stats").click();
+    $("#pullrequest_24").click();
     $("#ds").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
@@ -7,7 +7,7 @@ $(function() {
     $("#gc_summary").click();
     $("#cus").click();
     $("#ad").click();
-    $("#hacktoberfest_stats").click();
+    $("#hacktoberfest").click();
     $('#txt_captcha').html(get_captcha());
     $("#map_name").val($("#map_name option:first").val());
     $("#git_topic").val($("#git_topic option:first").val());
@@ -649,7 +649,7 @@ $("#gc_2014").click(function() {
     });
 });
 
-$("#hacktoberfest_stats").click(function() {
+$("#hacktoberfest").click(function() {
     $('#pr-events-spinner').show();
     $.ajax({
         url: "/hacktoberfest",
@@ -663,7 +663,7 @@ $("#hacktoberfest_stats").click(function() {
     });
 });
 
-$("#pullrequest_24_stats").click(function() {
+$("#pullrequest_24").click(function() {
     $('#pr-events-spinner').show();
     $.ajax({
         url: "/24pullrequest",
