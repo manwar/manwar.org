@@ -1,6 +1,7 @@
 $(function() {
     $("#pullrequest_24").click();
     $("#ds").click();
+    $("#pr_tracker_top30").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
     $("#hd_10").click();
@@ -421,6 +422,20 @@ $("#hd_30").click(function() {
         },
         complete: function() {
             $('#hd-spinner').hide();
+        }
+    });
+});
+
+$("#pr_tracker_top30").click(function() {
+    $('#cd-spinner').show();
+    $.ajax({
+        url: "/pull-request-tracker",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_tracker_top30_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
         }
     });
 });
