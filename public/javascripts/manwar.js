@@ -1,7 +1,6 @@
 $(function() {
     $("#pullrequest_24").click();
     $("#ds").click();
-    $("#pr_tracker_top30").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
     $("#hd_10").click();
