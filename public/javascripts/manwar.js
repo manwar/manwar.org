@@ -453,6 +453,20 @@ $("#pr_summary").click(function() {
     });
 });
 
+$("#pr_2019").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/2019",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_2019_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
+        }
+    });
+});
+
 $("#pr_2018").click(function() {
     $('#pr-spinner').show();
     $.ajax({
