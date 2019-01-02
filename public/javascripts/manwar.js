@@ -607,6 +607,20 @@ $("#gc_summary").click(function() {
     });
 });
 
+$("#gc_2019").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/2019",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_2019_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
+        }
+    });
+});
+
 $("#gc_2018").click(function() {
     $('#gc-spinner').show();
     $.ajax({
