@@ -440,6 +440,34 @@ $("#pr_tracker_top30").click(function() {
     });
 });
 
+$("#author_by_pr").click(function() {
+    $('#cd-spinner').show();
+    $.ajax({
+        url: "/author-by-pr",
+        dataType: "JSON",
+        success: function(data) {
+            $('#author_by_pr_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
+        }
+    });
+});
+
+$("#author_by_repo").click(function() {
+    $('#cd-spinner').show();
+    $.ajax({
+        url: "/author-by-repo",
+        dataType: "JSON",
+        success: function(data) {
+            $('#author_by_repo_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#cd-spinner').hide();
+        }
+    });
+});
+
 $("#pr_summary").click(function() {
     $('#pr-spinner').show();
     $.ajax({
