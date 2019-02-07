@@ -4,6 +4,7 @@ $(function() {
     $("#pr_tracker_summary").click();
     $("#pr_summary").click();
     $("#prc_summary").click();
+    $("#prclub_summary").click();
     $("#hd_10").click();
     $("#gc_summary").click();
     $("#cus").click();
@@ -548,6 +549,34 @@ $("#pr_2015").click(function() {
         },
         complete: function() {
             $('#pr-spinner').hide();
+        }
+    });
+});
+
+$("#prclub_summary").click(function() {
+    $('#prclub-spinner').show();
+    $.ajax({
+        url: "/pullrequest-club/summary",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prclub_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prclub-spinner').hide();
+        }
+    });
+});
+
+$("#prclub_2019").click(function() {
+    $('#prclub-spinner').show();
+    $.ajax({
+        url: "/pullrequest-club/2019",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prclub_2019_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prclub-spinner').hide();
         }
     });
 });
