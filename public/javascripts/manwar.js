@@ -568,6 +568,20 @@ $("#pwc_summary").click(function() {
     });
 });
 
+$("#pwc_current").click(function() {
+    $('#pwc-spinner').show();
+    $.ajax({
+        url: "/pwc/current",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pwc_current_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pwc-spinner').hide();
+        }
+    });
+});
+
 $("#prclub_summary").click(function() {
     $('#prclub-spinner').show();
     $.ajax({
