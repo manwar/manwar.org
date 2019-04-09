@@ -318,11 +318,15 @@ sub send_raw_data {
 
 sub get_maps {
 
-    my $available_maps = Map::Tube::API->new->available_maps;
+    # TODO
+    # ERROR:
+    # [Map::Tube::Server:21982] error @2019-04-09 11:03:08> Route exception: Can't upgrade BIND (1) to 4 at /usr/local/share/perl/5.14.2/Class/Load.pm line 147.
+
+    #my $available_maps = Map::Tube::API->new->available_maps;
     my $maps = [];
-    foreach my $map (@$available_maps) {
-        push @{$maps}, { name => $map };
-    }
+    #foreach my $map (@$available_maps) {
+    #    push @{$maps}, { name => $map };
+    #}
 
     return $maps;
 }
