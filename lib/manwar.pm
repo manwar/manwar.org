@@ -150,18 +150,9 @@ get '/historical-distributions/:tag' => sub {
     return send_raw_data(JSON->new->allow_nonref->utf8(1)->encode($source));
 };
 
-get '/pwc/:tag' => sub {
+get '/pwc-leaders' => sub {
 
-    my $tag = route_parameters->{tag};
-    my $file;
-    if ($tag =~ /^\d+$/) {
-        $file = sprintf("pwc-%d.json", $tag);
-    }
-    else {
-        $file = sprintf("pwc-%s.json", $tag);
-    }
-
-    return send_data(path(setting('appdir'), 'public', 'stats', $file));
+    return send_data(path(setting('appdir'), 'public', 'stats', "pwc-leaders.json"));
 };
 
 get '/pullrequest-club/:tag' => sub {

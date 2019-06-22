@@ -3,7 +3,7 @@ $(function() {
     $("#ds").click();
     $("#pr_tracker_summary").click();
     $("#pr_summary").click();
-    $("#pwc_summary").click();
+    $("#pwc_leaders").click();
     $("#prc_summary").click();
     $("#prclub_summary").click();
     $("#hd_10").click();
@@ -554,27 +554,13 @@ $("#pr_2015").click(function() {
     });
 });
 
-$("#pwc_summary").click(function() {
+$("#pwc_leaders").click(function() {
     $('#pwc-spinner').show();
     $.ajax({
-        url: "/pwc/summary",
+        url: "/pwc-leaders",
         dataType: "JSON",
         success: function(data) {
-            $('#pwc_summary_stats').highcharts(data);
-        },
-        complete: function() {
-            $('#pwc-spinner').hide();
-        }
-    });
-});
-
-$("#pwc_current").click(function() {
-    $('#pwc-spinner').show();
-    $.ajax({
-        url: "/pwc/current",
-        dataType: "JSON",
-        success: function(data) {
-            $('#pwc_current_stats').highcharts(data);
+            $('#pwc_leaders_stats').highcharts(data);
         },
         complete: function() {
             $('#pwc-spinner').hide();
