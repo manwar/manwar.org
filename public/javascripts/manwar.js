@@ -582,6 +582,20 @@ $("#prclub_summary").click(function() {
     });
 });
 
+$("#prclub_2020").click(function() {
+    $('#prclub-spinner').show();
+    $.ajax({
+        url: "/pullrequest-club/2020",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prclub_2020_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prclub-spinner').hide();
+        }
+    });
+});
+
 $("#prclub_2019").click(function() {
     $('#prclub-spinner').show();
     $.ajax({
