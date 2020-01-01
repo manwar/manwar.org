@@ -484,6 +484,20 @@ $("#pr_summary").click(function() {
     });
 });
 
+$("#pr_2020").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/2020",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_2020_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
+        }
+    });
+});
+
 $("#pr_2019").click(function() {
     $('#pr-spinner').show();
     $.ajax({
