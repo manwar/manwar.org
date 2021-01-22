@@ -611,6 +611,20 @@ $("#prclub_summary").click(function() {
     });
 });
 
+$("#prclub_2021").click(function() {
+    $('#prclub-spinner').show();
+    $.ajax({
+        url: "/pullrequest-club/2021",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prclub_2021_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prclub-spinner').hide();
+        }
+    });
+});
+
 $("#prclub_2020").click(function() {
     $('#prclub-spinner').show();
     $.ajax({
