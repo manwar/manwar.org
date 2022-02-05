@@ -485,6 +485,20 @@ $("#pr_summary").click(function() {
     });
 });
 
+$("#pr_2022").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/2022",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_2022_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
+        }
+    });
+});
+
 $("#pr_2021").click(function() {
     $('#pr-spinner').show();
     $.ajax({
@@ -611,6 +625,20 @@ $("#prclub_summary").click(function() {
     });
 });
 
+$("#prclub_2022").click(function() {
+    $('#prclub-spinner').show();
+    $.ajax({
+        url: "/pullrequest-club/2022",
+        dataType: "JSON",
+        success: function(data) {
+            $('#prclub_2022_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#prclub-spinner').hide();
+        }
+    });
+});
+
 $("#prclub_2021").click(function() {
     $('#prclub-spinner').show();
     $.ajax({
@@ -730,6 +758,20 @@ $("#gc_summary").click(function() {
         dataType: "JSON",
         success: function(data) {
             $('#gc_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
+        }
+    });
+});
+
+$("#gc_2022").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/2022",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_2022_stats').highcharts(data);
         },
         complete: function() {
             $('#gc-spinner').hide();

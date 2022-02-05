@@ -1,0 +1,63 @@
+{
+   "chart":{
+      "type":"column"
+   },
+   "title":{
+      "text":"Pull Request Club - 2022"
+   },
+   "subtitle":{
+      "text":"Click the columns to view details. Last updated at 2022-02-05 22:45:00 GMT"
+   },
+   "xAxis":{
+      "type":"category"
+   },
+   "yAxis":{
+      "title":{
+         "text":"Total GitHub Pull Request"
+      }
+   },
+   "legend":{
+      "enabled":false
+   },
+   "plotOptions":{
+      "series":{
+         "borderWidth":0,
+         "dataLabels":{
+            "enabled":1,
+            "format":"{point.y}"
+         }
+      }
+   },
+   "tooltip":{
+      "headerFormat":"<span style='font-size:11px'>{series.name}</span><br>",
+      "pointFormat":"<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
+      "followPointer":1
+   },
+   "series":[
+      {
+         "name":"Pull Request Club",
+         "colorByPoint":true,
+         "data":[
+            {
+               "name":"January",
+               "y":1,
+               "drilldown":"January 2022"
+            }
+         ]
+      }
+   ],
+   "drilldown":{
+      "series":[
+         {
+            "name":"Pull Request Club 2022",
+            "id":"January 2022",
+            "data":[
+               [
+                  "lib::projectroot (#4)",
+                  1
+               ]
+            ]
+         }
+      ]
+   }
+}
