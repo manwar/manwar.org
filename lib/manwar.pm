@@ -272,7 +272,7 @@ post '/contact' => sub {
     return $status;
 };
 
-=head
+=head1
 get '/my-reading-links' => sub {
     template 'my-reading-links';
 };
