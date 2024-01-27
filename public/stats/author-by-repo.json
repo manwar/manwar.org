@@ -2,188 +2,35 @@
    "xAxis" : {
       "type" : "category"
    },
-   "series" : [
-      {
-         "ColorByPoint" : 1,
-         "data" : [
-            {
-               "y" : 56,
-               "drilldown" : "reneeb",
-               "name" : "#1: reneeb"
-            },
-            {
-               "name" : "#2: neilb",
-               "drilldown" : "neilb",
-               "y" : 32
-            },
-            {
-               "y" : 29,
-               "drilldown" : "LibreCat",
-               "name" : "#3: LibreCat"
-            },
-            {
-               "drilldown" : "tupinek",
-               "y" : 22,
-               "name" : "#4: tupinek"
-            },
-            {
-               "name" : "#5: briandfoy",
-               "y" : 21,
-               "drilldown" : "briandfoy"
-            },
-            {
-               "name" : "#6: FGasper",
-               "drilldown" : "FGasper",
-               "y" : 18
-            },
-            {
-               "y" : 18,
-               "drilldown" : "binary-com",
-               "name" : "#7: binary-com"
-            },
-            {
-               "name" : "#8: davorg",
-               "y" : 18,
-               "drilldown" : "davorg"
-            },
-            {
-               "name" : "#9: jjn1056",
-               "drilldown" : "jjn1056",
-               "y" : 17
-            },
-            {
-               "drilldown" : "robrwo",
-               "y" : 17,
-               "name" : "#10: robrwo"
-            },
-            {
-               "drilldown" : "yanick",
-               "y" : 17,
-               "name" : "#11: yanick"
-            },
-            {
-               "name" : "#12: eserte",
-               "drilldown" : "eserte",
-               "y" : 16
-            },
-            {
-               "y" : 15,
-               "drilldown" : "pplu",
-               "name" : "#13: pplu"
-            },
-            {
-               "name" : "#14: salva",
-               "drilldown" : "salva",
-               "y" : 15
-            },
-            {
-               "drilldown" : "srchulo",
-               "y" : 15,
-               "name" : "#15: srchulo"
-            },
-            {
-               "name" : "#16: fayland",
-               "drilldown" : "fayland",
-               "y" : 14
-            },
-            {
-               "name" : "#17: jkeenan",
-               "y" : 14,
-               "drilldown" : "jkeenan"
-            },
-            {
-               "name" : "#18: preaction",
-               "y" : 14,
-               "drilldown" : "preaction"
-            },
-            {
-               "name" : "#19: Corion",
-               "y" : 13,
-               "drilldown" : "Corion"
-            },
-            {
-               "drilldown" : "domm",
-               "y" : 13,
-               "name" : "#20: domm"
-            },
-            {
-               "name" : "#21: oalders",
-               "drilldown" : "oalders",
-               "y" : 12
-            },
-            {
-               "name" : "#22: rjbs",
-               "drilldown" : "rjbs",
-               "y" : 12
-            },
-            {
-               "name" : "#23: stevan",
-               "y" : 12,
-               "drilldown" : "stevan"
-            },
-            {
-               "name" : "#24: bayashi",
-               "drilldown" : "bayashi",
-               "y" : 11
-            },
-            {
-               "drilldown" : "bluefeet",
-               "y" : 11,
-               "name" : "#25: bluefeet"
-            },
-            {
-               "drilldown" : "markov2",
-               "y" : 11,
-               "name" : "#26: markov2"
-            },
-            {
-               "y" : 11,
-               "drilldown" : "team-at-cpan",
-               "name" : "#27: team-at-cpan"
-            },
-            {
-               "drilldown" : "vanstyn",
-               "y" : 11,
-               "name" : "#28: vanstyn"
-            },
-            {
-               "y" : 11,
-               "drilldown" : "yuki-kimoto",
-               "name" : "#29: yuki-kimoto"
-            },
-            {
-               "y" : 10,
-               "drilldown" : "benkasminbullock",
-               "name" : "#30: benkasminbullock"
-            }
-         ],
-         "name" : "Author By Repository"
-      }
-   ],
-   "subtitle" : {
-      "text" : "Click the columns to view PR breakdown. Last updated at 2024-01-27 02:09:09 GMT"
+   "legend" : {
+      "enabled" : 0
    },
-   "title" : {
-      "text" : "Author By Repository (TOP 30) 2015 - 2024"
+   "plotOptions" : {
+      "series" : {
+         "dataLabels" : {
+            "enabled" : 1,
+            "format" : "{point.y}"
+         },
+         "borderWidth" : 0
+      }
+   },
+   "chart" : {
+      "type" : "column"
    },
    "yAxis" : {
       "title" : {
          "text" : ""
       }
    },
-   "plotOptions" : {
-      "series" : {
-         "borderWidth" : 0,
-         "dataLabels" : {
-            "enabled" : 1,
-            "format" : "{point.y}"
-         }
-      }
+   "tooltip" : {
+      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
+      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
+      "followPointer" : 1
    },
    "drilldown" : {
       "series" : [
          {
-            "id" : "reneeb",
+            "name" : "reneeb",
             "data" : [
                [
                   "App-CPANCoverBadge",
@@ -263,6 +110,10 @@
                ],
                [
                   "HTTP-Tiny-FileProtocol",
+                  1
+               ],
+               [
+                  "HTTP-Tiny-FromHTTPRequest",
                   1
                ],
                [
@@ -410,7 +261,7 @@
                   1
                ]
             ],
-            "name" : "reneeb"
+            "id" : "reneeb"
          },
          {
             "name" : "neilb",
@@ -548,6 +399,7 @@
          },
          {
             "id" : "LibreCat",
+            "name" : "LibreCat",
             "data" : [
                [
                   "Catmandu",
@@ -665,11 +517,10 @@
                   "perl-oai-lib",
                   2
                ]
-            ],
-            "name" : "LibreCat"
+            ]
          },
          {
-            "id" : "tupinek",
+            "name" : "tupinek",
             "data" : [
                [
                   "Map-Tube-Bucharest",
@@ -760,10 +611,9 @@
                   1
                ]
             ],
-            "name" : "tupinek"
+            "id" : "tupinek"
          },
          {
-            "id" : "briandfoy",
             "name" : "briandfoy",
             "data" : [
                [
@@ -850,10 +700,10 @@
                   "tie-timely",
                   1
                ]
-            ]
+            ],
+            "id" : "briandfoy"
          },
          {
-            "name" : "FGasper",
             "data" : [
                [
                   "p5-CBOR-Free",
@@ -928,10 +778,10 @@
                   1
                ]
             ],
+            "name" : "FGasper",
             "id" : "FGasper"
          },
          {
-            "id" : "binary-com",
             "name" : "binary-com",
             "data" : [
                [
@@ -1006,11 +856,10 @@
                   "perl-feed-phasecheck",
                   1
                ]
-            ]
+            ],
+            "id" : "binary-com"
          },
          {
-            "id" : "davorg",
-            "name" : "davorg",
             "data" : [
                [
                   "Ogg-Vorbis-Header",
@@ -1084,10 +933,90 @@
                   "xml-feed",
                   3
                ]
+            ],
+            "name" : "davorg",
+            "id" : "davorg"
+         },
+         {
+            "id" : "yanick",
+            "name" : "yanick",
+            "data" : [
+               [
+                  "Dancer-Template-Handlebars",
+                  1
+               ],
+               [
+                  "Dancer2-Plugin-FontSubset",
+                  1
+               ],
+               [
+                  "Dancer2-Plugin-Showterm",
+                  2
+               ],
+               [
+                  "Dancer2-Plugin-WebSocket",
+                  2
+               ],
+               [
+                  "Dist-Zilla-Plugin-SchwartzRatio",
+                  1
+               ],
+               [
+                  "Dist-Zilla-Stash-Contributors",
+                  1
+               ],
+               [
+                  "Escape-Houdini",
+                  1
+               ],
+               [
+                  "List-Lazy",
+                  1
+               ],
+               [
+                  "MoobX",
+                  1
+               ],
+               [
+                  "MsgPack-RPC",
+                  1
+               ],
+               [
+                  "Taskwarrior-Kusarigama",
+                  1
+               ],
+               [
+                  "Template-Caribou",
+                  1
+               ],
+               [
+                  "Template-Mustache",
+                  1
+               ],
+               [
+                  "Term-Caca",
+                  1
+               ],
+               [
+                  "moosex-blessed-reconstruct",
+                  1
+               ],
+               [
+                  "perl-json-schema-shorthand",
+                  1
+               ],
+               [
+                  "pollux",
+                  1
+               ],
+               [
+                  "xml-xpathscript",
+                  2
+               ]
             ]
          },
          {
-            "name" : "jjn1056",
+            "id" : "jjn1056",
             "data" : [
                [
                   "Catalyst-ActionRole-Public",
@@ -1158,9 +1087,10 @@
                   1
                ]
             ],
-            "id" : "jjn1056"
+            "name" : "jjn1056"
          },
          {
+            "id" : "robrwo",
             "data" : [
                [
                   "File-Rotate-Simple",
@@ -1231,84 +1161,10 @@
                   1
                ]
             ],
-            "name" : "robrwo",
-            "id" : "robrwo"
+            "name" : "robrwo"
          },
          {
-            "id" : "yanick",
-            "name" : "yanick",
-            "data" : [
-               [
-                  "Dancer-Template-Handlebars",
-                  1
-               ],
-               [
-                  "Dancer2-Plugin-FontSubset",
-                  1
-               ],
-               [
-                  "Dancer2-Plugin-Showterm",
-                  2
-               ],
-               [
-                  "Dancer2-Plugin-WebSocket",
-                  2
-               ],
-               [
-                  "Dist-Zilla-Plugin-SchwartzRatio",
-                  1
-               ],
-               [
-                  "Dist-Zilla-Stash-Contributors",
-                  1
-               ],
-               [
-                  "Escape-Houdini",
-                  1
-               ],
-               [
-                  "List-Lazy",
-                  1
-               ],
-               [
-                  "MsgPack-RPC",
-                  1
-               ],
-               [
-                  "Taskwarrior-Kusarigama",
-                  1
-               ],
-               [
-                  "Template-Caribou",
-                  1
-               ],
-               [
-                  "Template-Mustache",
-                  1
-               ],
-               [
-                  "Term-Caca",
-                  1
-               ],
-               [
-                  "moosex-blessed-reconstruct",
-                  1
-               ],
-               [
-                  "perl-json-schema-shorthand",
-                  1
-               ],
-               [
-                  "pollux",
-                  1
-               ],
-               [
-                  "xml-xpathscript",
-                  2
-               ]
-            ]
-         },
-         {
+            "name" : "eserte",
             "data" : [
                [
                   "Map-Tube-Berlin",
@@ -1375,11 +1231,76 @@
                   1
                ]
             ],
-            "name" : "eserte",
             "id" : "eserte"
          },
          {
-            "name" : "pplu",
+            "name" : "domm",
+            "data" : [
+               [
+                  "API-Medium",
+                  2
+               ],
+               [
+                  "App-TimeTracker",
+                  2
+               ],
+               [
+                  "App-TimeTracker-Category",
+                  1
+               ],
+               [
+                  "App-TimeTracker-TellRemote",
+                  1
+               ],
+               [
+                  "Bread-Runner",
+                  2
+               ],
+               [
+                  "Catalyst-Plugin-Session-Store-Redis",
+                  1
+               ],
+               [
+                  "CtrlO-Crypt-XkcdPassword",
+                  3
+               ],
+               [
+                  "DBIx-SchemaChecksum",
+                  1
+               ],
+               [
+                  "InfluxDB-LineProtocol",
+                  2
+               ],
+               [
+                  "Plack-App-ServiceStatus",
+                  2
+               ],
+               [
+                  "Plack-Middleware-PrettyException",
+                  1
+               ],
+               [
+                  "Web-Request-Role-JSON",
+                  1
+               ],
+               [
+                  "Web-Request-Role-Response",
+                  1
+               ],
+               [
+                  "lib-projectroot",
+                  2
+               ],
+               [
+                  "perl-oauth2",
+                  1
+               ]
+            ],
+            "id" : "domm"
+         },
+         {
+            "id" : "pplu",
             "data" : [
                [
                   "AWSv4Signer",
@@ -1442,10 +1363,10 @@
                   1
                ]
             ],
-            "id" : "pplu"
+            "name" : "pplu"
          },
          {
-            "name" : "salva",
+            "id" : "salva",
             "data" : [
                [
                   "p5-AnyEvent-FileLock",
@@ -1508,11 +1429,10 @@
                   2
                ]
             ],
-            "id" : "salva"
+            "name" : "salva"
          },
          {
             "id" : "srchulo",
-            "name" : "srchulo",
             "data" : [
                [
                   "Catalyst--Model--DBIx--Raw",
@@ -1574,9 +1494,11 @@
                   "jQuery-File-Upload",
                   2
                ]
-            ]
+            ],
+            "name" : "srchulo"
          },
          {
+            "id" : "fayland",
             "name" : "fayland",
             "data" : [
                [
@@ -1635,8 +1557,7 @@
                   "perl-WebService-DeathByCaptcha",
                   1
                ]
-            ],
-            "id" : "fayland"
+            ]
          },
          {
             "id" : "jkeenan",
@@ -1763,6 +1684,7 @@
             "id" : "preaction"
          },
          {
+            "id" : "Corion",
             "name" : "Corion",
             "data" : [
                [
@@ -1817,68 +1739,11 @@
                   "html-rebase",
                   1
                ]
-            ],
-            "id" : "Corion"
+            ]
          },
          {
-            "name" : "domm",
-            "data" : [
-               [
-                  "API-Medium",
-                  2
-               ],
-               [
-                  "App-TimeTracker",
-                  2
-               ],
-               [
-                  "Bread-Runner",
-                  2
-               ],
-               [
-                  "Catalyst-Plugin-Session-Store-Redis",
-                  1
-               ],
-               [
-                  "CtrlO-Crypt-XkcdPassword",
-                  3
-               ],
-               [
-                  "DBIx-SchemaChecksum",
-                  1
-               ],
-               [
-                  "InfluxDB-LineProtocol",
-                  2
-               ],
-               [
-                  "Plack-App-ServiceStatus",
-                  2
-               ],
-               [
-                  "Plack-Middleware-PrettyException",
-                  1
-               ],
-               [
-                  "Web-Request-Role-JSON",
-                  1
-               ],
-               [
-                  "Web-Request-Role-Response",
-                  1
-               ],
-               [
-                  "lib-projectroot",
-                  2
-               ],
-               [
-                  "perl-oauth2",
-                  1
-               ]
-            ],
-            "id" : "domm"
-         },
-         {
+            "id" : "oalders",
+            "name" : "oalders",
             "data" : [
                [
                   "archive-any",
@@ -1928,9 +1793,7 @@
                   "webservice-sqlformat",
                   2
                ]
-            ],
-            "name" : "oalders",
-            "id" : "oalders"
+            ]
          },
          {
             "id" : "rjbs",
@@ -1987,6 +1850,7 @@
             "name" : "rjbs"
          },
          {
+            "id" : "stevan",
             "name" : "stevan",
             "data" : [
                [
@@ -2037,10 +1901,10 @@
                   "tree-simple-sax",
                   1
                ]
-            ],
-            "id" : "stevan"
+            ]
          },
          {
+            "id" : "bayashi",
             "data" : [
                [
                   "App-jl",
@@ -2087,12 +1951,10 @@
                   1
                ]
             ],
-            "name" : "bayashi",
-            "id" : "bayashi"
+            "name" : "bayashi"
          },
          {
             "id" : "bluefeet",
-            "name" : "bluefeet",
             "data" : [
                [
                   "Catalyst-Model-Curio",
@@ -2138,9 +2000,11 @@
                   "Net-Gitlab",
                   1
                ]
-            ]
+            ],
+            "name" : "bluefeet"
          },
          {
+            "id" : "markov2",
             "name" : "markov2",
             "data" : [
                [
@@ -2187,8 +2051,7 @@
                   "perl5-User-Identity",
                   1
                ]
-            ],
-            "id" : "markov2"
+            ]
          },
          {
             "data" : [
@@ -2241,6 +2104,8 @@
             "id" : "team-at-cpan"
          },
          {
+            "id" : "vanstyn",
+            "name" : "vanstyn",
             "data" : [
                [
                   "Alien-Web",
@@ -2286,11 +2151,10 @@
                   "RapidApp",
                   1
                ]
-            ],
-            "name" : "vanstyn",
-            "id" : "vanstyn"
+            ]
          },
          {
+            "id" : "yuki-kimoto",
             "name" : "yuki-kimoto",
             "data" : [
                [
@@ -2337,12 +2201,9 @@
                   "giblog",
                   3
                ]
-            ],
-            "id" : "yuki-kimoto"
+            ]
          },
          {
-            "id" : "benkasminbullock",
-            "name" : "benkasminbullock",
             "data" : [
                [
                   "Directory-Diff",
@@ -2384,19 +2245,174 @@
                   "net-ipv6addr",
                   1
                ]
-            ]
+            ],
+            "name" : "benkasminbullock",
+            "id" : "benkasminbullock"
          }
       ]
    },
-   "chart" : {
-      "type" : "column"
+   "title" : {
+      "text" : "Author By Repository (TOP 30) 2015 - 2024"
    },
-   "legend" : {
-      "enabled" : 0
-   },
-   "tooltip" : {
-      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
-      "followPointer" : 1,
-      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>"
+   "series" : [
+      {
+         "data" : [
+            {
+               "name" : "#1: reneeb",
+               "y" : 57,
+               "drilldown" : "reneeb"
+            },
+            {
+               "name" : "#2: neilb",
+               "y" : 32,
+               "drilldown" : "neilb"
+            },
+            {
+               "name" : "#3: LibreCat",
+               "y" : 29,
+               "drilldown" : "LibreCat"
+            },
+            {
+               "y" : 22,
+               "name" : "#4: tupinek",
+               "drilldown" : "tupinek"
+            },
+            {
+               "y" : 21,
+               "name" : "#5: briandfoy",
+               "drilldown" : "briandfoy"
+            },
+            {
+               "drilldown" : "FGasper",
+               "y" : 18,
+               "name" : "#6: FGasper"
+            },
+            {
+               "drilldown" : "binary-com",
+               "y" : 18,
+               "name" : "#7: binary-com"
+            },
+            {
+               "drilldown" : "davorg",
+               "y" : 18,
+               "name" : "#8: davorg"
+            },
+            {
+               "drilldown" : "yanick",
+               "name" : "#9: yanick",
+               "y" : 18
+            },
+            {
+               "y" : 17,
+               "name" : "#10: jjn1056",
+               "drilldown" : "jjn1056"
+            },
+            {
+               "y" : 17,
+               "name" : "#11: robrwo",
+               "drilldown" : "robrwo"
+            },
+            {
+               "y" : 16,
+               "name" : "#12: eserte",
+               "drilldown" : "eserte"
+            },
+            {
+               "drilldown" : "domm",
+               "y" : 15,
+               "name" : "#13: domm"
+            },
+            {
+               "y" : 15,
+               "name" : "#14: pplu",
+               "drilldown" : "pplu"
+            },
+            {
+               "drilldown" : "salva",
+               "name" : "#15: salva",
+               "y" : 15
+            },
+            {
+               "y" : 15,
+               "name" : "#16: srchulo",
+               "drilldown" : "srchulo"
+            },
+            {
+               "name" : "#17: fayland",
+               "y" : 14,
+               "drilldown" : "fayland"
+            },
+            {
+               "y" : 14,
+               "name" : "#18: jkeenan",
+               "drilldown" : "jkeenan"
+            },
+            {
+               "drilldown" : "preaction",
+               "y" : 14,
+               "name" : "#19: preaction"
+            },
+            {
+               "y" : 13,
+               "name" : "#20: Corion",
+               "drilldown" : "Corion"
+            },
+            {
+               "y" : 12,
+               "name" : "#21: oalders",
+               "drilldown" : "oalders"
+            },
+            {
+               "name" : "#22: rjbs",
+               "y" : 12,
+               "drilldown" : "rjbs"
+            },
+            {
+               "drilldown" : "stevan",
+               "y" : 12,
+               "name" : "#23: stevan"
+            },
+            {
+               "drilldown" : "bayashi",
+               "y" : 11,
+               "name" : "#24: bayashi"
+            },
+            {
+               "name" : "#25: bluefeet",
+               "y" : 11,
+               "drilldown" : "bluefeet"
+            },
+            {
+               "drilldown" : "markov2",
+               "y" : 11,
+               "name" : "#26: markov2"
+            },
+            {
+               "y" : 11,
+               "name" : "#27: team-at-cpan",
+               "drilldown" : "team-at-cpan"
+            },
+            {
+               "name" : "#28: vanstyn",
+               "y" : 11,
+               "drilldown" : "vanstyn"
+            },
+            {
+               "drilldown" : "yuki-kimoto",
+               "name" : "#29: yuki-kimoto",
+               "y" : 11
+            },
+            {
+               "drilldown" : "benkasminbullock",
+               "y" : 10,
+               "name" : "#30: benkasminbullock"
+            }
+         ],
+         "name" : "Author By Repository",
+         "ColorByPoint" : 1
+      }
+   ],
+   "subtitle" : {
+      "text" : "Click the columns to view PR breakdown. Last updated at 2024-01-27 20:11:41 GMT"
    }
 }
