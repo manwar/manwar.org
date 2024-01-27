@@ -485,6 +485,20 @@ $("#pr_summary").click(function() {
     });
 });
 
+$("#pr_2023").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/2023",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_2023_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
+        }
+    });
+});
+
 $("#pr_2022").click(function() {
     $('#pr-spinner').show();
     $.ajax({
