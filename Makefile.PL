@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME               => 'manwar',
-    AUTHOR             => q{Mohammad S Anwar <mohammad.anwar@yahoo.com>},
+    AUTHOR             => q{Mohammad Sajid Anwar <mohammad.anwar@yahoo.com>},
     VERSION_FROM       => 'lib/manwar.pm',
     ABSTRACT           => 'lib/manwar.pm',
     LICENSE            => 'artistic_2',

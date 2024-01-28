@@ -20,7 +20,7 @@ Version 0.31
 
 =head1 AUTHOR
 
-Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
+Mohammad Sajid Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
