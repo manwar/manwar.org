@@ -779,6 +779,20 @@ $("#gc_summary").click(function() {
     });
 });
 
+$("#gc_2023").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/2023",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_2023_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
+        }
+    });
+});
+
 $("#gc_2022").click(function() {
     $('#gc-spinner').show();
     $.ajax({
