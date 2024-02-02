@@ -16,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.31
+Version 0.32
 
 =head1 AUTHOR
 
@@ -24,7 +24,7 @@ Mohammad Sajid Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.31';
+$manwar::VERSION   = '0.32';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 sub get_template_data {
@@ -39,7 +39,7 @@ sub get_template_data {
         cr_title       => $cpan_recent->{title},
         cr_sub_title   => $cpan_recent->{sub_title},
         maps           => get_maps(),
-        #dists          => get_dists(),
+        dists          => get_dists(),
         git_topics     => get_source_data('git-how-to.json'),
         psql_topics    => get_source_data('psql-how-to.json'),
         who_am_i       => get_source_data('who-am-i.json'),
@@ -309,15 +309,11 @@ sub send_raw_data {
 
 sub get_maps {
 
-    # TODO
-    # ERROR:
-    # [Map::Tube::Server:21982] error @2019-04-09 11:03:08> Route exception: Can't upgrade BIND (1) to 4 at /usr/local/share/perl/5.14.2/Class/Load.pm line 147.
-
-    #my $available_maps = Map::Tube::API->new->available_maps;
+    my $available_maps = Map::Tube::API->new->available_maps;
     my $maps = [];
-    #foreach my $map (@$available_maps) {
-    #    push @{$maps}, { name => $map };
-    #}
+    foreach my $map (@$available_maps) {
+        push @{$maps}, { name => $map };
+    }
 
     return $maps;
 }
@@ -373,12 +369,15 @@ sub get_total_dists {
         { name => "Map::Tube::Barcelona",       title => "Barcelona"        },
         { name => "Map::Tube::Beijing",         title => "Beijing"          },
         { name => "Map::Tube::Berlin",          title => "Berlin"           },
+        { name => "Map::Tube::Bielefeld",       title => "Bielefeld"        },
         { name => "Map::Tube::Bucharest",       title => "Bucharest"        },
         { name => "Map::Tube::Budapest",        title => "Budapest"         },
         { name => "Map::Tube::Copenhagen",      title => "Copenhagen"       },
         { name => "Map::Tube::Delhi",           title => "Delhi"            },
         { name => "Map::Tube::Dnipropetrovsk",  title => "Dnipropetrovsk"   },
+        { name => "Map::Tube::Frankfurt",       title => "Frankfurt"        },
         { name => "Map::Tube::Glasgow",         title => "Glasgow"          },
+        { name => "Map::Tube::Hongkong",        title => "Hong Kong"        },
         { name => "Map::Tube::Kazan",           title => "Kazan"            },
         { name => "Map::Tube::Kharkiv",         title => "Kharkiv"          },
         { name => "Map::Tube::Kiev",            title => "Kiev"             },
@@ -387,6 +386,7 @@ sub get_total_dists {
         { name => "Map::Tube::KualaLumpur",     title => "Kuala Lumpur"     },
         { name => "Map::Tube::London",          title => "London"           },
         { name => "Map::Tube::Lyon",            title => "Lyon"             },
+        { name => "Map::Tube::Madrid",          title => "Madrid"           },
         { name => "Map::Tube::Malaga",          title => "Malaga"           },
         { name => "Map::Tube::Milan",           title => "Milan"            },
         { name => "Map::Tube::Minsk",           title => "Minsk"            },
@@ -395,6 +395,7 @@ sub get_total_dists {
         { name => "Map::Tube::Nanjing",         title => "Nanjing"          },
         { name => "Map::Tube::NizhnyNovgorod",  title => "Nizhny Novgorod"  },
         { name => "Map::Tube::Novosibirsk",     title => "Novosibirsk"      },
+        { name => "Map::Tube::Nuremberg",       title => "Nuremberg"        },
         { name => "Map::Tube::Prague",          title => "Prague"           },
         { name => "Map::Tube::SaintPetersburg", title => "Saint Petersburg" },
         { name => "Map::Tube::Samara",          title => "Samara"           },
