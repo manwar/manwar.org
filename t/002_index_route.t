@@ -8,6 +8,8 @@ use Test::More tests => 2;
 use Plack::Test;
 use HTTP::Request::Common;
 
+$ENV{MAP_BASE_URL} = 'http://127.0.0.1';
+
 my $app = manwar->to_app;
 is( ref $app, 'CODE', 'Got app' );
 
