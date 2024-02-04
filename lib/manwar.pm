@@ -16,7 +16,7 @@ Dancer2 App - manwar.org
 
 =head1 VERSION
 
-Version 0.32
+Version 0.33
 
 =head1 AUTHOR
 
@@ -24,7 +24,7 @@ Mohammad Sajid Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =cut
 
-$manwar::VERSION   = '0.32';
+$manwar::VERSION   = '0.33';
 $manwar::AUTHORITY = 'cpan:MANWAR';
 
 sub get_template_data {
