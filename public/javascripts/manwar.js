@@ -319,13 +319,13 @@ $("#ad").click(function() {
     });
 });
 
-$("#pd-a-c").click(function() {
+$("#pd-a-d").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/a/c",
+        url: "/personal-distributions/a/d",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_a_c_stats').highcharts(data);
+            $('#pd_a_d_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();
@@ -333,41 +333,13 @@ $("#pd-a-c").click(function() {
     });
 });
 
-$("#pd-d-h").click(function() {
+$("#pd-e-z").click(function() {
     $('#cd-spinner').show();
     $.ajax({
-        url: "/personal-distributions/d/h",
+        url: "/personal-distributions/e/z",
         dataType: "JSON",
         success: function(data) {
-            $('#pd_d_h_stats').highcharts(data);
-        },
-        complete: function() {
-            $('#cd-spinner').hide();
-        }
-    });
-});
-
-$("#pd-i-p").click(function() {
-    $('#cd-spinner').show();
-    $.ajax({
-        url: "/personal-distributions/i/p",
-        dataType: "JSON",
-        success: function(data) {
-            $('#pd_i_p_stats').highcharts(data);
-        },
-        complete: function() {
-            $('#cd-spinner').hide();
-        }
-    });
-});
-
-$("#pd-q-z").click(function() {
-    $('#cd-spinner').show();
-    $.ajax({
-        url: "/personal-distributions/q/z",
-        dataType: "JSON",
-        success: function(data) {
-            $('#pd_q_z_stats').highcharts(data);
+            $('#pd_e_z_stats').highcharts(data);
         },
         complete: function() {
             $('#cd-spinner').hide();

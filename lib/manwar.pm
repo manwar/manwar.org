@@ -243,7 +243,7 @@ get '/personal-distributions/:start/:end' => sub {
 
     my $start = route_parameters->{start};
     my $end   = route_parameters->{end};
-    my $file  = sprintf("pd_%s_to_%s.json", $start, $end);
+    my $file  = sprintf("pd-%s-%s.json", $start, $end);
     return send_data(path(setting('appdir'), 'public', 'stats', $file));
 };
 
