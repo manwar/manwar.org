@@ -4,11 +4,198 @@
          "text" : ""
       }
    },
+   "legend" : {
+      "enabled" : 0
+   },
+   "subtitle" : {
+      "text" : "Click the columns to view PR breakdown. Last updated at 2024-02-05 19:39:46 GMT"
+   },
+   "title" : {
+      "text" : "Author By Repository (TOP 30) 2015 - 2024"
+   },
+   "plotOptions" : {
+      "series" : {
+         "dataLabels" : {
+            "format" : "{point.y}",
+            "enabled" : 1
+         },
+         "borderWidth" : 0
+      }
+   },
+   "tooltip" : {
+      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
+      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
+      "followPointer" : 1
+   },
+   "chart" : {
+      "type" : "column"
+   },
+   "series" : [
+      {
+         "name" : "Author By Repository",
+         "ColorByPoint" : 1,
+         "data" : [
+            {
+               "drilldown" : "reneeb",
+               "name" : "#1: reneeb",
+               "y" : 57
+            },
+            {
+               "name" : "#2: neilb",
+               "drilldown" : "neilb",
+               "y" : 32
+            },
+            {
+               "y" : 29,
+               "drilldown" : "LibreCat",
+               "name" : "#3: LibreCat"
+            },
+            {
+               "y" : 22,
+               "name" : "#4: tupinek",
+               "drilldown" : "tupinek"
+            },
+            {
+               "drilldown" : "briandfoy",
+               "name" : "#5: briandfoy",
+               "y" : 21
+            },
+            {
+               "y" : 18,
+               "name" : "#6: FGasper",
+               "drilldown" : "FGasper"
+            },
+            {
+               "drilldown" : "binary-com",
+               "name" : "#7: binary-com",
+               "y" : 18
+            },
+            {
+               "y" : 18,
+               "name" : "#8: davorg",
+               "drilldown" : "davorg"
+            },
+            {
+               "y" : 18,
+               "name" : "#9: yanick",
+               "drilldown" : "yanick"
+            },
+            {
+               "y" : 17,
+               "drilldown" : "jjn1056",
+               "name" : "#10: jjn1056"
+            },
+            {
+               "name" : "#11: robrwo",
+               "drilldown" : "robrwo",
+               "y" : 17
+            },
+            {
+               "y" : 16,
+               "drilldown" : "domm",
+               "name" : "#12: domm"
+            },
+            {
+               "drilldown" : "eserte",
+               "name" : "#13: eserte",
+               "y" : 16
+            },
+            {
+               "y" : 15,
+               "drilldown" : "pplu",
+               "name" : "#14: pplu"
+            },
+            {
+               "y" : 15,
+               "drilldown" : "salva",
+               "name" : "#15: salva"
+            },
+            {
+               "drilldown" : "srchulo",
+               "name" : "#16: srchulo",
+               "y" : 15
+            },
+            {
+               "y" : 14,
+               "name" : "#17: fayland",
+               "drilldown" : "fayland"
+            },
+            {
+               "name" : "#18: jkeenan",
+               "drilldown" : "jkeenan",
+               "y" : 14
+            },
+            {
+               "name" : "#19: preaction",
+               "drilldown" : "preaction",
+               "y" : 14
+            },
+            {
+               "y" : 13,
+               "name" : "#20: Corion",
+               "drilldown" : "Corion"
+            },
+            {
+               "drilldown" : "oalders",
+               "name" : "#21: oalders",
+               "y" : 12
+            },
+            {
+               "y" : 12,
+               "drilldown" : "rjbs",
+               "name" : "#22: rjbs"
+            },
+            {
+               "name" : "#23: stevan",
+               "drilldown" : "stevan",
+               "y" : 12
+            },
+            {
+               "y" : 11,
+               "name" : "#24: bayashi",
+               "drilldown" : "bayashi"
+            },
+            {
+               "name" : "#25: bluefeet",
+               "drilldown" : "bluefeet",
+               "y" : 11
+            },
+            {
+               "y" : 11,
+               "name" : "#26: markov2",
+               "drilldown" : "markov2"
+            },
+            {
+               "name" : "#27: team-at-cpan",
+               "drilldown" : "team-at-cpan",
+               "y" : 11
+            },
+            {
+               "drilldown" : "vanstyn",
+               "name" : "#28: vanstyn",
+               "y" : 11
+            },
+            {
+               "y" : 11,
+               "name" : "#29: yuki-kimoto",
+               "drilldown" : "yuki-kimoto"
+            },
+            {
+               "y" : 10,
+               "drilldown" : "benkasminbullock",
+               "name" : "#30: benkasminbullock"
+            }
+         ]
+      }
+   ],
+   "xAxis" : {
+      "type" : "category"
+   },
    "drilldown" : {
       "series" : [
          {
-            "name" : "reneeb",
             "id" : "reneeb",
+            "name" : "reneeb",
             "data" : [
                [
                   "App-CPANCoverBadge",
@@ -241,8 +428,6 @@
             ]
          },
          {
-            "id" : "neilb",
-            "name" : "neilb",
             "data" : [
                [
                   "CPAN-Dashboard",
@@ -372,7 +557,9 @@
                   "constant-Atom",
                   1
                ]
-            ]
+            ],
+            "id" : "neilb",
+            "name" : "neilb"
          },
          {
             "data" : [
@@ -493,12 +680,12 @@
                   2
                ]
             ],
-            "name" : "LibreCat",
-            "id" : "LibreCat"
+            "id" : "LibreCat",
+            "name" : "LibreCat"
          },
          {
-            "name" : "tupinek",
             "id" : "tupinek",
+            "name" : "tupinek",
             "data" : [
                [
                   "Map-Tube-Bucharest",
@@ -681,6 +868,8 @@
             ]
          },
          {
+            "id" : "FGasper",
+            "name" : "FGasper",
             "data" : [
                [
                   "p5-CBOR-Free",
@@ -754,13 +943,9 @@
                   "p5-X-Tiny",
                   1
                ]
-            ],
-            "id" : "FGasper",
-            "name" : "FGasper"
+            ]
          },
          {
-            "id" : "binary-com",
-            "name" : "binary-com",
             "data" : [
                [
                   "dogstatsd-perl",
@@ -834,7 +1019,9 @@
                   "perl-feed-phasecheck",
                   1
                ]
-            ]
+            ],
+            "id" : "binary-com",
+            "name" : "binary-com"
          },
          {
             "name" : "davorg",
@@ -915,6 +1102,8 @@
             ]
          },
          {
+            "id" : "yanick",
+            "name" : "yanick",
             "data" : [
                [
                   "Dancer-Template-Handlebars",
@@ -988,9 +1177,7 @@
                   "xml-xpathscript",
                   2
                ]
-            ],
-            "id" : "yanick",
-            "name" : "yanick"
+            ]
          },
          {
             "data" : [
@@ -1067,8 +1254,8 @@
             "name" : "jjn1056"
          },
          {
-            "id" : "robrwo",
             "name" : "robrwo",
+            "id" : "robrwo",
             "data" : [
                [
                   "File-Rotate-Simple",
@@ -1141,8 +1328,8 @@
             ]
          },
          {
-            "id" : "domm",
             "name" : "domm",
+            "id" : "domm",
             "data" : [
                [
                   "API-Medium",
@@ -1277,12 +1464,10 @@
                   1
                ]
             ],
-            "name" : "eserte",
-            "id" : "eserte"
+            "id" : "eserte",
+            "name" : "eserte"
          },
          {
-            "name" : "pplu",
-            "id" : "pplu",
             "data" : [
                [
                   "AWSv4Signer",
@@ -1344,7 +1529,9 @@
                   "swagger-schema-kubernetes",
                   1
                ]
-            ]
+            ],
+            "id" : "pplu",
+            "name" : "pplu"
          },
          {
             "name" : "salva",
@@ -1479,8 +1666,6 @@
             "id" : "srchulo"
          },
          {
-            "name" : "fayland",
-            "id" : "fayland",
             "data" : [
                [
                   "business-pxpay",
@@ -1538,7 +1723,9 @@
                   "perl-WebService-DeathByCaptcha",
                   1
                ]
-            ]
+            ],
+            "name" : "fayland",
+            "id" : "fayland"
          },
          {
             "name" : "jkeenan",
@@ -1603,8 +1790,6 @@
             ]
          },
          {
-            "name" : "preaction",
-            "id" : "preaction",
             "data" : [
                [
                   "Alien-SwaggerUI",
@@ -1662,7 +1847,9 @@
                   "Yancy-Backend-Static",
                   2
                ]
-            ]
+            ],
+            "id" : "preaction",
+            "name" : "preaction"
          },
          {
             "data" : [
@@ -1723,6 +1910,8 @@
             "name" : "Corion"
          },
          {
+            "id" : "oalders",
+            "name" : "oalders",
             "data" : [
                [
                   "archive-any",
@@ -1772,13 +1961,9 @@
                   "webservice-sqlformat",
                   2
                ]
-            ],
-            "id" : "oalders",
-            "name" : "oalders"
+            ]
          },
          {
-            "name" : "rjbs",
-            "id" : "rjbs",
             "data" : [
                [
                   "Dist-Zilla",
@@ -1828,9 +2013,13 @@
                   "Time-Piece",
                   1
                ]
-            ]
+            ],
+            "name" : "rjbs",
+            "id" : "rjbs"
          },
          {
+            "name" : "stevan",
+            "id" : "stevan",
             "data" : [
                [
                   "BreadBoard",
@@ -1880,13 +2069,9 @@
                   "tree-simple-sax",
                   1
                ]
-            ],
-            "id" : "stevan",
-            "name" : "stevan"
+            ]
          },
          {
-            "name" : "bayashi",
-            "id" : "bayashi",
             "data" : [
                [
                   "App-jl",
@@ -1932,9 +2117,13 @@
                   "WebService-BitFlyer",
                   1
                ]
-            ]
+            ],
+            "name" : "bayashi",
+            "id" : "bayashi"
          },
          {
+            "id" : "bluefeet",
+            "name" : "bluefeet",
             "data" : [
                [
                   "Catalyst-Model-Curio",
@@ -1980,9 +2169,7 @@
                   "Net-Gitlab",
                   1
                ]
-            ],
-            "id" : "bluefeet",
-            "name" : "bluefeet"
+            ]
          },
          {
             "data" : [
@@ -2081,12 +2268,10 @@
                   1
                ]
             ],
-            "id" : "team-at-cpan",
-            "name" : "team-at-cpan"
+            "name" : "team-at-cpan",
+            "id" : "team-at-cpan"
          },
          {
-            "name" : "vanstyn",
-            "id" : "vanstyn",
             "data" : [
                [
                   "Alien-Web",
@@ -2132,9 +2317,13 @@
                   "RapidApp",
                   1
                ]
-            ]
+            ],
+            "id" : "vanstyn",
+            "name" : "vanstyn"
          },
          {
+            "name" : "yuki-kimoto",
+            "id" : "yuki-kimoto",
             "data" : [
                [
                   "D",
@@ -2180,11 +2369,11 @@
                   "giblog",
                   3
                ]
-            ],
-            "id" : "yuki-kimoto",
-            "name" : "yuki-kimoto"
+            ]
          },
          {
+            "name" : "benkasminbullock",
+            "id" : "benkasminbullock",
             "data" : [
                [
                   "Directory-Diff",
@@ -2226,197 +2415,8 @@
                   "net-ipv6addr",
                   1
                ]
-            ],
-            "id" : "benkasminbullock",
-            "name" : "benkasminbullock"
+            ]
          }
       ]
-   },
-   "series" : [
-      {
-         "name" : "Author By Repository",
-         "ColorByPoint" : 1,
-         "data" : [
-            {
-               "name" : "#1: reneeb",
-               "y" : 57,
-               "drilldown" : "reneeb"
-            },
-            {
-               "drilldown" : "neilb",
-               "y" : 32,
-               "name" : "#2: neilb"
-            },
-            {
-               "drilldown" : "LibreCat",
-               "y" : 29,
-               "name" : "#3: LibreCat"
-            },
-            {
-               "y" : 22,
-               "name" : "#4: tupinek",
-               "drilldown" : "tupinek"
-            },
-            {
-               "y" : 21,
-               "name" : "#5: briandfoy",
-               "drilldown" : "briandfoy"
-            },
-            {
-               "y" : 18,
-               "name" : "#6: FGasper",
-               "drilldown" : "FGasper"
-            },
-            {
-               "drilldown" : "binary-com",
-               "y" : 18,
-               "name" : "#7: binary-com"
-            },
-            {
-               "name" : "#8: davorg",
-               "y" : 18,
-               "drilldown" : "davorg"
-            },
-            {
-               "drilldown" : "yanick",
-               "y" : 18,
-               "name" : "#9: yanick"
-            },
-            {
-               "name" : "#10: jjn1056",
-               "y" : 17,
-               "drilldown" : "jjn1056"
-            },
-            {
-               "name" : "#11: robrwo",
-               "y" : 17,
-               "drilldown" : "robrwo"
-            },
-            {
-               "name" : "#12: domm",
-               "y" : 16,
-               "drilldown" : "domm"
-            },
-            {
-               "drilldown" : "eserte",
-               "name" : "#13: eserte",
-               "y" : 16
-            },
-            {
-               "drilldown" : "pplu",
-               "name" : "#14: pplu",
-               "y" : 15
-            },
-            {
-               "y" : 15,
-               "name" : "#15: salva",
-               "drilldown" : "salva"
-            },
-            {
-               "y" : 15,
-               "name" : "#16: srchulo",
-               "drilldown" : "srchulo"
-            },
-            {
-               "name" : "#17: fayland",
-               "y" : 14,
-               "drilldown" : "fayland"
-            },
-            {
-               "name" : "#18: jkeenan",
-               "y" : 14,
-               "drilldown" : "jkeenan"
-            },
-            {
-               "name" : "#19: preaction",
-               "y" : 14,
-               "drilldown" : "preaction"
-            },
-            {
-               "drilldown" : "Corion",
-               "y" : 13,
-               "name" : "#20: Corion"
-            },
-            {
-               "drilldown" : "oalders",
-               "name" : "#21: oalders",
-               "y" : 12
-            },
-            {
-               "drilldown" : "rjbs",
-               "name" : "#22: rjbs",
-               "y" : 12
-            },
-            {
-               "drilldown" : "stevan",
-               "y" : 12,
-               "name" : "#23: stevan"
-            },
-            {
-               "name" : "#24: bayashi",
-               "y" : 11,
-               "drilldown" : "bayashi"
-            },
-            {
-               "y" : 11,
-               "name" : "#25: bluefeet",
-               "drilldown" : "bluefeet"
-            },
-            {
-               "y" : 11,
-               "name" : "#26: markov2",
-               "drilldown" : "markov2"
-            },
-            {
-               "y" : 11,
-               "name" : "#27: team-at-cpan",
-               "drilldown" : "team-at-cpan"
-            },
-            {
-               "y" : 11,
-               "name" : "#28: vanstyn",
-               "drilldown" : "vanstyn"
-            },
-            {
-               "drilldown" : "yuki-kimoto",
-               "y" : 11,
-               "name" : "#29: yuki-kimoto"
-            },
-            {
-               "name" : "#30: benkasminbullock",
-               "y" : 10,
-               "drilldown" : "benkasminbullock"
-            }
-         ]
-      }
-   ],
-   "chart" : {
-      "type" : "column"
-   },
-   "plotOptions" : {
-      "series" : {
-         "dataLabels" : {
-            "format" : "{point.y}",
-            "enabled" : 1
-         },
-         "borderWidth" : 0
-      }
-   },
-   "subtitle" : {
-      "text" : "Click the columns to view PR breakdown. Last updated at 2024-02-04 16:28:23 GMT"
-   },
-   "tooltip" : {
-      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
-      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
-      "followPointer" : 1
-   },
-   "legend" : {
-      "enabled" : 0
-   },
-   "title" : {
-      "text" : "Author By Repository (TOP 30) 2015 - 2024"
-   },
-   "xAxis" : {
-      "type" : "category"
    }
 }
