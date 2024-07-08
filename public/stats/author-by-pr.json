@@ -1,17 +1,190 @@
 {
-   "plotOptions" : {
-      "series" : {
-         "borderWidth" : 0,
-         "dataLabels" : {
-            "format" : "{point.y}",
-            "enabled" : 1
-         }
-      }
+   "chart" : {
+      "type" : "column"
    },
    "tooltip" : {
       "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
-      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
-      "followPointer" : 1
+      "followPointer" : 1,
+      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>"
+   },
+   "xAxis" : {
+      "type" : "category"
+   },
+   "subtitle" : {
+      "text" : "Click the columns to view PR breakdown. Last updated at 2024-07-08 17:43:10 GMT"
+   },
+   "plotOptions" : {
+      "series" : {
+         "dataLabels" : {
+            "enabled" : 1,
+            "format" : "{point.y}"
+         },
+         "borderWidth" : 0
+      }
+   },
+   "series" : [
+      {
+         "name" : "Author By Pull Request",
+         "data" : [
+            {
+               "name" : "#1: szabgab",
+               "y" : 194,
+               "drilldown" : "szabgab"
+            },
+            {
+               "y" : 107,
+               "drilldown" : "reneeb",
+               "name" : "#2: reneeb"
+            },
+            {
+               "name" : "#3: LibreCat",
+               "y" : 37,
+               "drilldown" : "LibreCat"
+            },
+            {
+               "name" : "#4: davorg",
+               "y" : 34,
+               "drilldown" : "davorg"
+            },
+            {
+               "drilldown" : "neilb",
+               "y" : 34,
+               "name" : "#5: neilb"
+            },
+            {
+               "y" : 26,
+               "drilldown" : "eserte",
+               "name" : "#6: eserte"
+            },
+            {
+               "y" : 26,
+               "drilldown" : "tupinek",
+               "name" : "#7: tupinek"
+            },
+            {
+               "drilldown" : "preaction",
+               "y" : 25,
+               "name" : "#8: preaction"
+            },
+            {
+               "name" : "#9: briandfoy",
+               "y" : 24,
+               "drilldown" : "briandfoy"
+            },
+            {
+               "y" : 24,
+               "drilldown" : "dnmfarrell",
+               "name" : "#10: dnmfarrell"
+            },
+            {
+               "y" : 24,
+               "drilldown" : "domm",
+               "name" : "#11: domm"
+            },
+            {
+               "drilldown" : "srchulo",
+               "y" : 24,
+               "name" : "#12: srchulo"
+            },
+            {
+               "drilldown" : "FGasper",
+               "y" : 23,
+               "name" : "#13: FGasper"
+            },
+            {
+               "y" : 23,
+               "drilldown" : "yuki-kimoto",
+               "name" : "#14: yuki-kimoto"
+            },
+            {
+               "name" : "#15: PerlDancer",
+               "y" : 21,
+               "drilldown" : "PerlDancer"
+            },
+            {
+               "drilldown" : "oalders",
+               "y" : 21,
+               "name" : "#16: oalders"
+            },
+            {
+               "name" : "#17: yanick",
+               "drilldown" : "yanick",
+               "y" : 21
+            },
+            {
+               "name" : "#18: robrwo",
+               "drilldown" : "robrwo",
+               "y" : 20
+            },
+            {
+               "name" : "#19: salva",
+               "y" : 20,
+               "drilldown" : "salva"
+            },
+            {
+               "name" : "#20: binary-com",
+               "drilldown" : "binary-com",
+               "y" : 19
+            },
+            {
+               "name" : "#21: jjn1056",
+               "y" : 19,
+               "drilldown" : "jjn1056"
+            },
+            {
+               "y" : 18,
+               "drilldown" : "fayland",
+               "name" : "#22: fayland"
+            },
+            {
+               "name" : "#23: jkeenan",
+               "y" : 18,
+               "drilldown" : "jkeenan"
+            },
+            {
+               "name" : "#24: pplu",
+               "y" : 18,
+               "drilldown" : "pplu"
+            },
+            {
+               "y" : 17,
+               "drilldown" : "stevan",
+               "name" : "#25: stevan"
+            },
+            {
+               "name" : "#26: Corion",
+               "drilldown" : "Corion",
+               "y" : 13
+            },
+            {
+               "name" : "#27: barbie",
+               "drilldown" : "barbie",
+               "y" : 13
+            },
+            {
+               "name" : "#28: bayashi",
+               "y" : 13,
+               "drilldown" : "bayashi"
+            },
+            {
+               "y" : 13,
+               "drilldown" : "rjbs",
+               "name" : "#29: rjbs"
+            },
+            {
+               "name" : "#30: sciurius",
+               "drilldown" : "sciurius",
+               "y" : 13
+            }
+         ],
+         "ColorByPoint" : 1
+      }
+   ],
+   "legend" : {
+      "enabled" : 0
+   },
+   "title" : {
+      "text" : "Author By Pull Request (TOP 30) 2015 - 2024"
    },
    "drilldown" : {
       "series" : [
@@ -63,7 +236,6 @@
          },
          {
             "id" : "reneeb",
-            "name" : "reneeb",
             "data" : [
                [
                   "App-CPANCoverBadge",
@@ -293,9 +465,11 @@
                   "perl-Tropo",
                   1
                ]
-            ]
+            ],
+            "name" : "reneeb"
          },
          {
+            "id" : "LibreCat",
             "data" : [
                [
                   "Catmandu",
@@ -414,8 +588,7 @@
                   2
                ]
             ],
-            "name" : "LibreCat",
-            "id" : "LibreCat"
+            "name" : "LibreCat"
          },
          {
             "data" : [
@@ -492,10 +665,11 @@
                   3
                ]
             ],
-            "name" : "davorg",
-            "id" : "davorg"
+            "id" : "davorg",
+            "name" : "davorg"
          },
          {
+            "id" : "neilb",
             "data" : [
                [
                   "CPAN-Dashboard",
@@ -626,11 +800,10 @@
                   1
                ]
             ],
-            "name" : "neilb",
-            "id" : "neilb"
+            "name" : "neilb"
          },
          {
-            "name" : "eserte",
+            "id" : "eserte",
             "data" : [
                [
                   "Map-Tube-Berlin",
@@ -697,10 +870,9 @@
                   1
                ]
             ],
-            "id" : "eserte"
+            "name" : "eserte"
          },
          {
-            "id" : "tupinek",
             "data" : [
                [
                   "Map-Tube-Bucharest",
@@ -791,9 +963,11 @@
                   1
                ]
             ],
+            "id" : "tupinek",
             "name" : "tupinek"
          },
          {
+            "name" : "preaction",
             "data" : [
                [
                   "Alien-SwaggerUI",
@@ -852,11 +1026,10 @@
                   2
                ]
             ],
-            "name" : "preaction",
             "id" : "preaction"
          },
          {
-            "name" : "briandfoy",
+            "id" : "briandfoy",
             "data" : [
                [
                   "Net-SSH-Perl-ProxiedIPC",
@@ -943,7 +1116,7 @@
                   1
                ]
             ],
-            "id" : "briandfoy"
+            "name" : "briandfoy"
          },
          {
             "data" : [
@@ -984,12 +1157,12 @@
                   16
                ]
             ],
-            "name" : "dnmfarrell",
-            "id" : "dnmfarrell"
+            "id" : "dnmfarrell",
+            "name" : "dnmfarrell"
          },
          {
-            "id" : "domm",
             "name" : "domm",
+            "id" : "domm",
             "data" : [
                [
                   "API-Medium",
@@ -1058,7 +1231,6 @@
             ]
          },
          {
-            "id" : "srchulo",
             "data" : [
                [
                   "Catalyst--Model--DBIx--Raw",
@@ -1121,11 +1293,10 @@
                   2
                ]
             ],
+            "id" : "srchulo",
             "name" : "srchulo"
          },
          {
-            "id" : "FGasper",
-            "name" : "FGasper",
             "data" : [
                [
                   "p5-CBOR-Free",
@@ -1199,9 +1370,12 @@
                   "p5-X-Tiny",
                   1
                ]
-            ]
+            ],
+            "id" : "FGasper",
+            "name" : "FGasper"
          },
          {
+            "id" : "yuki-kimoto",
             "data" : [
                [
                   "D",
@@ -1248,12 +1422,10 @@
                   3
                ]
             ],
-            "name" : "yuki-kimoto",
-            "id" : "yuki-kimoto"
+            "name" : "yuki-kimoto"
          },
          {
             "id" : "PerlDancer",
-            "name" : "PerlDancer",
             "data" : [
                [
                   "Dancer",
@@ -1287,10 +1459,10 @@
                   "advent-calendar",
                   2
                ]
-            ]
+            ],
+            "name" : "PerlDancer"
          },
          {
-            "name" : "oalders",
             "data" : [
                [
                   "archive-any",
@@ -1341,7 +1513,8 @@
                   2
                ]
             ],
-            "id" : "oalders"
+            "id" : "oalders",
+            "name" : "oalders"
          },
          {
             "name" : "yanick",
@@ -1422,6 +1595,7 @@
             "id" : "yanick"
          },
          {
+            "name" : "robrwo",
             "id" : "robrwo",
             "data" : [
                [
@@ -1492,8 +1666,7 @@
                   "Types-Const",
                   1
                ]
-            ],
-            "name" : "robrwo"
+            ]
          },
          {
             "data" : [
@@ -1558,11 +1731,10 @@
                   2
                ]
             ],
-            "name" : "salva",
-            "id" : "salva"
+            "id" : "salva",
+            "name" : "salva"
          },
          {
-            "id" : "binary-com",
             "name" : "binary-com",
             "data" : [
                [
@@ -1637,9 +1809,11 @@
                   "perl-feed-phasecheck",
                   1
                ]
-            ]
+            ],
+            "id" : "binary-com"
          },
          {
+            "name" : "jjn1056",
             "id" : "jjn1056",
             "data" : [
                [
@@ -1710,12 +1884,10 @@
                   "WebService-Auth0",
                   1
                ]
-            ],
-            "name" : "jjn1056"
+            ]
          },
          {
             "id" : "fayland",
-            "name" : "fayland",
             "data" : [
                [
                   "business-pxpay",
@@ -1773,9 +1945,11 @@
                   "perl-WebService-DeathByCaptcha",
                   1
                ]
-            ]
+            ],
+            "name" : "fayland"
          },
          {
+            "name" : "jkeenan",
             "data" : [
                [
                   "CPAN-Cpanorg-Auxiliary",
@@ -1834,11 +2008,9 @@
                   1
                ]
             ],
-            "name" : "jkeenan",
             "id" : "jkeenan"
          },
          {
-            "id" : "pplu",
             "data" : [
                [
                   "AWSv4Signer",
@@ -1901,11 +2073,12 @@
                   1
                ]
             ],
+            "id" : "pplu",
             "name" : "pplu"
          },
          {
-            "id" : "stevan",
             "name" : "stevan",
+            "id" : "stevan",
             "data" : [
                [
                   "BreadBoard",
@@ -2012,8 +2185,8 @@
                   1
                ]
             ],
-            "name" : "Corion",
-            "id" : "Corion"
+            "id" : "Corion",
+            "name" : "Corion"
          },
          {
             "data" : [
@@ -2054,12 +2227,10 @@
                   1
                ]
             ],
-            "name" : "barbie",
-            "id" : "barbie"
+            "id" : "barbie",
+            "name" : "barbie"
          },
          {
-            "id" : "bayashi",
-            "name" : "bayashi",
             "data" : [
                [
                   "App-jl",
@@ -2105,7 +2276,9 @@
                   "WebService-BitFlyer",
                   1
                ]
-            ]
+            ],
+            "id" : "bayashi",
+            "name" : "bayashi"
          },
          {
             "name" : "rjbs",
@@ -2162,8 +2335,8 @@
             "id" : "rjbs"
          },
          {
-            "id" : "sciurius",
             "name" : "sciurius",
+            "id" : "sciurius",
             "data" : [
                [
                   "comics",
@@ -2201,182 +2374,9 @@
          }
       ]
    },
-   "xAxis" : {
-      "type" : "category"
-   },
-   "subtitle" : {
-      "text" : "Click the columns to view PR breakdown. Last updated at 2024-07-08 17:26:14 GMT"
-   },
-   "series" : [
-      {
-         "name" : "Author By Pull Request",
-         "ColorByPoint" : 1,
-         "data" : [
-            {
-               "drilldown" : "szabgab",
-               "name" : "#1: szabgab",
-               "y" : 194
-            },
-            {
-               "name" : "#2: reneeb",
-               "y" : 107,
-               "drilldown" : "reneeb"
-            },
-            {
-               "name" : "#3: LibreCat",
-               "y" : 37,
-               "drilldown" : "LibreCat"
-            },
-            {
-               "drilldown" : "davorg",
-               "y" : 34,
-               "name" : "#4: davorg"
-            },
-            {
-               "name" : "#5: neilb",
-               "y" : 34,
-               "drilldown" : "neilb"
-            },
-            {
-               "drilldown" : "eserte",
-               "name" : "#6: eserte",
-               "y" : 26
-            },
-            {
-               "drilldown" : "tupinek",
-               "y" : 26,
-               "name" : "#7: tupinek"
-            },
-            {
-               "drilldown" : "preaction",
-               "name" : "#8: preaction",
-               "y" : 25
-            },
-            {
-               "drilldown" : "briandfoy",
-               "name" : "#9: briandfoy",
-               "y" : 24
-            },
-            {
-               "y" : 24,
-               "name" : "#10: dnmfarrell",
-               "drilldown" : "dnmfarrell"
-            },
-            {
-               "drilldown" : "domm",
-               "name" : "#11: domm",
-               "y" : 24
-            },
-            {
-               "y" : 24,
-               "name" : "#12: srchulo",
-               "drilldown" : "srchulo"
-            },
-            {
-               "drilldown" : "FGasper",
-               "y" : 23,
-               "name" : "#13: FGasper"
-            },
-            {
-               "drilldown" : "yuki-kimoto",
-               "y" : 23,
-               "name" : "#14: yuki-kimoto"
-            },
-            {
-               "y" : 21,
-               "name" : "#15: PerlDancer",
-               "drilldown" : "PerlDancer"
-            },
-            {
-               "name" : "#16: oalders",
-               "y" : 21,
-               "drilldown" : "oalders"
-            },
-            {
-               "name" : "#17: yanick",
-               "y" : 21,
-               "drilldown" : "yanick"
-            },
-            {
-               "drilldown" : "robrwo",
-               "name" : "#18: robrwo",
-               "y" : 20
-            },
-            {
-               "y" : 20,
-               "name" : "#19: salva",
-               "drilldown" : "salva"
-            },
-            {
-               "drilldown" : "binary-com",
-               "y" : 19,
-               "name" : "#20: binary-com"
-            },
-            {
-               "drilldown" : "jjn1056",
-               "name" : "#21: jjn1056",
-               "y" : 19
-            },
-            {
-               "y" : 18,
-               "name" : "#22: fayland",
-               "drilldown" : "fayland"
-            },
-            {
-               "y" : 18,
-               "name" : "#23: jkeenan",
-               "drilldown" : "jkeenan"
-            },
-            {
-               "name" : "#24: pplu",
-               "y" : 18,
-               "drilldown" : "pplu"
-            },
-            {
-               "drilldown" : "stevan",
-               "name" : "#25: stevan",
-               "y" : 17
-            },
-            {
-               "name" : "#26: Corion",
-               "y" : 13,
-               "drilldown" : "Corion"
-            },
-            {
-               "drilldown" : "barbie",
-               "name" : "#27: barbie",
-               "y" : 13
-            },
-            {
-               "name" : "#28: bayashi",
-               "y" : 13,
-               "drilldown" : "bayashi"
-            },
-            {
-               "drilldown" : "rjbs",
-               "name" : "#29: rjbs",
-               "y" : 13
-            },
-            {
-               "name" : "#30: sciurius",
-               "y" : 13,
-               "drilldown" : "sciurius"
-            }
-         ]
-      }
-   ],
-   "legend" : {
-      "enabled" : 0
-   },
-   "title" : {
-      "text" : "Author By Pull Request (TOP 30) 2015 - 2024"
-   },
    "yAxis" : {
       "title" : {
          "text" : ""
       }
-   },
-   "chart" : {
-      "type" : "column"
    }
 }
