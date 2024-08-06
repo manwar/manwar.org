@@ -1,7 +1,9 @@
 {
-   "tooltip" : {
-      "pointFormat" : "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b><br/>",
-      "shared" : true
+   "yAxis" : {
+      "title" : {
+         "text" : ""
+      },
+      "min" : 0
    },
    "xAxis" : {
       "categories" : [
@@ -37,8 +39,16 @@
          "#30: sciurius"
       ]
    },
+   "title" : {
+      "text" : "Pull Request Tracker (Top 30) 2015 - 2024"
+   },
+   "plotOptions" : {
+      "column" : {
+         "stacking" : "percent"
+      }
+   },
    "subtitle" : {
-      "text" : "[Pull Request: 2459] [Repository: 1814] [Author: 623] Last updated at 2024-07-27 22:48:52 GMT"
+      "text" : "[Pull Request: 2459] [Repository: 1814] [Author: 623] Last updated at 2024-08-06 09:38:00 GMT"
    },
    "series" : [
       {
@@ -77,6 +87,7 @@
          ]
       },
       {
+         "name" : "Close (Unmerged)",
          "data" : [
             0,
             2,
@@ -108,11 +119,9 @@
             1,
             10,
             1
-         ],
-         "name" : "Close (Unmerged)"
+         ]
       },
       {
-         "name" : "Open",
          "data" : [
             0,
             6,
@@ -144,24 +153,15 @@
             0,
             1,
             1
-         ]
+         ],
+         "name" : "Open"
       }
    ],
-   "title" : {
-      "text" : "Pull Request Tracker (Top 30) 2015 - 2024"
+   "tooltip" : {
+      "shared" : true,
+      "pointFormat" : "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b><br/>"
    },
    "chart" : {
       "type" : "column"
-   },
-   "plotOptions" : {
-      "column" : {
-         "stacking" : "percent"
-      }
-   },
-   "yAxis" : {
-      "title" : {
-         "text" : ""
-      },
-      "min" : 0
    }
 }
