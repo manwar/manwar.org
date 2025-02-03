@@ -1,187 +1,37 @@
 {
-   "subtitle" : {
-      "text" : "Click the columns to view PR breakdown. Last updated at 2025-01-20 14:59:08 GMT"
-   },
-   "legend" : {
-      "enabled" : 0
-   },
-   "series" : [
-      {
-         "ColorByPoint" : 1,
-         "name" : "Author By Repository",
-         "data" : [
-            {
-               "name" : "#1: reneeb",
-               "drilldown" : "reneeb",
-               "y" : 57
-            },
-            {
-               "drilldown" : "neilb",
-               "name" : "#2: neilb",
-               "y" : 32
-            },
-            {
-               "y" : 29,
-               "name" : "#3: LibreCat",
-               "drilldown" : "LibreCat"
-            },
-            {
-               "y" : 22,
-               "name" : "#4: tupinek",
-               "drilldown" : "tupinek"
-            },
-            {
-               "drilldown" : "briandfoy",
-               "name" : "#5: briandfoy",
-               "y" : 21
-            },
-            {
-               "name" : "#6: FGasper",
-               "drilldown" : "FGasper",
-               "y" : 18
-            },
-            {
-               "drilldown" : "binary-com",
-               "name" : "#7: binary-com",
-               "y" : 18
-            },
-            {
-               "y" : 18,
-               "drilldown" : "davorg",
-               "name" : "#8: davorg"
-            },
-            {
-               "drilldown" : "yanick",
-               "name" : "#9: yanick",
-               "y" : 18
-            },
-            {
-               "drilldown" : "jjn1056",
-               "name" : "#10: jjn1056",
-               "y" : 17
-            },
-            {
-               "y" : 17,
-               "name" : "#11: robrwo",
-               "drilldown" : "robrwo"
-            },
-            {
-               "y" : 16,
-               "name" : "#12: domm",
-               "drilldown" : "domm"
-            },
-            {
-               "drilldown" : "eserte",
-               "name" : "#13: eserte",
-               "y" : 16
-            },
-            {
-               "name" : "#14: pplu",
-               "drilldown" : "pplu",
-               "y" : 15
-            },
-            {
-               "y" : 15,
-               "drilldown" : "salva",
-               "name" : "#15: salva"
-            },
-            {
-               "drilldown" : "srchulo",
-               "name" : "#16: srchulo",
-               "y" : 15
-            },
-            {
-               "drilldown" : "fayland",
-               "name" : "#17: fayland",
-               "y" : 14
-            },
-            {
-               "y" : 14,
-               "name" : "#18: jkeenan",
-               "drilldown" : "jkeenan"
-            },
-            {
-               "drilldown" : "preaction",
-               "name" : "#19: preaction",
-               "y" : 14
-            },
-            {
-               "y" : 13,
-               "name" : "#20: Corion",
-               "drilldown" : "Corion"
-            },
-            {
-               "drilldown" : "oalders",
-               "name" : "#21: oalders",
-               "y" : 12
-            },
-            {
-               "drilldown" : "rjbs",
-               "name" : "#22: rjbs",
-               "y" : 12
-            },
-            {
-               "y" : 12,
-               "name" : "#23: stevan",
-               "drilldown" : "stevan"
-            },
-            {
-               "name" : "#24: bayashi",
-               "drilldown" : "bayashi",
-               "y" : 11
-            },
-            {
-               "y" : 11,
-               "name" : "#25: bluefeet",
-               "drilldown" : "bluefeet"
-            },
-            {
-               "y" : 11,
-               "drilldown" : "markov2",
-               "name" : "#26: markov2"
-            },
-            {
-               "y" : 11,
-               "name" : "#27: team-at-cpan",
-               "drilldown" : "team-at-cpan"
-            },
-            {
-               "drilldown" : "vanstyn",
-               "name" : "#28: vanstyn",
-               "y" : 11
-            },
-            {
-               "y" : 11,
-               "name" : "#29: yuki-kimoto",
-               "drilldown" : "yuki-kimoto"
-            },
-            {
-               "y" : 10,
-               "name" : "#30: benkasminbullock",
-               "drilldown" : "benkasminbullock"
-            }
-         ]
-      }
-   ],
-   "xAxis" : {
-      "type" : "category"
-   },
-   "title" : {
-      "text" : "Author By Repository (TOP 30) 2015 - 2025"
-   },
    "plotOptions" : {
       "series" : {
+         "borderWidth" : 0,
          "dataLabels" : {
-            "format" : "{point.y}",
-            "enabled" : 1
-         },
-         "borderWidth" : 0
+            "enabled" : 1,
+            "format" : "{point.y}"
+         }
       }
+   },
+   "tooltip" : {
+      "followPointer" : 1,
+      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
+      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>"
+   },
+   "xAxis" : {
+      "type" : "category"
    },
    "yAxis" : {
       "title" : {
          "text" : ""
       }
+   },
+   "title" : {
+      "text" : "Author By Repository (TOP 30) 2015 - 2025"
+   },
+   "legend" : {
+      "enabled" : 0
+   },
+   "subtitle" : {
+      "text" : "Click the columns to view PR breakdown. Last updated at 2025-02-03 11:26:41 GMT"
+   },
+   "chart" : {
+      "type" : "column"
    },
    "drilldown" : {
       "series" : [
@@ -416,11 +266,10 @@
                   1
                ]
             ],
-            "name" : "reneeb",
-            "id" : "reneeb"
+            "id" : "reneeb",
+            "name" : "reneeb"
          },
          {
-            "name" : "neilb",
             "data" : [
                [
                   "CPAN-Dashboard",
@@ -551,11 +400,12 @@
                   1
                ]
             ],
-            "id" : "neilb"
+            "id" : "neilb",
+            "name" : "neilb"
          },
          {
-            "id" : "LibreCat",
             "name" : "LibreCat",
+            "id" : "LibreCat",
             "data" : [
                [
                   "Catmandu",
@@ -676,8 +526,8 @@
             ]
          },
          {
-            "id" : "tupinek",
             "name" : "tupinek",
+            "id" : "tupinek",
             "data" : [
                [
                   "Map-Tube-Bucharest",
@@ -856,11 +706,10 @@
                   1
                ]
             ],
-            "name" : "briandfoy",
-            "id" : "briandfoy"
+            "id" : "briandfoy",
+            "name" : "briandfoy"
          },
          {
-            "id" : "FGasper",
             "name" : "FGasper",
             "data" : [
                [
@@ -935,9 +784,11 @@
                   "p5-X-Tiny",
                   1
                ]
-            ]
+            ],
+            "id" : "FGasper"
          },
          {
+            "name" : "binary-com",
             "data" : [
                [
                   "dogstatsd-perl",
@@ -1012,11 +863,9 @@
                   1
                ]
             ],
-            "name" : "binary-com",
             "id" : "binary-com"
          },
          {
-            "id" : "davorg",
             "name" : "davorg",
             "data" : [
                [
@@ -1091,7 +940,8 @@
                   "xml-feed",
                   3
                ]
-            ]
+            ],
+            "id" : "davorg"
          },
          {
             "name" : "yanick",
@@ -1172,7 +1022,6 @@
             "id" : "yanick"
          },
          {
-            "id" : "jjn1056",
             "data" : [
                [
                   "Catalyst-ActionRole-Public",
@@ -1243,10 +1092,10 @@
                   1
                ]
             ],
+            "id" : "jjn1056",
             "name" : "jjn1056"
          },
          {
-            "id" : "robrwo",
             "name" : "robrwo",
             "data" : [
                [
@@ -1317,9 +1166,11 @@
                   "Types-Const",
                   1
                ]
-            ]
+            ],
+            "id" : "robrwo"
          },
          {
+            "name" : "domm",
             "data" : [
                [
                   "API-Medium",
@@ -1386,7 +1237,6 @@
                   1
                ]
             ],
-            "name" : "domm",
             "id" : "domm"
          },
          {
@@ -1460,8 +1310,6 @@
             "name" : "eserte"
          },
          {
-            "id" : "pplu",
-            "name" : "pplu",
             "data" : [
                [
                   "AWSv4Signer",
@@ -1523,10 +1371,12 @@
                   "swagger-schema-kubernetes",
                   1
                ]
-            ]
+            ],
+            "id" : "pplu",
+            "name" : "pplu"
          },
          {
-            "id" : "salva",
+            "name" : "salva",
             "data" : [
                [
                   "p5-AnyEvent-FileLock",
@@ -1589,9 +1439,10 @@
                   2
                ]
             ],
-            "name" : "salva"
+            "id" : "salva"
          },
          {
+            "name" : "srchulo",
             "id" : "srchulo",
             "data" : [
                [
@@ -1654,10 +1505,11 @@
                   "jQuery-File-Upload",
                   2
                ]
-            ],
-            "name" : "srchulo"
+            ]
          },
          {
+            "name" : "fayland",
+            "id" : "fayland",
             "data" : [
                [
                   "business-pxpay",
@@ -1715,13 +1567,11 @@
                   "perl-WebService-DeathByCaptcha",
                   1
                ]
-            ],
-            "name" : "fayland",
-            "id" : "fayland"
+            ]
          },
          {
-            "id" : "jkeenan",
             "name" : "jkeenan",
+            "id" : "jkeenan",
             "data" : [
                [
                   "CPAN-Cpanorg-Auxiliary",
@@ -1782,6 +1632,7 @@
             ]
          },
          {
+            "id" : "preaction",
             "data" : [
                [
                   "Alien-SwaggerUI",
@@ -1840,10 +1691,10 @@
                   2
                ]
             ],
-            "name" : "preaction",
-            "id" : "preaction"
+            "name" : "preaction"
          },
          {
+            "id" : "Corion",
             "data" : [
                [
                   "Finance-Bank-Postbank_de",
@@ -1898,11 +1749,9 @@
                   1
                ]
             ],
-            "name" : "Corion",
-            "id" : "Corion"
+            "name" : "Corion"
          },
          {
-            "id" : "oalders",
             "data" : [
                [
                   "archive-any",
@@ -1953,10 +1802,10 @@
                   2
                ]
             ],
+            "id" : "oalders",
             "name" : "oalders"
          },
          {
-            "id" : "rjbs",
             "data" : [
                [
                   "Dist-Zilla",
@@ -2007,6 +1856,7 @@
                   1
                ]
             ],
+            "id" : "rjbs",
             "name" : "rjbs"
          },
          {
@@ -2060,12 +1910,11 @@
                   1
                ]
             ],
-            "name" : "stevan",
-            "id" : "stevan"
+            "id" : "stevan",
+            "name" : "stevan"
          },
          {
             "id" : "bayashi",
-            "name" : "bayashi",
             "data" : [
                [
                   "App-jl",
@@ -2111,10 +1960,10 @@
                   "WebService-BitFlyer",
                   1
                ]
-            ]
+            ],
+            "name" : "bayashi"
          },
          {
-            "id" : "bluefeet",
             "data" : [
                [
                   "Catalyst-Model-Curio",
@@ -2161,11 +2010,12 @@
                   1
                ]
             ],
+            "id" : "bluefeet",
             "name" : "bluefeet"
          },
          {
-            "id" : "markov2",
             "name" : "markov2",
+            "id" : "markov2",
             "data" : [
                [
                   "perl5-Any-Daemon",
@@ -2214,6 +2064,7 @@
             ]
          },
          {
+            "name" : "team-at-cpan",
             "id" : "team-at-cpan",
             "data" : [
                [
@@ -2260,10 +2111,10 @@
                   "WebService-Async-UserAgent",
                   1
                ]
-            ],
-            "name" : "team-at-cpan"
+            ]
          },
          {
+            "name" : "vanstyn",
             "id" : "vanstyn",
             "data" : [
                [
@@ -2310,11 +2161,9 @@
                   "RapidApp",
                   1
                ]
-            ],
-            "name" : "vanstyn"
+            ]
          },
          {
-            "name" : "yuki-kimoto",
             "data" : [
                [
                   "D",
@@ -2361,10 +2210,10 @@
                   3
                ]
             ],
-            "id" : "yuki-kimoto"
+            "id" : "yuki-kimoto",
+            "name" : "yuki-kimoto"
          },
          {
-            "id" : "benkasminbullock",
             "data" : [
                [
                   "Directory-Diff",
@@ -2407,16 +2256,167 @@
                   1
                ]
             ],
+            "id" : "benkasminbullock",
             "name" : "benkasminbullock"
          }
       ]
    },
-   "chart" : {
-      "type" : "column"
-   },
-   "tooltip" : {
-      "pointFormat" : "<span style='color:{point.color}'>{point.name}</span>: <b>{point.y:f}</b><br/>",
-      "headerFormat" : "<span style='font-size:11px'>{series.name}</span><br>",
-      "followPointer" : 1
-   }
+   "series" : [
+      {
+         "ColorByPoint" : 1,
+         "name" : "Author By Repository",
+         "data" : [
+            {
+               "drilldown" : "reneeb",
+               "name" : "#1: reneeb",
+               "y" : 57
+            },
+            {
+               "y" : 32,
+               "name" : "#2: neilb",
+               "drilldown" : "neilb"
+            },
+            {
+               "drilldown" : "LibreCat",
+               "name" : "#3: LibreCat",
+               "y" : 29
+            },
+            {
+               "y" : 22,
+               "name" : "#4: tupinek",
+               "drilldown" : "tupinek"
+            },
+            {
+               "y" : 21,
+               "drilldown" : "briandfoy",
+               "name" : "#5: briandfoy"
+            },
+            {
+               "y" : 18,
+               "name" : "#6: FGasper",
+               "drilldown" : "FGasper"
+            },
+            {
+               "name" : "#7: binary-com",
+               "drilldown" : "binary-com",
+               "y" : 18
+            },
+            {
+               "drilldown" : "davorg",
+               "name" : "#8: davorg",
+               "y" : 18
+            },
+            {
+               "name" : "#9: yanick",
+               "drilldown" : "yanick",
+               "y" : 18
+            },
+            {
+               "y" : 17,
+               "drilldown" : "jjn1056",
+               "name" : "#10: jjn1056"
+            },
+            {
+               "y" : 17,
+               "name" : "#11: robrwo",
+               "drilldown" : "robrwo"
+            },
+            {
+               "y" : 16,
+               "drilldown" : "domm",
+               "name" : "#12: domm"
+            },
+            {
+               "y" : 16,
+               "drilldown" : "eserte",
+               "name" : "#13: eserte"
+            },
+            {
+               "y" : 15,
+               "name" : "#14: pplu",
+               "drilldown" : "pplu"
+            },
+            {
+               "y" : 15,
+               "drilldown" : "salva",
+               "name" : "#15: salva"
+            },
+            {
+               "y" : 15,
+               "name" : "#16: srchulo",
+               "drilldown" : "srchulo"
+            },
+            {
+               "drilldown" : "fayland",
+               "name" : "#17: fayland",
+               "y" : 14
+            },
+            {
+               "y" : 14,
+               "name" : "#18: jkeenan",
+               "drilldown" : "jkeenan"
+            },
+            {
+               "name" : "#19: preaction",
+               "drilldown" : "preaction",
+               "y" : 14
+            },
+            {
+               "y" : 13,
+               "name" : "#20: Corion",
+               "drilldown" : "Corion"
+            },
+            {
+               "y" : 12,
+               "drilldown" : "oalders",
+               "name" : "#21: oalders"
+            },
+            {
+               "y" : 12,
+               "name" : "#22: rjbs",
+               "drilldown" : "rjbs"
+            },
+            {
+               "y" : 12,
+               "name" : "#23: stevan",
+               "drilldown" : "stevan"
+            },
+            {
+               "y" : 11,
+               "name" : "#24: bayashi",
+               "drilldown" : "bayashi"
+            },
+            {
+               "y" : 11,
+               "drilldown" : "bluefeet",
+               "name" : "#25: bluefeet"
+            },
+            {
+               "drilldown" : "markov2",
+               "name" : "#26: markov2",
+               "y" : 11
+            },
+            {
+               "y" : 11,
+               "drilldown" : "team-at-cpan",
+               "name" : "#27: team-at-cpan"
+            },
+            {
+               "y" : 11,
+               "drilldown" : "vanstyn",
+               "name" : "#28: vanstyn"
+            },
+            {
+               "y" : 11,
+               "name" : "#29: yuki-kimoto",
+               "drilldown" : "yuki-kimoto"
+            },
+            {
+               "name" : "#30: benkasminbullock",
+               "drilldown" : "benkasminbullock",
+               "y" : 10
+            }
+         ]
+      }
+   ]
 }
