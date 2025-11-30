@@ -57,6 +57,45 @@
         margin-left: -25px;
     }
 
+    .addon-photo {
+        position: absolute;
+        top: 10px;
+        left: 45px;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .addon-book {
+        position: absolute;
+        top: 10px;
+        left: 310px;
+        width: 180px;
+        border-radius: 8px;
+        border: 3px solid white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 767px) {
+        .addon-photo,
+        .addon-book {
+            position: static;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .addon-photo {
+            width: 180px;
+            height: 180px;
+        }
+
+        .addon-book {
+            width: 150px;
+        }
+    }
+
     .no-padding {
         padding-left: 0;
     padding-right: 0;
@@ -187,14 +226,21 @@
       </nav><!-- End navbar -->
 
       <div class="container-fluid no-padding">
-            <div class = "row">
-                <div class="col-md-12">
-                    <div>
-                        <img src="/images/background.jpg" width="100%" class="img-responsive">
-                        <img src="/images/manwar.jpg" width="250px" height="250px" class="img-circle addon-image visible-sm visible-md visible-lg">
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="position: relative;">
+                    <img src="/images/background.jpg" width="100%" class="img-responsive">
+
+                    <img src="/images/manwar.jpg"
+                         class="img-circle addon-photo d-block">
+
+                    <a href="https://perlschool.com/books/design-patterns" target="_blank">
+                        <img src="/images/design-patterns-in-modern-perl.png"
+                             class="addon-book d-block">
+                    </a>
                 </div>
             </div>
+        </div>
       </div>
 
       <br/><br/>
@@ -1529,7 +1575,11 @@
         &nbsp;
         <a href="http://www.linkedin.com/in/mohammadanwar" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
         <br/>
-        <a href="https://theweeklychallenge.org/" target="_blank">[The Weekly Challenge]</a>
+        | &nbsp;
+        <a href="https://theweeklychallenge.org" target="_blank">The Weekly Challenge</a>
+        &nbsp; | &nbsp;
+        <a href="https://perlschool.com/books/design-patterns" target="_blank">Design Patterns in Modern Perl</a>
+        &nbsp; |
         <br/>
         <small>&copy; Copyright 2015 - 2025 manwar.org</small>
       </div>
