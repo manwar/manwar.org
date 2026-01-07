@@ -457,6 +457,20 @@ $("#pr_summary").click(function() {
     });
 });
 
+$("#pr_2026").click(function() {
+    $('#pr-spinner').show();
+    $.ajax({
+        url: "/pullrequest/2026",
+        dataType: "JSON",
+        success: function(data) {
+            $('#pr_2026_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#pr-spinner').hide();
+        }
+    });
+});
+
 $("#pr_2025").click(function() {
     $('#pr-spinner').show();
     $.ajax({
@@ -772,6 +786,20 @@ $("#gc_summary").click(function() {
         dataType: "JSON",
         success: function(data) {
             $('#gc_summary_stats').highcharts(data);
+        },
+        complete: function() {
+            $('#gc-spinner').hide();
+        }
+    });
+});
+
+$("#gc_2026").click(function() {
+    $('#gc-spinner').show();
+    $.ajax({
+        url: "/git-commits/2026",
+        dataType: "JSON",
+        success: function(data) {
+            $('#gc_2026_stats').highcharts(data);
         },
         complete: function() {
             $('#gc-spinner').hide();
