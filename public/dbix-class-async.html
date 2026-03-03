@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBIx::Class::Async — Pictorial Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #080b12;
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── STARFIELD BG ── */
+.starfield {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(79,140,255,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(255,100,180,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 60% 20%, rgba(100,255,200,.04) 0%, transparent 60%),
+    #080b12;
+}
+
+.page {
+  position: relative; z-index: 1;
+  padding: 48px 40px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #4f8cff;
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeUp .6s .1s forwards;
+}
+.hero-title {
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  background: linear-gradient(135deg, #fff 0%, #a0b8ff 40%, #ff80c8 80%, #ffbe6a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeUp .7s .2s forwards;
+}
+.hero-sub {
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,.35);
+  opacity: 0;
+  animation: fadeUp .7s .35s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  margin-bottom: 20px;
+  padding-left: 2px;
+}
+
+/* ═══════════════════════════════════════════════
+   ZONE 1 — THREE PLANES (User / Bridge / Workers)
+═══════════════════════════════════════════════ */
+.planes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.plane {
+  border-radius: 20px;
+  padding: 28px 30px 24px;
+  position: relative;
+  overflow: visible;
+}
+
+/* USER PLANE */
+.plane-user {
+  background: linear-gradient(135deg, rgba(79,140,255,.15), rgba(100,200,255,.08));
+  border: 1px solid rgba(79,140,255,.35);
+  box-shadow: 0 0 60px rgba(79,140,255,.08), inset 0 1px 0 rgba(255,255,255,.06);
+  z-index: 3;
+  animation: fadeUp .7s .4s both;
+}
+/* BRIDGE PLANE */
+.plane-bridge {
+  background: linear-gradient(135deg, rgba(255,140,80,.14), rgba(255,80,160,.08));
+  border: 1px solid rgba(255,140,80,.35);
+  box-shadow: 0 0 60px rgba(255,120,60,.07), inset 0 1px 0 rgba(255,255,255,.05);
+  z-index: 2;
+  margin-top: -2px;
+  animation: fadeUp .7s .55s both;
+}
+/* WORKER PLANE */
+.plane-workers {
+  background: linear-gradient(135deg, rgba(100,220,160,.13), rgba(60,180,255,.07));
+  border: 1px solid rgba(100,220,160,.35);
+  box-shadow: 0 0 60px rgba(80,200,140,.07), inset 0 1px 0 rgba(255,255,255,.05);
+  z-index: 1;
+  margin-top: -2px;
+  animation: fadeUp .7s .7s both;
+}
+
+.plane-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 8px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.plane-user   .plane-badge { background: rgba(79,140,255,.18); color: #7ab4ff; border: 1px solid rgba(79,140,255,.3); }
+.plane-bridge .plane-badge { background: rgba(255,140,60,.18); color: #ffaa70; border: 1px solid rgba(255,140,60,.3); }
+.plane-workers .plane-badge { background: rgba(80,210,150,.18); color: #7de8b8; border: 1px solid rgba(80,210,150,.3); }
+
+.plane-badge .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.plane-user   .dot { background: #4f8cff; box-shadow: 0 0 8px #4f8cff; }
+.plane-bridge .dot { background: #ff8c3c; box-shadow: 0 0 8px #ff8c3c; }
+.plane-workers .dot { background: #4ed898; box-shadow: 0 0 8px #4ed898; }
+
+.modules-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── MODULE CARDS ── */
+.mod {
+  flex: 1;
+  min-width: 160px;
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+  cursor: default;
+}
+.mod:hover {
+  transform: translateY(-3px);
+}
+
+.mod-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.mod-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  margin-bottom: 3px;
+}
+.mod-pkg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  opacity: .55;
+  margin-bottom: 8px;
+}
+.mod-features {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.feat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  opacity: .6;
+  padding: 2px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  line-height: 1.4;
+}
+.feat::before { content: '›'; opacity: .5; flex-shrink: 0; }
+
+/* user-plane modules */
+.mod-schema  { background: rgba(79,140,255,.12); border: 1px solid rgba(79,140,255,.25); color: #b8d4ff; }
+.mod-rs      { background: rgba(140,80,255,.12); border: 1px solid rgba(140,80,255,.25); color: #d0b8ff; }
+.mod-row     { background: rgba(60,200,255,.12); border: 1px solid rgba(60,200,255,.25); color: #b8eeff; }
+.mod-rscol   { background: rgba(255,200,60,.12); border: 1px solid rgba(255,200,60,.25); color: #fff0b8; }
+
+.mod-schema .mod-icon  { background: rgba(79,140,255,.2); }
+.mod-rs     .mod-icon  { background: rgba(140,80,255,.2); }
+.mod-row    .mod-icon  { background: rgba(60,200,255,.2); }
+.mod-rscol  .mod-icon  { background: rgba(255,200,60,.2); }
+
+/* bridge-plane modules */
+.mod-async   { background: rgba(255,120,60,.13); border: 1px solid rgba(255,120,60,.28); color: #ffd0b0; }
+.mod-exc     { background: rgba(255,60,100,.13); border: 1px solid rgba(255,60,100,.28); color: #ffb0c0; }
+.mod-cache   { background: rgba(255,200,80,.13); border: 1px solid rgba(255,200,80,.28); color: #fff0c0; }
+.mod-storage { background: rgba(180,100,255,.13); border: 1px solid rgba(180,100,255,.28); color: #e8c8ff; }
+
+.mod-async   .mod-icon { background: rgba(255,120,60,.22); }
+.mod-exc     .mod-icon { background: rgba(255,60,100,.22); }
+.mod-cache   .mod-icon { background: rgba(255,200,80,.22); }
+.mod-storage .mod-icon { background: rgba(180,100,255,.22); }
+
+/* worker-plane modules */
+.mod-w1 { background: rgba(60,210,140,.12); border: 1px solid rgba(60,210,140,.28); color: #b0f0d8; }
+.mod-w2 { background: rgba(60,180,255,.12); border: 1px solid rgba(60,180,255,.28); color: #b0dcff; }
+.mod-w3 { background: rgba(160,230,80,.12); border: 1px solid rgba(160,230,80,.28); color: #d8f8b0; }
+.mod-w4 { background: rgba(60,210,140,.12); border: 1px solid rgba(60,210,140,.28); color: #b0f0d8; }
+
+.mod-w1 .mod-icon { background: rgba(60,210,140,.22); }
+.mod-w2 .mod-icon { background: rgba(60,180,255,.22); }
+.mod-w3 .mod-icon { background: rgba(160,230,80,.22); }
+.mod-w4 .mod-icon { background: rgba(60,210,140,.22); }
+
+/* ═══════════════════════════════════════════════
+   PIPE ARROWS BETWEEN PLANES
+═══════════════════════════════════════════════ */
+.pipe-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.pipe-visual {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  padding: 6px 20px;
+  gap: 12px;
+}
+
+.pipe-arrow-svg {
+  animation: pulseFlow 2s ease-in-out infinite;
+}
+@keyframes pulseFlow {
+  0%,100% { opacity: .5; }
+  50%      { opacity: 1; }
+}
+
+.pipe-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+
+.pipe-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  animation: pulseDot 1.6s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100% { opacity: .3; transform: scale(.8); }
+  50%      { opacity: 1;  transform: scale(1.2); }
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION 2 — LIFECYCLE FLOW
+═══════════════════════════════════════════════ */
+.lifecycle-section {
+  margin-bottom: 56px;
+  animation: fadeUp .7s .85s both;
+}
+
+.lifecycle-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.lc-step {
+  flex: 1;
+  min-width: 140px;
+  position: relative;
+}
+
+.lc-card {
+  height: 100%;
+  border-radius: 14px;
+  padding: 18px 15px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lc-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  opacity: .45;
+  letter-spacing: .1em;
+  margin-bottom: 8px;
+}
+.lc-icon { font-size: 22px; margin-bottom: 8px; }
+.lc-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+.lc-body {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px;
+  opacity: .55;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* step colours */
+.lc-s1 { background: rgba(79,140,255,.13); border: 1px solid rgba(79,140,255,.3); color: #c0d8ff; }
+.lc-s2 { background: rgba(140,80,255,.13); border: 1px solid rgba(140,80,255,.3); color: #d8c0ff; }
+.lc-s3 { background: rgba(255,140,60,.13); border: 1px solid rgba(255,140,60,.3); color: #ffd8b0; }
+.lc-s4 { background: rgba(255,60,100,.13); border: 1px solid rgba(255,60,100,.3); color: #ffb0c0; }
+.lc-s5 { background: rgba(60,210,140,.13); border: 1px solid rgba(60,210,140,.3); color: #b0f0d0; }
+.lc-s6 { background: rgba(60,180,255,.13); border: 1px solid rgba(60,180,255,.3); color: #b0dcff; }
+.lc-s7 { background: rgba(160,230,80,.13); border: 1px solid rgba(160,230,80,.3); color: #d8f8a0; }
+
+.lc-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION 3 — SERIALISATION PIPE
+═══════════════════════════════════════════════ */
+.serial-section {
+  margin-bottom: 56px;
+  animation: fadeUp .7s 1s both;
+}
+
+.serial-track {
+  position: relative;
+  padding: 28px 24px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* animated flowing line */
+.serial-track::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(79,140,255,.4) 15%,
+    rgba(255,140,60,.6) 35%,
+    rgba(255,60,100,.5) 50%,
+    rgba(60,210,140,.6) 70%,
+    rgba(160,230,80,.4) 85%,
+    transparent 100%
+  );
+  animation: flowLine 3s linear infinite;
+}
+@keyframes flowLine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.serial-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.snode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.snode-bubble {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  position: relative;
+  transition: transform .25s;
+}
+.snode-bubble:hover { transform: scale(1.12); }
+
+.snode-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  color: rgba(255,255,255,.7);
+}
+.snode-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.snode-arrow {
+  font-size: 18px;
+  color: rgba(255,255,255,.2);
+  flex-shrink: 0;
+  padding: 0 2px;
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+@keyframes arrowPulse {
+  0%,100% { opacity: .2; transform: scale(.9); }
+  50%      { opacity: .7; transform: scale(1.1); }
+}
+
+/* snode colours */
+.sn-a { background: rgba(79,140,255,.2); border: 1px solid rgba(79,140,255,.4); }
+.sn-b { background: rgba(255,140,60,.2); border: 1px solid rgba(255,140,60,.4); }
+.sn-c { background: rgba(255,60,100,.2); border: 1px solid rgba(255,60,100,.4); }
+.sn-d { background: rgba(100,200,80,.2); border: 1px solid rgba(100,200,80,.4); }
+.sn-e { background: rgba(60,180,255,.2); border: 1px solid rgba(60,180,255,.4); }
+.sn-f { background: rgba(160,100,255,.2); border: 1px solid rgba(160,100,255,.4); }
+.sn-g { background: rgba(60,220,160,.2); border: 1px solid rgba(60,220,160,.4); }
+.sn-h { background: rgba(255,200,60,.2); border: 1px solid rgba(255,200,60,.4); }
+
+/* ═══════════════════════════════════════════════
+   SECTION 4 — SUPPORT SYSTEMS (GRID OF CARDS)
+═══════════════════════════════════════════════ */
+.support-section {
+  margin-bottom: 56px;
+  animation: fadeUp .7s 1.1s both;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.sup-card {
+  border-radius: 16px;
+  padding: 22px 20px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .2s;
+}
+.sup-card:hover { transform: translateY(-4px); }
+
+/* gradient shimmer on each card */
+.sup-card::after {
+  content: '';
+  position: absolute;
+  top: -40%; left: -40%;
+  width: 180%; height: 180%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sup-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.sup-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.sup-body {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  line-height: 1.7;
+  opacity: .55;
+}
+
+.sup-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.sup-chi    { background: linear-gradient(135deg,rgba(255,200,60,.18),rgba(255,140,60,.12)); border:1px solid rgba(255,180,60,.3); color:#ffe0a0; }
+.sup-txn    { background: linear-gradient(135deg,rgba(60,180,255,.18),rgba(100,120,255,.12)); border:1px solid rgba(80,160,255,.3); color:#b0d4ff; }
+.sup-retry  { background: linear-gradient(135deg,rgba(255,80,120,.18),rgba(255,60,80,.12)); border:1px solid rgba(255,80,100,.3); color:#ffb0c0; }
+.sup-metric { background: linear-gradient(135deg,rgba(140,80,255,.18),rgba(180,60,255,.12)); border:1px solid rgba(160,80,255,.3); color:#d8b0ff; }
+
+/* pill colours */
+.pill-y { background:rgba(255,200,60,.2); color:#ffd870; border:1px solid rgba(255,200,60,.3); }
+.pill-b { background:rgba(79,140,255,.2); color:#90beff; border:1px solid rgba(79,140,255,.3); }
+.pill-r { background:rgba(255,80,100,.2); color:#ff9090; border:1px solid rgba(255,80,100,.3); }
+.pill-p { background:rgba(160,80,255,.2); color:#c890ff; border:1px solid rgba(160,80,255,.3); }
+.pill-g { background:rgba(60,210,140,.2); color:#80f0c0; border:1px solid rgba(60,210,140,.3); }
+
+/* ═══════════════════════════════════════════════
+   SECTION 5 — WORKER INTERNALS (visual)
+═══════════════════════════════════════════════ */
+.worker-section {
+  margin-bottom: 56px;
+  animation: fadeUp .7s 1.2s both;
+}
+
+.worker-visual {
+  display: grid;
+  grid-template-columns: 1fr 180px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.wv-side {
+  border-radius: 16px;
+  padding: 22px 20px;
+}
+
+.wv-parent {
+  background: linear-gradient(160deg, rgba(79,140,255,.13), rgba(100,60,255,.08));
+  border: 1px solid rgba(79,140,255,.3);
+  color: #c0d4ff;
+}
+
+.wv-worker {
+  background: linear-gradient(160deg, rgba(60,210,140,.13), rgba(60,180,80,.08));
+  border: 1px solid rgba(60,210,140,.3);
+  color: #b0f0d4;
+}
+
+.wv-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: .8;
+}
+
+.wv-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  opacity: .7;
+  line-height: 1.5;
+}
+.wv-item:last-child { border-bottom: none; }
+.wv-bullet { flex-shrink: 0; opacity: .5; }
+
+.wv-pipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: rgba(255,255,255,.02);
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.wv-pipe-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* animated data packets */
+.packets {
+  position: relative;
+  height: 60px;
+  width: 2px;
+  background: rgba(79,140,255,.15);
+  border-radius: 1px;
+  margin: 4px auto;
+}
+.packet {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  left: -2px;
+}
+.pkt-down {
+  background: #4f8cff;
+  box-shadow: 0 0 6px #4f8cff;
+  animation: packetDown 2s ease-in-out infinite;
+}
+.pkt-up {
+  background: #4ed898;
+  box-shadow: 0 0 6px #4ed898;
+  animation: packetUp 2.3s ease-in-out infinite .8s;
+}
+@keyframes packetDown {
+  0%   { top: 0; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 54px; opacity: 0; }
+}
+@keyframes packetUp {
+  0%   { top: 54px; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 0; opacity: 0; }
+}
+
+/* op chips in worker */
+.op-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+.op-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(60,210,140,.12);
+  border: 1px solid rgba(60,210,140,.22);
+  color: #7de8b8;
+  letter-spacing: .04em;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION 6 — ROW INFLATION PRIORITY
+═══════════════════════════════════════════════ */
+.inflation-section {
+  margin-bottom: 56px;
+  animation: fadeUp .7s 1.3s both;
+}
+
+.inflation-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inf-layer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  transition: transform .15s;
+}
+.inf-layer:hover { transform: translateX(6px); }
+
+.inf-num {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.inf-title {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+.inf-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  opacity: .55;
+  line-height: 1.5;
+}
+.inf-badge {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.il-1 { background: rgba(255,200,60,.1);  border: 1px solid rgba(255,200,60,.25); color: #ffe090; }
+.il-2 { background: rgba(79,140,255,.1);  border: 1px solid rgba(79,140,255,.25); color: #b0d0ff; }
+.il-3 { background: rgba(255,140,60,.1);  border: 1px solid rgba(255,140,60,.25); color: #ffd0a0; }
+.il-4 { background: rgba(140,80,255,.1);  border: 1px solid rgba(140,80,255,.25); color: #d0b0ff; }
+.il-5 { background: rgba(60,210,140,.1);  border: 1px solid rgba(60,210,140,.25); color: #a0f0d0; }
+.il-6 { background: rgba(255,80,100,.1);  border: 1px solid rgba(255,80,100,.25); color: #ffb0c0; }
+
+.il-1 .inf-num { background:rgba(255,200,60,.2);  color:#ffd040; }
+.il-2 .inf-num { background:rgba(79,140,255,.2);  color:#70a8ff; }
+.il-3 .inf-num { background:rgba(255,140,60,.2);  color:#ffa060; }
+.il-4 .inf-num { background:rgba(140,80,255,.2);  color:#b070ff; }
+.il-5 .inf-num { background:rgba(60,210,140,.2);  color:#40d890; }
+.il-6 .inf-num { background:rgba(255,80,100,.2);  color:#ff6080; }
+
+.il-1 .inf-badge { background:rgba(255,200,60,.15); color:#ffd040; border:1px solid rgba(255,200,60,.3); }
+.il-2 .inf-badge { background:rgba(79,140,255,.15); color:#70a8ff; border:1px solid rgba(79,140,255,.3); }
+.il-3 .inf-badge { background:rgba(255,140,60,.15); color:#ffa060; border:1px solid rgba(255,140,60,.3); }
+.il-4 .inf-badge { background:rgba(140,80,255,.15); color:#b070ff; border:1px solid rgba(140,80,255,.3); }
+.il-5 .inf-badge { background:rgba(60,210,140,.15); color:#40d890; border:1px solid rgba(60,210,140,.3); }
+.il-6 .inf-badge { background:rgba(255,80,100,.15); color:#ff6080; border:1px solid rgba(255,80,100,.3); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding-top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.15);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .support-grid { grid-template-columns: 1fr 1fr; }
+  .worker-visual { grid-template-columns: 1fr; }
+  .wv-pipe { flex-direction: row; writing-mode: initial; padding: 10px; }
+  .wv-pipe-label { writing-mode: initial; transform: none; }
+  .lifecycle-flow { flex-direction: column; }
+  .lc-arrow { transform: rotate(90deg); padding: 4px 0; }
+}
+</style>
+</head>
+<body>
+<div class="starfield"></div>
+
+<div class="page">
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Architecture · v0.64 · CPAN:MANWAR</div>
+  <h1 class="hero-title">DBIx::Class::Async</h1>
+  <p class="hero-sub">Bridge &amp; Worker · Non-blocking · Multi-process · Future-based</p>
+</div>
+
+<!-- ══ SECTION 1: THREE PLANES ═══════════════════════════════ -->
+<div class="section-label">01 · Module Planes</div>
+<div class="planes">
+
+  <!-- USER PLANE -->
+  <div class="plane plane-user">
+    <div class="plane-badge"><div class="dot"></div> User-facing API Layer</div>
+    <div class="modules-row">
+
+      <div class="mod mod-schema">
+        <div class="mod-icon">🗄️</div>
+        <div class="mod-name">Async::Schema</div>
+        <div class="mod-pkg">::Schema</div>
+        <div class="mod-features">
+          <div class="feat">connect() — spawns worker pool</div>
+          <div class="feat">resultset() — returns async RS</div>
+          <div class="feat">await / await_all / run_parallel</div>
+          <div class="feat">txn_do / txn_batch / txn_begin…</div>
+          <div class="feat">clone() — fresh pool instance</div>
+          <div class="feat">AUTOLOAD → native schema</div>
+        </div>
+      </div>
+
+      <div class="mod mod-rs">
+        <div class="mod-icon">🔍</div>
+        <div class="mod-name">Async::ResultSet</div>
+        <div class="mod-pkg">::ResultSet</div>
+        <div class="mod-features">
+          <div class="feat">search / find / count / all / next</div>
+          <div class="feat">create / update / delete / populate</div>
+          <div class="feat">CHI cache with TTL &amp; dynamic SQL bypass</div>
+          <div class="feat">Accumulating attr merge (join, prefetch…)</div>
+          <div class="feat">as_query / as_subselect_rs</div>
+          <div class="feat">search_with_pager / slice / page</div>
+        </div>
+      </div>
+
+      <div class="mod mod-row">
+        <div class="mod-icon">📄</div>
+        <div class="mod-name">Async::Row</div>
+        <div class="mod-pkg">::Row</div>
+        <div class="mod-features">
+          <div class="feat">AUTOLOAD → column getters/setters</div>
+          <div class="feat">AUTOLOAD → relationship accessors</div>
+          <div class="feat">update / delete / insert / copy</div>
+          <div class="feat">_dirty tracking + inflate/deflate map</div>
+          <div class="feat">Shadow-key optimisation (non-inflated)</div>
+          <div class="feat">prefetch cache → Future::done fast path</div>
+        </div>
+      </div>
+
+      <div class="mod mod-rscol">
+        <div class="mod-icon">📊</div>
+        <div class="mod-name">ResultSetColumn</div>
+        <div class="mod-pkg">::ResultSetColumn</div>
+        <div class="mod-features">
+          <div class="feat">sum / max / min / avg / func_future</div>
+          <div class="feat">Inherits RS filters &amp; async_db bridge</div>
+          <div class="feat">Pivots RS → single-column aggregates</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECTOR 1→2 -->
+  <div class="pipe-connector">
+    <div class="pipe-visual">
+      <div class="pipe-dot" style="background:#4f8cff;animation-delay:.0s"></div>
+      <div class="pipe-dot" style="background:#7a6eff;animation-delay:.2s"></div>
+      <div class="pipe-dot" style="background:#ff8c3c;animation-delay:.4s"></div>
+      <svg class="pipe-arrow-svg" width="32" height="14" viewBox="0 0 32 14" fill="none">
+        <path d="M0 7h26M20 1l6 6-6 6" stroke="rgba(255,140,60,.6)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="pipe-label">resultset() / _call_worker()</span>
+      <svg class="pipe-arrow-svg" width="32" height="14" viewBox="0 0 32 14" fill="none" style="transform:rotate(180deg)">
+        <path d="M0 7h26M20 1l6 6-6 6" stroke="rgba(60,210,140,.6)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <div class="pipe-dot" style="background:#4ed898;animation-delay:.6s"></div>
+      <div class="pipe-dot" style="background:#60bcff;animation-delay:.8s"></div>
+    </div>
+  </div>
+
+  <!-- BRIDGE PLANE -->
+  <div class="plane plane-bridge">
+    <div class="plane-badge"><div class="dot"></div> Async Engine &amp; Support Layer</div>
+    <div class="modules-row">
+
+      <div class="mod mod-async">
+        <div class="mod-icon">⚡</div>
+        <div class="mod-name">Async (Engine)</div>
+        <div class="mod-pkg">::Async</div>
+        <div class="mod-features">
+          <div class="feat">create_async_db — init state hashref</div>
+          <div class="feat">_init_workers — spawn N IO::Async::Function</div>
+          <div class="feat">_call_worker — round-robin dispatch</div>
+          <div class="feat">_next_worker — load balancer</div>
+          <div class="feat">_start_health_checks — periodic timer</div>
+          <div class="feat">_build_default_cache — CHI Memory</div>
+        </div>
+      </div>
+
+      <div class="mod mod-exc">
+        <div class="mod-icon">🛡️</div>
+        <div class="mod-name">Exception::Factory</div>
+        <div class="mod-pkg">::Exception::Factory</div>
+        <div class="mod-features">
+          <div class="feat">validate_or_fail — undef FK pre-flight</div>
+          <div class="feat">make_from_dbic_error — wraps raw errors</div>
+          <div class="feat">Fires before IPC dispatch (fast fail)</div>
+        </div>
+      </div>
+
+      <div class="mod mod-cache">
+        <div class="mod-icon">💾</div>
+        <div class="mod-name">CHI Cache</div>
+        <div class="mod-pkg">CHI + _query_cache</div>
+        <div class="mod-features">
+          <div class="feat">Driver: Memory (global)</div>
+          <div class="feat">Key: source + cond + attrs (sorted)</div>
+          <div class="feat">Dynamic SQL bypass (NOW, RAND, UUID…)</div>
+          <div class="feat">cache_ttl=0 by default (opt-in)</div>
+        </div>
+      </div>
+
+      <div class="mod mod-storage">
+        <div class="mod-icon">🔌</div>
+        <div class="mod-name">Storage::DBI</div>
+        <div class="mod-pkg">::Storage::DBI</div>
+        <div class="mod-features">
+          <div class="feat">dbh() → always undef (no parent DBH)</div>
+          <div class="feat">cursor() → Storage::DBI::Cursor</div>
+          <div class="feat">debug / debugobj / debugfh</div>
+          <div class="feat">DBIC compat shim for storage API</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECTOR 2→3 -->
+  <div class="pipe-connector">
+    <div class="pipe-visual">
+      <div class="pipe-dot" style="background:#ff8c3c;animation-delay:.1s"></div>
+      <div class="pipe-dot" style="background:#ff6080;animation-delay:.3s"></div>
+      <div class="pipe-dot" style="background:#4ed898;animation-delay:.5s"></div>
+      <svg class="pipe-arrow-svg" width="32" height="14" viewBox="0 0 32 14" fill="none">
+        <path d="M0 7h26M20 1l6 6-6 6" stroke="rgba(79,140,255,.6)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="pipe-label">IO::Async::Function pipe (fork + pipe)</span>
+      <svg class="pipe-arrow-svg" width="32" height="14" viewBox="0 0 32 14" fill="none" style="transform:rotate(180deg)">
+        <path d="M0 7h26M20 1l6 6-6 6" stroke="rgba(255,200,60,.6)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <div class="pipe-dot" style="background:#ffe060;animation-delay:.7s"></div>
+      <div class="pipe-dot" style="background:#4f8cff;animation-delay:.9s"></div>
+    </div>
+  </div>
+
+  <!-- WORKER PLANE -->
+  <div class="plane plane-workers">
+    <div class="plane-badge"><div class="dot"></div> Worker Processes (N × background forks)</div>
+    <div class="modules-row">
+
+      <div class="mod mod-w1">
+        <div class="mod-icon">⚙️</div>
+        <div class="mod-name">Worker Process</div>
+        <div class="mod-pkg">IO::Async::Function (×N)</div>
+        <div class="mod-features">
+          <div class="feat">state $schema_cache — one DBH per PID</div>
+          <div class="feat">InactiveDestroy=1 — fork safety</div>
+          <div class="feat">Lazy schema load on first call</div>
+          <div class="feat">$deflator — DBIC row → plain hashref</div>
+        </div>
+      </div>
+
+      <div class="mod mod-w2">
+        <div class="mod-icon">🗂️</div>
+        <div class="mod-name">CRUD Operations</div>
+        <div class="mod-pkg">find / search / create / update / delete</div>
+        <div class="mod-features">
+          <div class="feat">populate / populate_bulk</div>
+          <div class="feat">_serialise_row_with_prefetch</div>
+          <div class="feat">discard_changes (sync DB-generated PK)</div>
+          <div class="feat">Aggregate: count/sum/max/min/avg</div>
+        </div>
+      </div>
+
+      <div class="mod mod-w3">
+        <div class="mod-icon">🔀</div>
+        <div class="mod-name">Transactions</div>
+        <div class="mod-pkg">txn_do / txn_batch / txn_begin…</div>
+        <div class="mod-features">
+          <div class="feat">txn_do — multi-step with $name.id refs</div>
+          <div class="feat">txn_batch — flat op array, one txn</div>
+          <div class="feat">txn_begin/commit/rollback — manual</div>
+          <div class="feat">deploy — schema DDL via DBIC</div>
+        </div>
+      </div>
+
+      <div class="mod mod-w4">
+        <div class="mod-icon">🏓</div>
+        <div class="mod-name">Health &amp; Infra</div>
+        <div class="mod-pkg">ping / health_check</div>
+        <div class="mod-features">
+          <div class="feat">ping → SELECT 1 (health check)</div>
+          <div class="feat">{ error =&gt; $@ } envelope on failure</div>
+          <div class="feat">Exception::Factory wraps on parent side</div>
+          <div class="feat">Healthy flag per worker instance</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /planes -->
+
+<!-- ══ SECTION 2: REQUEST LIFECYCLE ═════════════════════════ -->
+<div class="section-label">02 · Request Lifecycle — create() call end-to-end</div>
+<div class="lifecycle-section">
+  <div class="lifecycle-flow">
+
+    <div class="lc-step">
+      <div class="lc-card lc-s1">
+        <div class="lc-num">STAGE 1</div>
+        <div class="lc-icon">👤</div>
+        <div class="lc-title">User Code</div>
+        <div class="lc-body">$schema→resultset('User')→create({…})<br><br>Returns Future immediately. Event loop stays responsive.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s2">
+        <div class="lc-num">STAGE 2</div>
+        <div class="lc-icon">🔧</div>
+        <div class="lc-title">ResultSet::create</div>
+        <div class="lc-body">Deflates custom types (JSON→string, DateTime→ISO). Strips aliases (me., self.). Clears CHI cache. Validates PK not scalar-ref.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s3">
+        <div class="lc-num">STAGE 3</div>
+        <div class="lc-icon">🛡️</div>
+        <div class="lc-title">Pre-flight Check</div>
+        <div class="lc-body">Exception::Factory validates data (undef FK keys). Returns Future::fail immediately on bad input. No IPC round-trip wasted.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s4">
+        <div class="lc-num">STAGE 4</div>
+        <div class="lc-icon">⚡</div>
+        <div class="lc-title">_call_worker</div>
+        <div class="lc-body">_next_worker() picks next IO::Async::Function (round-robin). Payload serialised over OS pipe. Future returned to caller.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(79,140,255,.6)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s5">
+        <div class="lc-num">STAGE 5 · WORKER</div>
+        <div class="lc-icon">⚙️</div>
+        <div class="lc-title">Worker Executes</div>
+        <div class="lc-body">state $schema_cache{$$} reused. DBIC create() runs. discard_changes() syncs DB-generated PK. $deflator converts Row → plain hashref.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(60,210,140,.6)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s6">
+        <div class="lc-num">STAGE 6</div>
+        <div class="lc-icon">🔄</div>
+        <div class="lc-title">Parent Inflates</div>
+        <div class="lc-body">followed_by: checks error envelope. Re-applies inflate coderefs (JSON→hash, string→DateTime). Wraps in ::Async::Row.</div>
+      </div>
+    </div>
+
+    <div class="lc-arrow">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 4l6 6-6 6" stroke="rgba(255,255,255,.3)" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="lc-step">
+      <div class="lc-card lc-s7">
+        <div class="lc-num">STAGE 7</div>
+        <div class="lc-icon">✅</div>
+        <div class="lc-title">Future Resolves</div>
+        <div class="lc-body">Row object (in_storage=1) delivered to user's →on_done / →then callback. Loop never blocked.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SECTION 3: SERIALISATION PIPELINE ════════════════════ -->
+<div class="section-label">03 · Serialisation &amp; Inflation Pipeline</div>
+<div class="serial-section">
+  <div class="serial-track">
+    <div class="serial-nodes">
+
+      <div class="snode">
+        <div class="snode-bubble sn-a">🧑‍💻</div>
+        <div class="snode-label">User Data</div>
+        <div class="snode-sub">Perl objects,<br>HashRefs</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-b">📦</div>
+        <div class="snode-label">Deflate</div>
+        <div class="snode-sub">JSON→string<br>DateTime→ISO<br>Custom deflators</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-c">📡</div>
+        <div class="snode-label">IPC Pipe</div>
+        <div class="snode-sub">IO::Async::<br>Function<br>pipe</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-d">⚙️</div>
+        <div class="snode-label">Worker</div>
+        <div class="snode-sub">DBIC executes<br>blocking query</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-e">🗜️</div>
+        <div class="snode-label">$deflator</div>
+        <div class="snode-sub">Row→hashref<br>prefetch graph<br>serialised</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-c">📡</div>
+        <div class="snode-label">IPC Return</div>
+        <div class="snode-sub">Plain hashref<br>travels pipe</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-f">💫</div>
+        <div class="snode-label">Inflate</div>
+        <div class="snode-sub">string→JSON<br>string→DateTime<br>DSN formatter</div>
+      </div>
+      <div class="snode-arrow">→</div>
+
+      <div class="snode">
+        <div class="snode-bubble sn-g">🎯</div>
+        <div class="snode-label">::Async::Row</div>
+        <div class="snode-sub">Rich object<br>in_storage=1<br>accessors ready</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 4: SUPPORT SYSTEMS ═══════════════════════════ -->
+<div class="section-label">04 · Support Systems</div>
+<div class="support-section">
+  <div class="support-grid">
+
+    <div class="sup-card sup-chi">
+      <span class="sup-icon">💾</span>
+      <div class="sup-title">Query Cache (CHI)</div>
+      <div class="sup-body">
+        Driver: Memory (global singleton). TTL set by cache_ttl (0 = disabled by default).<br><br>
+        Cache key = MD5 of source_name + sorted cond + whitelisted attrs. Dynamic SQL functions automatically bypass cache.
+      </div>
+      <div class="sup-pills">
+        <span class="pill pill-y">CHI::Driver::Memory</span>
+        <span class="pill pill-y">MD5 key</span>
+        <span class="pill pill-y">NOW() bypass</span>
+        <span class="pill pill-y">RAND() bypass</span>
+        <span class="pill pill-y">UUID() bypass</span>
+      </div>
+    </div>
+
+    <div class="sup-card sup-txn">
+      <span class="sup-icon">🔀</span>
+      <div class="sup-title">Transaction Modes</div>
+      <div class="sup-body">
+        <strong>txn_do</strong>: multi-step CRUD with $name.id placeholder resolution between steps. Atomic in one worker.<br><br>
+        <strong>txn_batch</strong>: flat op-array dispatched in a single DB transaction. High performance.<br><br>
+        <strong>txn_begin/commit/rollback</strong>: manual control; pins to a specific worker.
+      </div>
+      <div class="sup-pills">
+        <span class="pill pill-b">txn_do</span>
+        <span class="pill pill-b">txn_batch</span>
+        <span class="pill pill-b">txn_begin</span>
+        <span class="pill pill-b">$name.id refs</span>
+      </div>
+    </div>
+
+    <div class="sup-card sup-retry">
+      <span class="sup-icon">🔁</span>
+      <div class="sup-title">Retry &amp; Health Checks</div>
+      <div class="sup-body">
+        Exponential backoff: factor=2, delay=1s, max=3 retries. Detects deadlocks and transient DB errors.<br><br>
+        IO::Async::Timer::Periodic fires every 300s. Sends ping (SELECT 1) to each worker. Marks healthy flag. Reports live count via Metrics::Any gauge.
+      </div>
+      <div class="sup-pills">
+        <span class="pill pill-r">enable_retry</span>
+        <span class="pill pill-r">exp backoff</span>
+        <span class="pill pill-r">health check 300s</span>
+        <span class="pill pill-r">SELECT 1 ping</span>
+      </div>
+    </div>
+
+    <div class="sup-card sup-metric">
+      <span class="sup-icon">📈</span>
+      <div class="sup-title">Metrics &amp; Observability</div>
+      <div class="sup-body">
+        Optional Metrics::Any integration (silently disabled if absent). Always-on _stats hashref for quick introspection.<br><br>
+        Counters: queries_total, cache_hits, cache_misses.<br>
+        Histogram: query_duration_seconds.<br>
+        Gauge: workers_active.
+      </div>
+      <div class="sup-pills">
+        <span class="pill pill-p">Metrics::Any</span>
+        <span class="pill pill-p">queries_total</span>
+        <span class="pill pill-p">cache_hits</span>
+        <span class="pill pill-p">workers_active</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SECTION 5: WORKER IPC VISUAL ════════════════════════= -->
+<div class="section-label">05 · IPC — Parent ↔ Worker Communication</div>
+<div class="worker-section">
+  <div class="worker-visual">
+
+    <div class="wv-side wv-parent">
+      <div class="wv-title">🖥️ Parent Process</div>
+
+      <div class="wv-item"><span class="wv-bullet">▸</span> IO::Async::Loop — event reactor (Epoll/KQueue/Poll or Mojo/AnyEvent bridge)</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> _async_db hashref — _workers[], _worker_idx (round-robin), _stats, _cache</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> _native_schema — DBIC schema for metadata lookup (columns, relationships)</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> _metadata_schema — NullP: connection for as_query SQL generation (no DB needed)</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> _custom_inflators — map of {source}{col}{inflate/deflate} coderefs</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> _datetime_formatter — DSN-sniffed formatter (Pg / MySQL / SQLite)</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> IO::Async::Timer::Periodic — health-check pings every 300s</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> All Futures queued non-blocking — event loop never freezes</div>
+    </div>
+
+    <div class="wv-pipe">
+      <div class="wv-pipe-label">IO::Async::Function pipe</div>
+      <div class="packets">
+        <div class="packet pkt-down"></div>
+        <div class="packet pkt-up"></div>
+      </div>
+      <svg width="20" height="36" viewBox="0 0 20 36" fill="none">
+        <path d="M10 2v14M5 11l5 5 5-5" stroke="rgba(79,140,255,.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M10 34V20M5 25l5-5 5 5" stroke="rgba(78,216,152,.7)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="wv-side wv-worker">
+      <div class="wv-title">⚙️ Worker Process (×N forks)</div>
+
+      <div class="wv-item"><span class="wv-bullet">▸</span> state $schema_cache{$$} — one persistent DBH per PID, reused across calls</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> InactiveDestroy=1 + AutoInactiveDestroy=1 — prevents double-close on fork exit</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> Lazy schema load on first call — eval "require $schema_class" in worker process</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> $deflator — recursively serialises DBIC rows + prefetch graphs → plain hashrefs</div>
+      <div class="wv-item"><span class="wv-bullet">▸</span> Error envelope — { error =&gt; $@ } returned; Exception::Factory wraps on parent side</div>
+
+      <div class="op-grid">
+        <span class="op-chip">find</span>
+        <span class="op-chip">search</span>
+        <span class="op-chip">create</span>
+        <span class="op-chip">update</span>
+        <span class="op-chip">delete</span>
+        <span class="op-chip">populate</span>
+        <span class="op-chip">count</span>
+        <span class="op-chip">sum/max/min/avg</span>
+        <span class="op-chip">txn_do</span>
+        <span class="op-chip">txn_batch</span>
+        <span class="op-chip">txn_begin</span>
+        <span class="op-chip">deploy</span>
+        <span class="op-chip">ping</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SECTION 6: ROW INFLATION PRIORITY ════════════════════ -->
+<div class="section-label">06 · ::Async::Row — Accessor Priority Chain</div>
+<div class="inflation-section">
+  <div class="inflation-layers">
+
+    <div class="inf-layer il-1">
+      <div class="inf-num">1</div>
+      <div class="inf-title">⚡ _inflated cache</div>
+      <div class="inf-desc">Already-inflated value in _inflated{col}. Zero computation — direct return. Set after any inflate coderef runs.</div>
+      <div class="inf-badge">Fastest · O(1) hash lookup</div>
+    </div>
+
+    <div class="inf-layer il-2">
+      <div class="inf-num">2</div>
+      <div class="inf-title">🔑 Shadow key on $self{col}</div>
+      <div class="inf-desc">Non-inflated columns are shadowed directly onto the blessed hashref at construction time (warm-up). Avoids method call overhead for plain scalars.</div>
+      <div class="inf-badge">Fast · Direct hash key</div>
+    </div>
+
+    <div class="inf-layer il-3">
+      <div class="inf-num">3</div>
+      <div class="inf-title">📐 Inflator coderef from _inflation_map</div>
+      <div class="inf-desc">_inflation_map{col} holds inflate coderef from ResultSource column_info. Runs inflator, caches result in _inflated{col} and shadow key.</div>
+      <div class="inf-badge">Medium · One-time inflate, then cached</div>
+    </div>
+
+    <div class="inf-layer il-4">
+      <div class="inf-num">4</div>
+      <div class="inf-title">📦 Prefetch cache (_relationship_data)</div>
+      <div class="inf-desc">Relationship already fetched via prefetch. Checks if rel_info has raw SQL refs in WHERE — if so, bypasses cache and re-fetches (ensures datetime filters applied by DB).</div>
+      <div class="inf-badge">Fast · Future::done(cached_obj)</div>
+    </div>
+
+    <div class="inf-layer il-5">
+      <div class="inf-num">5</div>
+      <div class="inf-title">🌐 Async lazy-load (related_resultset)</div>
+      <div class="inf-desc">Relationship not yet fetched. Builds FK condition, calls resultset(target)→search({fk: val})→next/all. Returns Future from worker pool.</div>
+      <div class="inf-badge">Async · Full IPC round-trip</div>
+    </div>
+
+    <div class="inf-layer il-6">
+      <div class="inf-num">6</div>
+      <div class="inf-title">🚫 Exception (croak)</div>
+      <div class="inf-desc">Column or method not found in ResultSource, not in _data, not a relationship. AUTOLOAD guard checks can() up MRO chain before croak — allows custom methods from result class inheritance.</div>
+      <div class="inf-badge">Error · Not a known column or rel</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  DBIx::Class::Async v0.64 · © 2026 Mohammad Sajid Anwar · Artistic License 2.0<br>
+  In memory of Matt S. Trout (mst) — DBIx::Class core developer
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
