@@ -228,7 +228,7 @@ function renderChart(canvasId, raw) {
                                 var raw   = Array.isArray(pt) ? pt[0]
                                           : (pt && pt.name)  ? pt.name
                                           : '';
-                                var value = ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed;
+                                var value = ctx.formattedValue;
                                 /* Split "prs: repo" into repo (title line) + prs (detail line) */
                                 var sep   = raw.lastIndexOf(': ');
                                 var repo  = sep >= 0 ? raw.slice(sep + 2) : raw;
@@ -236,7 +236,17 @@ function renderChart(canvasId, raw) {
                                 /* Return array → Chart.js renders each element on its own line */
                                 return prs ? [repo + ': ' + value, prs] : [repo + ': ' + value];
                             }
-                            return ctx.dataset.label + ': ' + (ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed);
+                            /* Use ctx.raw to avoid locale-formatted numbers e.g. "1,027" → "1027" */
+                            /* Author name lives in series[i].meta[dataIndex] in the server JSON */
+                            var cvs2   = document.getElementById(canvasId);
+                            var rawJson = cvs2 && cvs2._rawJson;
+                            var author = rawJson
+                                && rawJson.series
+                                && rawJson.series[ctx.datasetIndex]
+                                && rawJson.series[ctx.datasetIndex].meta
+                                && rawJson.series[ctx.datasetIndex].meta[ctx.dataIndex];
+                            var label  = author || ctx.dataset.label;
+                            return label + ': ' + ctx.raw;
                         },
                         title: function(ctxArr) {
                             /* In drilldown: suppress the default x-axis label title line */
@@ -277,6 +287,11 @@ function fetchAndRender(url, canvasId, spinnerId) {
     $.ajax({
         url: url, dataType: 'json',
         success: function(data) {
+            /* Store raw JSON on canvas so tooltip can read series[i].meta */
+            try {
+                var cvs = document.getElementById(canvasId);
+                if (cvs) cvs._rawJson = data;
+            } catch(e) {}
             try { renderChart(canvasId, data); }
             catch(err) {
                 console.error('manwar.js renderChart error [' + canvasId + ']:', err, data);
@@ -343,7 +358,7 @@ $('#map_tube_button').on('click', function() {
 /* ═══════════════════════════════════════════════════════════════════════
    CPAN REGULARS
    ═══════════════════════════════════════════════════════════════════════ */
-$(function() { once('daily',   function() { fetchAndRender('/stats/daily',   'chart_daily_stats',   'cr-spinner'); }); });
+$(function() { once('daily', function() { fetchAndRender('/stats/daily', 'chart_daily_stats', 'cr-spinner'); }); });
 $('#ws').on('click', function() { once('weekly',  function() { fetchAndRender('/stats/weekly',   'chart_weekly_stats',  'cr-spinner'); }); });
 $('#ms').on('click', function() { once('monthly', function() { fetchAndRender('/stats/monthly',  'chart_monthly_stats', 'cr-spinner'); }); });
 
