@@ -5,164 +5,691 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:title"       content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Father"/>
+    <meta property="og:title"       content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Founder"/>
     <meta property="og:type"        content="website"/>
     <meta property="og:url"         content="https://manwar.org/"/>
     <meta property="og:image"       content="https://manwar.org/images/manwar.jpg"/>
-    <meta property="og:description" content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Father"/>
+    <meta property="og:description" content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Founder"/>
     <meta name="twitter:card"       content="summary" />
     <meta name="twitter:image"      content="https://manwar.org/images/manwar.jpg"/>
 
     <title>Mohammad Sajid Anwar (MANWAR)</title>
-    <meta name="description" content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Father"/>
-    <!-- Latest compiled and minified CSS -->
+    <meta name="description" content="Mohammad Sajid Anwar - Author/Contributor/Editor/Speaker/Founder"/>
+
     <link rel="stylesheet" href="<% request.uri_base %>/css/bootstrap.min.css"/>
-    <!--link rel="stylesheet" href="<% request.uri_base %>/css/font-awesome.6.5.1.min.css"/-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="me" href="https://fosstodon.org/@manwar"/>
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HWNEE4J2LT"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-HWNEE4J2LT');
     </script>
 </head>
 
 <style>
+    /* ── Design tokens ──────────────────────────── */
+    :root {
+        --bg:        #0b0e14;
+        --surface:   #131720;
+        --surface2:  #1a2030;
+        --border:    #252d3e;
+        --accent:    #3b82f6;
+        --accent2:   #f97316;
+        --accent3:   #22d3ee;
+        --text:      #e2e8f0;
+        --muted:     #64748b;
+        --success:   #10b981;
+        --warn:      #f59e0b;
+        --danger:    #ef4444;
+        --font-head: 'Syne', sans-serif;
+        --font-mono: 'Space Mono', monospace;
+    }
+
+    /* ── Reset / base ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-        padding-top: 51px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-mono);
+        font-size: 14px;
+        line-height: 1.7;
+        padding-top: 56px;
+        overflow-x: hidden;
     }
 
-    .section_header {
-        text-align: center;
-        width: auto;
-        background-size: cover;
-        border-radius: 0 0 85% 85% / 30%;
-        color: #FFF;
-        text-shadow: 1px 1px 1px #333;
-        background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
-        font-family: 'Dancing Script', cursive;
-        font-size: 40px;
-        margin-bottom: 30px;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent3); text-decoration: underline; }
+
+    hr {
+        border-color: var(--border);
+        margin: 0;
     }
 
-    .addon-image {
-        left: 2%;
-        top: 1%;
-        position: absolute;
-        margin-top: -25px;
-        margin-left: -25px;
+    /* ── Scrollbar ──────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* ── Navbar ─────────────────────────────────── */
+    #my-navbar {
+        background: rgba(11, 14, 20, 0.95);
+        border: none;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 1px 20px rgba(0,0,0,0.5);
     }
 
-    .addon-photo {
-        position: absolute;
-        top: 10px;
-        left: 45px;
-        width: 250px;
-        height: 250px;
-        border-radius: 50%;
-        border: 4px solid white;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    #my-navbar .navbar-brand {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: 18px;
+        color: var(--accent) !important;
+        letter-spacing: 0.05em;
     }
 
-    .addon-book {
-        position: absolute;
-        top: 10px;
-        left: 310px;
-        width: 180px;
+    #my-navbar .navbar-nav > li > a,
+    #my-navbar .dropdown-menu > li > a {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--muted) !important;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+    }
+
+    #my-navbar .navbar-nav > li > a:hover,
+    #my-navbar .dropdown-menu > li > a:hover {
+        color: var(--text) !important;
+        background: transparent !important;
+    }
+
+    #my-navbar .dropdown-menu {
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 8px;
-        border: 3px solid white;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        padding: 6px 0;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        min-width: 280px;
+    }
+
+    #my-navbar .navbar-nav > li.active > a,
+    #my-navbar .navbar-nav > li > a:focus {
+        background: transparent !important;
+        color: var(--accent) !important;
+    }
+
+    .navbar-toggle { border-color: var(--border); }
+    .navbar-toggle .icon-bar { background-color: var(--muted); }
+
+    /* ── Hero banner ────────────────────────────── */
+    .hero-wrap {
+        position: relative;
+        overflow: hidden;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .hero-wrap img.hero-bg {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        max-height: 340px;
+        opacity: 0.35;
+        filter: saturate(0.6);
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(249,115,22,0.1) 100%);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        display: flex;
+        align-items: center;
+        padding: 20px 40px;
+        gap: 28px;
+    }
+
+    .hero-avatar {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        border: 3px solid var(--accent);
+        box-shadow: 0 0 24px rgba(59,130,246,0.4);
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    .hero-book {
+        width: 90px;
+        border-radius: 6px;
+        border: 2px solid var(--border);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        flex-shrink: 0;
+        transition: transform 0.3s;
+    }
+    .hero-book:hover { transform: scale(1.05); }
+
+    .hero-text h1 {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: clamp(18px, 3vw, 30px);
+        color: var(--text);
+        margin: 0 0 4px;
+        line-height: 1.15;
+    }
+
+    .hero-text .role-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-right: 6px;
+        margin-bottom: 4px;
+    }
+
+    .badge-blue  { background: rgba(59,130,246,0.2);  color: var(--accent);  border: 1px solid rgba(59,130,246,0.35); }
+    .badge-orange{ background: rgba(249,115,22,0.2);  color: var(--accent2); border: 1px solid rgba(249,115,22,0.35); }
+    .badge-cyan  { background: rgba(34,211,238,0.15); color: var(--accent3); border: 1px solid rgba(34,211,238,0.3);  }
+    .badge-green { background: rgba(16,185,129,0.15); color: var(--success); border: 1px solid rgba(16,185,129,0.3);  }
+    .badge-gold  { background: rgba(245,158,11,0.15); color: var(--warn);    border: 1px solid rgba(245,158,11,0.3);  }
+
+    .dbix-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background: #080b12;
+        border: 1px solid rgba(79,140,255,.35);
+        border-radius: 10px;
+        font-family: var(--font-mono);
+        transition: all .22s ease;
+        box-shadow: 0 2px 16px rgba(0,0,0,.4);
+        text-decoration: none !important;
+        margin-top: 10px;
+        display: inline-flex;
+    }
+    .dbix-badge:hover {
+        border-color: rgba(79,140,255,.7);
+        box-shadow: 0 4px 24px rgba(79,140,255,.2);
     }
 
     @media (max-width: 767px) {
-        .addon-photo,
-        .addon-book {
-            position: static;
-            display: block;
-            margin: 20px auto;
-        }
-
-        .addon-photo {
-            width: 180px;
-            height: 180px;
-        }
-
-        .addon-book {
-            width: 150px;
-        }
+        .hero-content { flex-wrap: wrap; padding: 16px 16px; }
+        .hero-avatar  { width: 80px; height: 80px; }
+        .hero-book    { width: 60px; }
+        .hero-text h1 { font-size: 18px; }
     }
 
-    .no-padding {
-        padding-left: 0;
-    padding-right: 0;
+    /* ── Section layout ─────────────────────────── */
+    .section-wrap {
+        padding: 60px 0 40px;
     }
 
-    .spinner {
+    .section-header {
+        font-family: var(--font-head);
+        font-weight: 800;
+        font-size: clamp(22px, 4vw, 36px);
+        color: var(--text);
+        position: relative;
+        display: inline-block;
+        margin-bottom: 36px;
+        line-height: 1.1;
+    }
+
+    .section-header::after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 48px;
+        background: var(--accent);
+        margin-top: 8px;
+        border-radius: 2px;
+    }
+
+    .section-label {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 700;
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    /* ── Cards ──────────────────────────────────── */
+    .card-dark {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card-dark:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 24px rgba(59,130,246,0.12);
+    }
+
+    .card-dark-inner {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    /* ── Who am I ───────────────────────────────── */
+    .who-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 16px;
+        transition: border-color 0.2s;
+    }
+    .who-card:hover { border-color: var(--accent); }
+    .who-card img {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+    .who-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* ── Patreon grid ───────────────────────────── */
+    .patron-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .patron-chip {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: var(--text);
+        text-align: center;
+        font-weight: 600;
+        transition: all 0.2s;
+        line-height: 1.3;
+    }
+    .patron-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .patron-chip a { color: inherit; }
+    .patron-chip a:hover { text-decoration: none; }
+    .patron-chip.chip-cta {
+        border-color: var(--accent2);
+        color: var(--accent2);
+        cursor: pointer;
+    }
+    .patron-chip.chip-cta:hover { background: rgba(249,115,22,0.1); }
+
+    /* ── Work history ───────────────────────────── */
+    .work-current {
+        background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(16,185,129,0.08));
+        border: 1px solid rgba(59,130,246,0.35);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 28px;
+    }
+
+    .work-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+    }
+
+    .work-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        transition: border-color 0.2s;
+    }
+    .work-item:hover { border-color: var(--accent); }
+    .work-item .company { font-weight: 700; color: var(--text); font-family: var(--font-head); font-size: 15px; }
+    .work-item .role    { color: var(--success); font-size: 12px; margin: 4px 0; }
+    .work-item .desc    { color: var(--muted);   font-size: 12px; line-height: 1.5; }
+
+    /* ── Carousel overrides ─────────────────────── */
+    .carousel-dark { border-radius: 10px; overflow: hidden; }
+
+    .carousel-dark .item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        min-height: 160px;
+    }
+
+    .carousel-dark .item .card-dark-inner {
+        margin: 16px;
+    }
+
+    .carousel-dark .item h4 {
+        font-family: var(--font-head);
+        color: var(--accent);
+        font-size: 16px;
+        margin: 0 0 6px;
+    }
+
+    .carousel-dark .item .subtitle a {
+        color: var(--accent3);
+        font-weight: 700;
+    }
+
+    .carousel-dark .item .body-text { color: var(--muted); font-size: 13px; }
+
+    .carousel-dark .carousel-control {
+        background: rgba(59,130,246,0.15) !important;
+        width: 40px;
+        opacity: 1;
+        border-radius: 4px;
+    }
+    .carousel-dark .carousel-control:hover { background: rgba(59,130,246,0.35) !important; }
+
+    .carousel-dark .carousel-indicators li {
+        background-color: var(--border);
+        border-color: var(--border);
+    }
+    .carousel-dark .carousel-indicators li.active {
+        background-color: var(--accent);
+        border-color: var(--accent);
+    }
+
+    /* ── Tabs ───────────────────────────────────── */
+    .nav-tabs-dark { border-bottom: 1px solid var(--border); margin-bottom: 20px; flex-wrap: wrap; }
+
+    .nav-tabs-dark > li > a {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--muted);
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 8px 14px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-radius: 0;
+        transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-tabs-dark > li > a:hover {
+        color: var(--text);
+        background: transparent;
+        border-bottom-color: var(--border);
+    }
+    .nav-tabs-dark > li.active > a,
+    .nav-tabs-dark > li.active > a:focus,
+    .nav-tabs-dark > li.active > a:hover {
+        color: var(--accent);
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid var(--accent);
+    }
+
+    /* ── How-to / form controls ─────────────────── */
+    .form-control-dark {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 6px;
+        font-family: var(--font-mono);
+        font-size: 13px;
+    }
+    .form-control-dark:focus {
+        background: var(--surface2);
+        border-color: var(--accent);
+        color: var(--text);
+        box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+        outline: none;
+    }
+    .form-control-dark option { background: var(--surface2); }
+
+    label.ctrl-label { color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .btn-primary-dark {
+        background: var(--accent);
+        border: none;
+        color: #fff;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 9px 20px;
+        border-radius: 6px;
+        transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary-dark:hover { background: #2563eb; color: #fff; transform: translateY(-1px); }
+    .btn-primary-dark:active { transform: translateY(0); }
+
+    /* ── Response panels ────────────────────────── */
+    .response-panel {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 12px;
+        color: var(--accent3);
+        font-size: 13px;
+        line-height: 1.7;
+        min-height: 40px;
+    }
+    .response-panel ol, .response-panel ul { padding-left: 20px; color: var(--text); }
+    .response-panel li { margin-bottom: 4px; }
+
+    /* ── CPAN recent thumbnails ──────────────────── */
+    .cpan-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .cpan-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 9px 12px;
+        font-size: 12px;
+        transition: border-color 0.2s;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .cpan-item:hover { border-color: var(--accent3); }
+    .cpan-item a { color: var(--accent3); display: block; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── Map::Tube ──────────────────────────────── */
+    .map-tube-info {
+        background: var(--surface2);
+        border-left: 3px solid var(--accent);
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .dist-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 6px;
+        margin-top: 14px;
+    }
+    .dist-item {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 7px 10px;
+        font-size: 11px;
+        text-align: center;
+        transition: border-color 0.2s;
+    }
+    .dist-item:hover { border-color: var(--accent); }
+    .dist-item a { color: var(--muted); }
+    .dist-item a:hover { color: var(--accent); text-decoration: none; }
+
+    /* ── Chart containers ───────────────────────── */
+    .chart-wrap {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 8px;
+        position: relative;
+    }
+
+    .chart-wrap canvas {
+        max-height: 420px;
+    }
+
+    /* ── Spinner ────────────────────────────────── */
+    .spinner-wrap {
         display: none;
-        width:100px;
-        height: 100px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        text-align:center;
-        margin-left: -50px;
-        margin-top: -100px;
-        z-index:2;
-        overflow: auto;
+        text-align: center;
+        padding: 40px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+    .spinner-wrap::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 28px;
+        border: 2px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 12px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Footer ─────────────────────────────────── */
+    .site-footer {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 32px 0 24px;
+        text-align: center;
     }
 
-    .rainbow {
-        background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-        background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-        color:transparent;
-        -webkit-background-clip: text;
-        background-clip: text;
+    .site-footer .social-icons a {
+        color: var(--muted);
+        font-size: 20px;
+        margin: 0 10px;
+        transition: color 0.2s, transform 0.2s;
+        display: inline-block;
+    }
+    .site-footer .social-icons a:hover {
+        color: var(--accent);
+        transform: translateY(-2px);
     }
 
+    .site-footer .footer-links {
+        margin-top: 14px;
+        font-size: 12px;
+    }
+    .site-footer .footer-links a {
+        color: var(--muted);
+        margin: 0 8px;
+    }
+    .site-footer .footer-links a:hover { color: var(--text); }
+
+    .site-footer small { color: var(--muted); font-size: 11px; }
+
+    /* ── Alert / info banner ────────────────────── */
+    .info-banner {
+        background: rgba(59,130,246,0.08);
+        border: 1px solid rgba(59,130,246,0.25);
+        border-radius: 8px;
+        padding: 14px 18px;
+        font-size: 13px;
+        color: var(--text);
+        margin-bottom: 24px;
+        line-height: 1.6;
+    }
+
+    /* ── Embed responsive ────────────────────────── */
+    .embed-responsive { border-radius: 8px; overflow: hidden; border: 1px solid var(--border); margin: 16px 0; }
+
+    /* ── Utilities ──────────────────────────────── */
+    .text-accent  { color: var(--accent);  }
+    .text-accent2 { color: var(--accent2); }
+    .text-accent3 { color: var(--accent3); }
+    .text-success-dark { color: var(--success); }
+    .text-muted-dark   { color: var(--muted);   }
+
+    .no-padding { padding-left: 0; padding-right: 0; }
+
+    /* ── Captcha row ────────────────────────────── */
+    #txt_captcha { color: var(--warn); font-weight: 700; font-size: 15px; }
 </style>
 
 <body data-spy="scroll" data-target="#my-navbar">
-      <!-- Navbar -->
-      <nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
-          <div class="container">
-              <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-              </div>
 
-              <!-- Navbar Header-->
-              <a href="/" class="navbar-brand">HOME</a>
-              <div class="collapse navbar-collapse" id="navbar-collapse">
-                  <ul class="nav navbar-nav">
-                    <li><a href="#who-am-I">Who am I?</a>
+    <!-- ══════════════════════════════════════════
+         NAVBAR
+    ══════════════════════════════════════════ -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">MANWAR</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#who-am-I">Who am I?</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Latest...<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Latest <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                              <li><a href="#support-patreon">Supporters on Patreon</a>
-                              <li><a href="#work">Work...</a>
-                              <li><a href="#what-is-new">What is new?</a>
-                              <li><a href="#favourite-topics">Fovourite Topics</a>
-                              <li><a href="#how-to">How to ... ?</a>
+                            <li><a href="#support-patreon">Supporters on Patreon</a></li>
+                            <li><a href="#work">Work...</a></li>
+                            <li><a href="#what-is-new">What is new?</a></li>
+                            <li><a href="#favourite-topics">Favourite Topics</a></li>
+                            <li><a href="#how-to">How to...?</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Demo <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#map-tube">Map::Tube</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CPAN<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">CPAN <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#cpan-recent">Recent Uploads</a></li>
                             <li><a href="#cpan-regulars">Regular Uploads</a></li>
@@ -172,7 +699,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#github-pullrequest-tracker">Pull Request Tracker</a></li>
                             <li><a href="#github-pullrequest">Pull Request</a></li>
@@ -182,1499 +709,737 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#pr-events">Pull Request</a></li>
                             <li><a href="#perl-weekly-challenge">The Weekly Challenge</a></li>
-                            <li><a href="/talks/LPW-2016.pdf">LPW 2016: Journey from CPAN user to CPAN contributor</a></li>
-                            <li><a href="/talks/LPW-2017.pdf">LPW 2017: Create tube map in 20 minutes using Map::Tube</a></li>
-                            <li><a href="/talks/GPW-2018-1.pdf">GPW 2018: Journey: CPAN user to CPAN contributor</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/talks/LPW-2016.pdf">LPW 2016: Journey from CPAN user to contributor</a></li>
+                            <li><a href="/talks/LPW-2017.pdf">LPW 2017: Create tube map using Map::Tube</a></li>
+                            <li><a href="/talks/GPW-2018-1.pdf">GPW 2018: CPAN user to contributor</a></li>
                             <li><a href="/talks/GPW-2018-2.pdf">GPW 2018: Introduction to Map::Tube</a></li>
                             <li><a href="/talks/TPC-2018.pdf">TPC 2018: How to become a CPAN contributor?</a></li>
                             <li><a href="/talks/LPW-2019-1.pdf">LPW 2019: The Perl Weekly Challenge Review</a></li>
-                            <li><a href="/talks/LPW-2019-2.pdf">LPW 2019: Create and publish your first Perl 6 module distribution</a></li>
-                            <li><a href="/talks/LPW-2024.pdf">LPW 2024: What’s new in Perl v5.40?</a></li>
+                            <li><a href="/talks/LPW-2019-2.pdf">LPW 2019: First Perl 6 module distribution</a></li>
+                            <li><a href="/talks/LPW-2024.pdf">LPW 2024: What's new in Perl v5.40?</a></li>
                             <li><a href="/talks/LPW-2025.pdf">LPW 2025: Design Patterns in Modern Perl</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="https://www.patreon.com/manwar" title="Patreon" target="_blank">
-                        <i class="fa-brands fa-patreon"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://fosstodon.org/@manwar" title="Mastodon" target="_blank">
-                        <i class="fa-brands fa-mastodon"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/manwar" title="GitHub" target="_blank">
-                        <i class="fa-brands fa-github"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://stackoverflow.com/users/1421774/" title="Stackoverflow" target="_blank">
-                        <i class="fa-brands fa-stack-overflow"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://twitter.com/@cpan_author" title="Twitter" target="_blank">
-                        <i class="fa-brands fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://www.linkedin.com/in/mohammadanwar" title="LinkedIn" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i>
-                        </a>
-                    </li>
-                 </ul>
-              </div> <!-- End Navbar Header-->
-          </div><!-- End Container-->
-      </nav><!-- End navbar -->
+                    <li><a href="https://www.patreon.com/manwar" title="Patreon" target="_blank"><i class="fa-brands fa-patreon"></i></a></li>
+                    <li><a href="https://fosstodon.org/@manwar" title="Mastodon" target="_blank"><i class="fa-brands fa-mastodon"></i></a></li>
+                    <li><a href="https://github.com/manwar" title="GitHub" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="http://stackoverflow.com/users/1421774/" title="Stackoverflow" target="_blank"><i class="fa-brands fa-stack-overflow"></i></a></li>
+                    <li><a href="http://twitter.com/@cpan_author" title="Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="http://www.linkedin.com/in/mohammadanwar" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-      <div class="container-fluid no-padding">
+    <!-- ══════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════ -->
+    <div class="hero-wrap">
+        <img src="/images/background.jpg" class="hero-bg" alt="">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="/images/manwar.jpg" class="hero-avatar" alt="Mohammad Sajid Anwar">
+            <a href="https://perlschool.com/books/design-patterns" target="_blank">
+                <img src="/images/design-patterns-in-modern-perl.png" class="hero-book" alt="Design Patterns in Modern Perl">
+            </a>
+            <div class="hero-text">
+                <h1>Mohammad Sajid Anwar</h1>
+                <div style="margin: 8px 0 12px;">
+                    <span class="role-badge badge-blue">Author</span>
+                    <span class="role-badge badge-orange">Contributor</span>
+                    <span class="role-badge badge-cyan">Editor</span>
+                    <span class="role-badge badge-green">Speaker</span>
+                    <span class="role-badge badge-gold">Founder</span>
+                </div>
+                <a href="dbix-class-async.html" target="_blank" rel="noopener noreferrer" class="dbix-badge">
+                    <span style="font-size:16px">🐪</span>
+                    <div>
+                        <div style="font-size:11px;font-weight:600;background:linear-gradient(90deg,#7ab4ff,#c084fc,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">DBIx::Class::Async</div>
+                        <div style="font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:1px">Architecture Diagram</div>
+                    </div>
+                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" style="margin-left:4px;opacity:.5"><path d="M3 7h8M8 4l3 3-3 3" stroke="#7ab4ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </a>
+                <a href="https://www.perl.org/advocacy/white_camel/" target="_blank" rel="noopener noreferrer" class="dbix-badge">
+                    <span style="font-size:16px">🏆</span>
+                    <div>
+                        <div style="font-size:11px;font-weight:600;background:linear-gradient(90deg,#f0f0f0,#d4af37,#f0f0f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">2022 White Camel Awardee</div>
+                        <div style="font-size:9px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:1px">Perl Community Award</div>
+                    </div>
+                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" style="margin-left:4px;opacity:.5"><path d="M3 7h8M8 4l3 3-3 3" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WHO AM I
+    ══════════════════════════════════════════ -->
+    <hr id="who-am-I"/>
+    <div class="container section-wrap">
+        <span class="section-label">About</span>
+        <h2 class="section-header">Who am I?</h2>
+
+        <% FOREACH who_am_i_row IN who_am_i %>
         <div class="row">
-            <div class="col-md-12">
-                <div style="position: relative;">
-                    <img src="/images/background.jpg" width="100%" class="img-responsive">
+            <% FOREACH who_am_i_col IN who_am_i_row %>
+            <div class="col-md-4">
+                <div class="who-card">
+                    <img src="<% who_am_i_col.img_src %>"
+                         title="<% who_am_i_col.img_title %>"
+                         alt="<% who_am_i_col.img_alt %>">
+                    <p><% who_am_i_col.description %></p>
+                </div>
+            </div>
+            <% END %>
+        </div>
+        <% END %>
+    </div>
 
-                    <img src="/images/manwar.jpg"
-                         class="img-circle addon-photo d-block">
+    <!-- ══════════════════════════════════════════
+         PATREON
+    ══════════════════════════════════════════ -->
+    <hr id="support-patreon"/>
+    <div class="container section-wrap">
+        <span class="section-label">Community</span>
+        <h2 class="section-header">Supporters on Patreon</h2>
 
-                    <a href="https://perlschool.com/books/design-patterns" target="_blank">
-                        <img src="/images/design-patterns-in-modern-perl.png"
-                             class="addon-book d-block">
-                    </a>
-                    <a href="dbix-class-async.html"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style="text-decoration:none;
-                          position: absolute;
-                          top: 10px;
-                          left: 505px;"
-                       title="DBIx::Class::Async Architecture">
-                       <div style="
-                        display: inline-flex;
-                        align-items: center;
-                        gap: 10px;
-                        padding: 10px 16px;
-                        background: #080b12;
-                        border: 1px solid rgba(79,140,255,.35);
-                        border-radius: 12px;
-                        font-family: 'JetBrains Mono', monospace;
-                        transition: all .22s ease;
-                        box-shadow: 0 2px 16px rgba(0,0,0,.4);"
-                        onmouseover="this.style.borderColor='rgba(79,140,255,.7)';this.style.boxShadow='0 4px 24px rgba(79,140,255,.2)';"
-                        onmouseout="this.style.borderColor='rgba(79,140,255,.35)';this.style.boxShadow='0 2px 16px rgba(0,0,0,.4)';">
-                        <span style="font-size:20px">🐪</span>
-                        <div>
-                            <div style="
-                                 font-size: 11px; font-weight: 500; letter-spacing: .02em;
-                                 background: linear-gradient(90deg,#7ab4ff,#c084fc,#fb923c);
-                                 -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-                                 background-clip:text;">
-                                 DBIx::Class::Async
-                            </div>
-                            <div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:1px">
-                                Architecture Diagram
-                            </div>
+        <div class="info-banner">
+            This section is dedicated to all my Patreon supporters. Thank you for your generous support.
+            Special thanks to <strong>Gabor Szabo</strong> for introducing Patreon to me.
+        </div>
+
+        <div class="patron-grid">
+            <div class="patron-chip"><a href="https://github.com/perigrin" target="_blank">Chris Prather</a></div>
+            <div class="patron-chip">Malcolm Nooning</div>
+            <div class="patron-chip"><a href="https://github.com/drhyde" target="_blank">David Cantrell</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/andrewsolomon" target="_blank">Andrew Solomon</a></div>
+            <div class="patron-chip"><a href="https://github.com/jkeenan" target="_blank">James E. Keenan</a></div>
+            <div class="patron-chip">Tina Müller</div>
+            <div class="patron-chip"><a href="https://twitter.com/szabgab" target="_blank">Gabor Szabo</a></div>
+            <div class="patron-chip">Dave Jacoby</div>
+            <div class="patron-chip"><a href="http://pjcj.net" target="_blank">Paul Johnson</a></div>
+            <div class="patron-chip">Magnus Enger</div>
+            <div class="patron-chip">William McKee</div>
+            <div class="patron-chip">Mark Mann</div>
+            <div class="patron-chip">Richard Leach</div>
+            <div class="patron-chip">Jonas Berlin</div>
+            <div class="patron-chip">Kevin Goess</div>
+            <div class="patron-chip">Gert van Oss</div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/notbenh" target="_blank">Ben Hengst</a></div>
+            <div class="patron-chip"><a href="https://github.com/smonff" target="_blank">Sébastien Feugère</a></div>
+            <div class="patron-chip"><a href="https://twitter.com/jmaslak" target="_blank">Joelle Maslak</a></div>
+            <div class="patron-chip">Michael West</div>
+            <div class="patron-chip"><a href="https://metacpan.org/author/KARJALA" target="_blank">Alexander Karelas</a></div>
+            <div class="patron-chip"><a href="https://github.com/bradmacpherson" target="_blank">Brad Macpherson</a></div>
+            <div class="patron-chip"><a href="http://blog.polettix.it" target="_blank">Flavio Poletti</a></div>
+            <div class="patron-chip"><a href="https://lancewicks.com" target="_blank">Lance Wicks</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/x1mandi" target="_blank">Csaba Simandi</a></div>
+            <div class="patron-chip">Larry Sherwood</div>
+            <div class="patron-chip">Dwayne Page</div>
+            <div class="patron-chip"><a href="https://savage.net.au/index.html" target="_blank">Ron Savage</a></div>
+            <div class="patron-chip"><a href="https://mitchjacksontech.com" target="_blank">Mitch Jackson</a></div>
+            <div class="patron-chip"><a href="https://github.com/gugod" target="_blank">Kang-min Liu</a></div>
+            <div class="patron-chip"><a href="https://twitter.com/ActiveState" target="_blank">ActiveState Software</a></div>
+            <div class="patron-chip">Kevin Ernst</div>
+            <div class="patron-chip"><a href="http://solimano.org" target="_blank">David Solimano</a></div>
+            <div class="patron-chip"><a href="https://github.com/peelle" target="_blank">James Carman</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/dihnen" target="_blank">David Ihnen</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/emilperhinschi" target="_blank">Emil Perhinschi</a></div>
+            <div class="patron-chip">John Wiersba</div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/mjgardner" target="_blank">Mark Gardner</a></div>
+            <div class="patron-chip">Leonardo Ruoso</div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/robert-coursen-514b4915b" target="_blank">Robert Coursen</a></div>
+            <div class="patron-chip"><a href="http://raf.org" target="_blank">raf</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/jculverhouse" target="_blank">Jeffrey Culverhouse</a></div>
+            <div class="patron-chip"><a href="https://www.preshweb.co.uk/about" target="_blank">David Precious</a></div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/zahir-lalani-4940253" target="_blank">Zahir Lalani</a></div>
+            <div class="patron-chip">Håkon Hægland</div>
+            <div class="patron-chip">M. Monderkamp</div>
+            <div class="patron-chip"><a href="https://www.linkedin.com/in/szabgab" target="_blank">Gabor Szabo</a></div>
+            <div class="patron-chip chip-cta"><a href="https://www.patreon.com/manwar" target="_blank">Support me? ❤</a></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WORK
+    ══════════════════════════════════════════ -->
+    <hr id="work"/>
+    <div class="container section-wrap">
+        <span class="section-label">Career</span>
+        <h2 class="section-header">Work...</h2>
+
+        <% FOREACH current_row IN current %>
+        <% FOREACH current_col IN current_row %>
+        <div class="work-current">
+            <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--success);margin-bottom:8px;font-weight:700;">▸ Current Position</div>
+            <div style="font-family:var(--font-head);font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px;">
+                <a href="<% current_col.company_url %>"><% current_col.company_name %></a>
+            </div>
+            <div style="color:var(--success);font-size:13px;margin-bottom:8px;"><% current_col.job_title %></div>
+            <div style="color:var(--muted);font-size:13px;"><% current_col.job_description %></div>
+        </div>
+        <% END %>
+        <% END %>
+
+        <div class="work-grid">
+        <% FOREACH work_row IN work %>
+        <% FOREACH work_col IN work_row %>
+            <div class="work-item">
+                <div class="company"><a href="<% work_col.company_url %>"><% work_col.company_name %></a></div>
+                <div class="role"><% work_col.job_title %></div>
+                <div class="desc"><% work_col.job_description %></div>
+            </div>
+        <% END %>
+        <% END %>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         WHAT IS NEW
+    ══════════════════════════════════════════ -->
+    <hr id="what-is-new"/>
+    <div class="container section-wrap">
+        <span class="section-label">Updates</span>
+        <h2 class="section-header">What is new?</h2>
+
+        <div id="what-is-new-slides" class="carousel slide carousel-dark" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <% FOREACH win_indicator IN win_indicators %>
+                <li data-target="#what-is-new-slides" data-slide-to="<% win_indicator.slide_to %>" <% win_indicator.class %>></li>
+                <% END %>
+            </ol>
+            <div class="carousel-inner">
+                <% FOREACH win_row IN win %>
+                <div class="item<% win_row.active %>">
+                    <div class="card-dark-inner" style="margin:16px 50px;">
+                        <h4><% win_row.title %></h4>
+                        <p class="subtitle"><a href="<% win_row.sub_title_url %>" target="_blank"><% win_row.sub_title_name %></a></p>
+                        <p class="body-text"><% win_row.body %></p>
+                    </div>
+                </div>
+                <% END %>
+            </div>
+            <a class="left carousel-control" href="#what-is-new-slides" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#what-is-new-slides" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FAVOURITE TOPICS
+    ══════════════════════════════════════════ -->
+    <hr id="favourite-topics"/>
+    <div class="container section-wrap">
+        <span class="section-label">Interests</span>
+        <h2 class="section-header">Favourite Topics</h2>
+
+        <div id="favourite-topics-slides" class="carousel slide carousel-dark" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <% FOREACH ft_indicator IN ft_indicators %>
+                <li data-target="#favourite-topics-slides" data-slide-to="<% ft_indicator.slide_to %>" <% ft_indicator.class %>></li>
+                <% END %>
+            </ol>
+            <div class="carousel-inner">
+                <% FOREACH ft_row IN ft %>
+                <div class="item<% ft_row.active %>">
+                    <div class="card-dark-inner" style="margin:16px 50px;">
+                        <h4><% ft_row.title %></h4>
+                        <p class="subtitle"><a href="<% ft_row.sub_title_url %>" target="_blank"><% ft_row.sub_title_name %></a></p>
+                    </div>
+                </div>
+                <% END %>
+            </div>
+            <a class="left carousel-control" href="#favourite-topics-slides" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#favourite-topics-slides" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         HOW TO
+    ══════════════════════════════════════════ -->
+    <hr id="how-to"/>
+    <div class="container section-wrap">
+        <span class="section-label">Reference</span>
+        <h2 class="section-header">How to...?</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="git" href="#git_how_to" role="tab" data-toggle="tab">Git</a></li>
+            <li><a id="psql" href="#psql_how_to" role="tab" data-toggle="tab">PostgreSQL</a></li>
+        </ul>
+
+        <div id="how-to-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="git_how_to">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="git_topic" class="ctrl-label">Select Topic</label>
+                            <select id="git_topic" class="form-control form-control-dark">
+                                <option value="">-- choose a topic --</option>
+                                <% FOREACH git_topic IN git_topics %>
+                                <option value="<% git_topic.id %>"><% git_topic.question %></option>
+                                <% END %>
+                            </select>
                         </div>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="margin-left:4px;opacity:.5">
-                             <path d="M3 7h8M8 4l3 3-3 3" stroke="#7ab4ff" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                       </div>
-                    </a>
+                        <div id="git_how_to_response" class="response-panel"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="psql_how_to">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="psql_topic" class="ctrl-label">Select Topic</label>
+                            <select id="psql_topic" class="form-control form-control-dark">
+                                <option value="">-- choose a topic --</option>
+                                <% FOREACH psql_topic IN psql_topics %>
+                                <option value="<% psql_topic.id %>"><% psql_topic.question %></option>
+                                <% END %>
+                            </select>
+                        </div>
+                        <div id="psql_how_to_response" class="response-panel"></div>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
+    </div>
 
-      <br/><br/>
+    <!-- ══════════════════════════════════════════
+         MAP::TUBE
+    ══════════════════════════════════════════ -->
+    <hr id="map-tube"/>
+    <div class="container section-wrap">
+        <span class="section-label">Demo</span>
+        <h2 class="section-header">Map::Tube</h2>
 
-      <!-- Who am I? -->
-      <hr  id="who-am-I"/>
-      <div class="container">
-          <section>
-              <div class="page-header">
-              <h1><span class="section_header">Who am I?</span></h1>
-          </div>
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="map_tube_summary" href="#map_tube_summary_details" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="map_tube_demo" href="#map_tube_demo_live" role="tab" data-toggle="tab">Try Me</a></li>
+        </ul>
 
-                <% FOREACH who_am_i_row IN who_am_i %>
-                <div class="row">
-                    <% FOREACH who_am_i_col IN who_am_i_row %>
-                        <div class="col-md-4 text-justify">
-                            <img src="<% who_am_i_col.img_src %>"
-                                 title="<% who_am_i_col.img_title %>"
-                                 class="img-responsive img-circle margin"
-                                 style="display:inline" width="50" height="50"
-                                 alt="<% who_am_i_col.img_alt %>">
-                            <br/>
-                            <small><% who_am_i_col.description %></small>
-                        </div>
+        <div id="map-tube-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="map_tube_summary_details">
+                <div class="map-tube-info">
+                    <a target="_blank" href="https://metacpan.org/pod/Map::Tube"><strong>Map::Tube</strong></a>
+                    is a Lightweight Routing Framework first released on <strong>26th Oct 2010</strong>.
+                    As of v3.69, there have been <strong>181</strong> public releases with <strong>41</strong> maps.
+                </div>
+
+                <div class="embed-responsive embed-responsive-16by9">
+                    <object class="embed-responsive-item" data="https://www.google.com/maps/d/u/0/embed?mid=1VVxj6HvdHDvMPD30lp09kppOZlR6xCY&ehbc=2E312F&noprof=1"></object>
+                </div>
+
+                <div class="dist-grid">
+                    <% FOREACH dist_row IN dists %>
+                    <% FOREACH dist_col IN dist_row %>
+                    <div class="dist-item">
+                        <a target="_blank" title="<% dist_col.title %>" href="https://metacpan.org/pod/<% dist_col.name %>"><% dist_col.title %></a>
+                    </div>
+                    <% END %>
                     <% END %>
                 </div>
-                <br/>
-                <% END %>
+            </div>
 
-        </section>
-      </div> <!--End Container for Who am I? -->
-
-      <br/>
-
-      <!-- Support Patreon -->
-      <hr  id="support-patreon"/>
-      <div class="container">
-          <section>
-              <div class="page-header">
-              <h1><span class="section_header">Supporters on Patreon</span></h1>
-              </div>
-          </section>
-
-          <div class="panel-group">
-            <div class="panel panel-success">
-               <div class="panel-body">
-                 <strong>
-                   <p class="text-success">This section is dedicated to all my Patreon supporters. I would like to thank each and every supporters for their generous donation. Below is the list of donors, not everyone is still active now. I would like to thank <strong>Gabor Szabo</strong> for introducing <strong>Patreon</strong> to me.</p>
-                 </strong>
-               </div>
-             </div>
-          </div>
-
-          <!-- BEGIN: patreon donor list -->
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Anirvan Chatterjee</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Andrew Solomon</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Fabio Valeri</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Michael Small</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>David Mills</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Stefan Adams</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Roberto Bisotto</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Kjetil Skotheim</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Colin Hay</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>John Gee</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Dmitry</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>James McQuillan</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Paolo Capaldo</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Emmanuel Thouraud</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Barin Bhattacharya</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Craig Scrivner</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Ludovic Tolhurst-Cleaver</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Ronald</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Richard Bychowski</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Weijun Huang</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Jan-Felix Wittmann</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Mike Weisenborn</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>John Van Walleghen</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Ed Freyfogle</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Adam Russell</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Leo</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Bruce Van Allen</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Jxyzn Sxyzyxn</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Slobodan Mišković</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>smonff</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Rick Frazier</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Matthew Persico</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Eric Bivona</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>William Stokes</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>VasPet</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Andrew Beverley</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Kirill</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Magnus Enger</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>William McKee</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Mark Mann</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong>Richard Leach</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Jonas Berlin</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Kevin Goess</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Gert van Oss</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/notbenh" target="_blank">Ben Hengst</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="https://github.com/smonff" target="_blank">Sébastien Feugère</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong><a href="https://twitter.com/jmaslak" target="_blank">Joelle Maslak</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong>Michael West</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong><a href="https://metacpan.org/author/KARJALA" target="_blank">Alexander Karelas</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong><a href="https://github.com/bradmacpherson" target="_blank">Brad Macpherson</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="http://blog.polettix.it" target="_blank">Flavio Poletti</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong><a href="https://lancewicks.com" target="_blank">Lance Wicks</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/x1mandi" target="_blank">Csaba Simandi</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong>Larry Sherwood</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Dwayne Page</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="https://savage.net.au/index.html" target="_blank">Ron Savage</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong><a href="https://mitchjacksontech.com" target="_blank">Mitch Jackson</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong><a href="https://github.com/gugod" target="_blank">Kang-min Liu</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong><a href="https://twitter.com/ActiveState" target="_blank">ActiveState Software</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>Kevin Ernst</strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="http://solimano.org" target="_blank">David Solimano</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong><a href="https://github.com/peelle" target="_blank">James Carman</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/dihnen" target="_blank">David Ihnen</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/emilperhinschi" target="_blank">Emil Perhinschi</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong>John Wiersba</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/mjgardner" target="_blank">Mark Gardner</a></strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong>Leonardo Ruoso</strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/robert-coursen-514b4915b" target="_blank">Robert Coursen</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong><a href="http://raf.org" target="_blank">raf</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/jculverhouse" target="_blank">Jeffrey Culverhouse</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.preshweb.co.uk/about" target="_blank">David Precious</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-danger">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/zahir-lalani-4940253" target="_blank">Zahir Lalani</a></strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="panel text-center panel-success">
-                 <div class="panel-heading">
-                   <strong><a href="" target="_blank">Håkon Hægland</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-default">
-                 <div class="panel-heading">
-                   <strong><a href="" target="_blank">M. Monderkamp</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="panel text-center panel-info">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.linkedin.com/in/szabgab" target="_blank">Gabor Szabo</a></strong>
-                 </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="panel text-center panel-warning">
-                 <div class="panel-heading">
-                   <strong><a href="https://www.patreon.com/manwar" target="_blank">Do you want to support me?</a></strong>
-                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- END: patreon donor list -->
-
-      </div>
-
-      <br/>
-
-      <!-- Work -->
-      <hr id="work"/>
-      <div class="container">
-             <section>
-               <div class="page-header">
-                   <h1><span class="section_header">Work...</span></h1>
-               </div>
-
-               <% FOREACH current_row IN current %>
-               <div class="panel-group">
-                 <% FOREACH current_col IN current_row %>
-                 <div class="panel panel-success text-center">
-                   <div class="panel-heading">
-                     <strong><a href="<% current_col.company_url %>"><% current_col.company_name %></a></strong>
-                   </div>
-                   <div class="panel-body">
-                     <small>
-                       <p class="text-success"><% current_col.job_title %></p>
-                       <p class="text-center text-primary"><% current_col.job_description %></p>
-                     </small>
-                   </div>
-                 </div>
-                 <% END %>
-               </div>
-               <% END %>
-
-               <% FOREACH work_row IN work %>
-               <div class="row">
-                 <% FOREACH work_col IN work_row %>
-                 <div class="col-sm-4">
-                   <div class="panel text-center <% work_col.header_class %>">
-                     <div class="panel-heading">
-                       <strong><a href="<% work_col.company_url %>"><% work_col.company_name %></a></strong>
-                     </div>
-                     <div class="panel-body">
-                       <small><p class="text-success"><% work_col.job_title %></p>
-                         <p class="text-justify text-primary"><% work_col.job_description %></p>
-                       </small>
-                       <br/>
-                     </div>
-                   </div>
-                 </div>
-                 <% END %>
-               </div>
-               <% END %>
-
-             </section>
-      </div><!-- End Container for "Work" -->
-
-      <br/>
-      <br/>
-
-      <!-- What is new? -->
-      <hr id="what-is-new"/>
-      <div class="container">
-            <section>
-              <div class="page-header">
-              <h1><span class="section_header">What is new?</span></h1>
-              </div>
-
-                <div id="what-is-new-slides" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <% FOREACH win_indicator IN win_indicators %>
-                        <li data-target="#what-is-new-slides" data-slide-to="<% win_indicator.slide_to %>" <% win_indicator.class %>></li>
-                        <% END %>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <% FOREACH win_row IN win %>
-                        <div class="item<% win_row.active %>">
-                            <div class="panel text-center <% win_row.header_class %>">
-                                <div class="panel-heading"><strong><% win_row.title %></strong></div>
-                                <div class="panel-body">
-                                  <small>
-                                    <p class="text-success">
-                                      <strong><a href="<% win_row.sub_title_url %>" target="_blank"><% win_row.sub_title_name %></a></strong>
-                                    </p>
-                                    <p class="text-primary"><% win_row.body %></p>
-                                  </small>
-                                </div>
-                            </div>
-                        </div>
-                        <% END %>
-                    </div><!-- End of Wrapper for Slides -->
-
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#what-is-new-slides" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#what-is-new-slides" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </section>
-      </div><!-- End container for "What is new?"-->
-
-      <br/>
-      <br/>
-      <br/>
-
-      <!-- Favourite Topics -->
-      <hr id="favourite-topics"/>
-      <div class="container">
-            <section>
-              <div class="page-header">
-              <h1><span class="section_header">Favourite Topics</span></h1>
-              </div>
-
-                <div id="favourite-topics-slides" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <% FOREACH ft_indicator IN ft_indicators %>
-                        <li data-target="#favourite-topics-slides" data-slide-to="<% ft_indicator.slide_to %>" <% ft_indicator.class %>></li>
-                        <% END %>
-                    </ol>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <% FOREACH ft_row IN ft %>
-                        <div class="item<% ft_row.active %>">
-                            <div class="panel text-center <% ft_row.header_class %>">
-                              <div class="panel-heading"><strong><% ft_row.title %></strong></div>
-                              <div class="panel-body">
-                                <p class="text-success">
-                                  <strong><a href="<% ft_row.sub_title_url %>" target="_blank"><% ft_row.sub_title_name %></a></strong>
-                                </p>
-                              </div>
-                            </div>
-                        </div>
-                        <% END %>
+            <div class="tab-pane" id="map_tube_demo_live">
+                <div class="card-dark" style="max-width:560px;">
+                    <div class="form-group">
+                        <label for="map_name" class="ctrl-label">Map (City)</label>
+                        <select id="map_name" class="form-control form-control-dark">
+                            <option value="">-- select map --</option>
+                            <% FOREACH map IN maps %>
+                            <option value="<% map.name %>"><% map.name %></option>
+                            <% END %>
+                        </select>
                     </div>
-
-                    <!-- Left and right controls -->
-                    <a class="left carousel-control" href="#favourite-topics-slides" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#favourite-topics-slides" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </section>
-      </div><!-- End container -->
-
-      <br/>
-      <br/>
-      <br/>
-
-      <!-- How to ...? -->
-      <hr id="how-to"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-            <h1><span class="section_header">How to ...?</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="git" href="#git_how_to" role="tab" data-toggle="tab">Git</a></li>
-               <li><a id="psql" href="#psql_how_to" role="tab" data-toggle="tab">PostgreSQL</a></li>
-            </ul>
-
-            <div id="how-to-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="git_how_to">
-                 <form class="form-horizontal">
-                   <div class="form-group">
-                     <label for="git_topic" class="col-sm-3 control-label">Topics:</label>
-                     <div class="col-sm-9">
-                       <select id="git_topic" class="form-control">
-                         <option value="">--Select topic--</option>
-                         <% FOREACH git_topic IN git_topics %>
-                         <option value="<% git_topic.id %>"><% git_topic.question %></option>
-                         <% END %>
-                       </select>
-                     </div>
-                   </div>
-                 </form>
-                 <div id="git_how_to_response" class="panel-body text-primary"></div>
-               </div>
-
-               <div class="tab-pane" id="psql_how_to">
-                 <form class="form-horizontal">
-                   <div class="form-group">
-                     <label for="psql_topic" class="col-sm-3 control-label">Topics:</label>
-                     <div class="col-sm-9">
-                       <select id="psql_topic" class="form-control">
-                         <option value="">--Select topic--</option>
-                         <% FOREACH psql_topic IN psql_topics %>
-                         <option value="<% psql_topic.id %>"><% psql_topic.question %></option>
-                         <% END %>
-                       </select>
-                     </div>
-                   </div>
-                 </form>
-                 <div id="psql_how_to_response" class="panel-body text-primary"></div>
-               </div>
-
-            </div>
-          </section>
-      </div><!-- End container -->
-
-      <br/>
-      <br/>
-      <br/>
-
-      <!-- Map::Tube Section -->
-      <hr id="map-tube"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">Map::Tube</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="map_tube_summary" href="#map_tube_summary_details" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="map_tube_demo" href="#map_tube_demo_live" role="tab" data-toggle="tab">Try Me</a></li>
-            </ul>
-
-            <div id="map-tube-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="map_tube_summary_details">
-                  <div class="panel-group">
-                     <div class="panel panel-success text-center">
-                         <div class="panel-heading">
-                           <strong>
-                             Map::Tube - Lightweight Routing Framework
-                           </strong>
-                         </div>
-                         <div class="panel-body">
-                             <small>
-                                 <p class="text-justify text-primary">
-                                   <a target="_blank" title="Map::Tube" href="https://metacpan.org/pod/Map::Tube"><strong>Map::Tube</strong></a> is one of my favourite distributions published to <strong>CPAN</strong>. It was first released on <strong>26th Oct 2010</strong>. As of Map::Tube <strong>v3.69</strong>, there have been <strong>181</strong> public releases so far. There are <strong>41</strong> maps created using the framework as listed below. Some maps data are incomplete.
-                                 </p>
-                             </small>
-
-                             <!-- 16:9 aspect ratio -->
-                             <div class="embed-responsive embed-responsive-16by9">
-                               <object class="embed-responsive-item" data="https://www.google.com/maps/d/u/0/embed?mid=1VVxj6HvdHDvMPD30lp09kppOZlR6xCY&ehbc=2E312F&noprof=1"></object>
-                             </div>
-
-                             <br>
-
-                             <% FOREACH dist_row IN dists %>
-                             <div class="row">
-                               <% FOREACH dist_col IN dist_row%>
-                               <div class="col-md-2">
-                                 <div class="thumbnail">
-                                   <a target="_blank" title="<% dist_col.title %>" href="https://metacpan.org/pod/<% dist_col.name %>"><% dist_col.title %></a>
-                                 </div>
-                               </div>
-                               <% END %>
-                             </div>
-                             <% END %>
-
-                         </div>
-                     </div>
-                  </div>
-               </div>
-
-               <div class="tab-pane" id="map_tube_demo_live">
-                 <form class="form-horizontal">
-                   <div class="form-group">
-                     <label for="map_name" class="col-sm-3 control-label">Map (City):</label>
-                     <div class="col-sm-9">
-                       <select id="map_name" class="form-control">
-                         <option value="">--Select map--</option>
-                         <% FOREACH map IN maps %>
-                         <option value="<% map.name %>"><% map.name %></option>
-                         <% END %>
-                       </select>
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="start" class="col-sm-3 control-label">Start Station:</label>
-                     <div class="col-sm-9">
-                       <select id="start" class="form-control"></select>
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label for="end" class="col-sm-3 control-label">End Station:</label>
-                     <div class="col-sm-9">
-                       <select id="end" class="form-control"></select>
-                     </div>
-                   </div>
-                   <div class="form-group">
-                     <label class="col-sm-3 control-label">Captcha:</label>
-                     <div class="col-sm-7">
-                       <input type="text" class="form-control" id="txt_captcha_response">
-                     </div>
-                     <label id="txt_captcha" class="col-sm-2 control-label"></label>
-                   </div>
-                   <div class="form-group">
-                     <div class="col-sm-offset-3 col-sm-9">
-                       <button id="map_tube_button" type="button" class="btn btn-default">Find Shortest Route</button>
-                     </div>
-                   </div>
-                 </form>
-
-                 <div id="shortest-route-result" class="panel-body text-primary"></div>
-
-               </div>
-
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- CPAN Recent -->
-      <hr id="cpan-recent"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-            <h1><span class="section_header">CPAN Recent</span></h1>
-          </div>
-
-            <% FOREACH cr_row IN cr %>
-                <div class="row">
-                <% FOREACH cr_col IN cr_row %>
-                    <div class="col-md-3"><div class="thumbnail">
-                        <a target="_blank" title="<% cr_col.tooltip %>" href="<% cr_col.link %>"><% cr_col.name %></a>
-                    </div></div>
-                <% END %>
-                </div>
-            <% END %>
-
-          </section>
-      </div> <!--End Container-->
-
-      <!-- CPAN Regulars -->
-      <hr id="cpan-regulars"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-            <h1><span class="section_header">CPAN Regulars</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="ds" href="#daily_stats" role="tab" data-toggle="tab">Daily</a></li>
-               <li><a id="ws" href="#weekly_stats" role="tab" data-toggle="tab">Weekly</a></li>
-               <li><a id="ms" href="#monthly_stats" role="tab" data-toggle="tab">Monthly</a></li>
-            </ul>
-
-            <div id="cr-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="daily_stats"></div>
-               <div class="tab-pane" id="weekly_stats"></div>
-               <div class="tab-pane" id="monthly_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- CPAN Uploaders -->
-      <hr id="cpan-uploaders"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">CPAN Uploaders</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="cus" href="#cpan_uploaders_stats" role="tab" data-toggle="tab">All Time</a></li>
-               <li><a id="nus" href="#neocpan_uploaders_stats" role="tab" data-toggle="tab">NeoCPAN</a></li>
-            </ul>
-
-            <div id="cu-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="cpan_uploaders_stats"></div>
-               <div class="tab-pane" id="neocpan_uploaders_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- CPAN Distributions -->
-      <hr id="cpan-distributions"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">CPAN Distributions</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="ad" href="#ad_stats" role="tab" data-toggle="tab">Adopted</a></li>
-               <li><a id="pd-a-d" href="#pd_a_d_stats" role="tab" data-toggle="tab">Personal (a..d)</a></li>
-               <li><a id="pd-e-z" href="#pd_e_z_stats" role="tab" data-toggle="tab">Personal (e..z)</a></li>
-            </ul>
-
-            <div id="cd-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="ad_stats"></div>
-               <div class="tab-pane" id="pd_a_d_stats"></div>
-               <div class="tab-pane" id="pd_e_z_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- Historical Distributions -->
-      <hr id="historical-distributions"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">Historical Distributions</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="hd_10" href="#hd_10_stats" role="tab" data-toggle="tab">Top 10</a></li>
-               <li><a id="hd_20" href="#hd_20_stats" role="tab" data-toggle="tab">Top 20</a></li>
-               <li><a id="hd_30" href="#hd_30_stats" role="tab" data-toggle="tab">Top 30</a></li>
-            </ul>
-
-            <div id="hd-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="hd_10_stats"></div>
-               <div class="tab-pane" id="hd_20_stats"></div>
-               <div class="tab-pane" id="hd_30_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- GitHub Pull Request Tracker -->
-      <hr id="github-pullrequest-tracker"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">GitHub Pull Request Tracker</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="pr_tracker_summary" href="#pr_tracker_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="author_by_pr"   href="#author_by_pr_stats"   role="tab" data-toggle="tab">Author By PR</a></li>
-               <li><a id="author_by_repo" href="#author_by_repo_stats" role="tab" data-toggle="tab">Author By Repository</a></li>
-            </ul>
-
-            <div id="pr-tracker-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="pr_tracker_summary_stats"></div>
-               <div class="tab-pane" id="author_by_pr_stats"></div>
-               <div class="tab-pane" id="author_by_repo_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- GitHub Pull Request -->
-      <hr id="github-pullrequest"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">GitHub Pull Request</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="pr_summary" href="#pr_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="pr_2026" href="#pr_2026_stats" role="tab" data-toggle="tab">2026</a></li>
-               <li><a id="pr_2025" href="#pr_2025_stats" role="tab" data-toggle="tab">2025</a></li>
-               <li><a id="pr_2024" href="#pr_2024_stats" role="tab" data-toggle="tab">2024</a></li>
-               <li><a id="pr_2023" href="#pr_2023_stats" role="tab" data-toggle="tab">2023</a></li>
-               <li><a id="pr_2022" href="#pr_2022_stats" role="tab" data-toggle="tab">2022</a></li>
-               <li><a id="pr_2021" href="#pr_2021_stats" role="tab" data-toggle="tab">2021</a></li>
-               <li><a id="pr_2020" href="#pr_2020_stats" role="tab" data-toggle="tab">2020</a></li>
-               <li><a id="pr_2019" href="#pr_2019_stats" role="tab" data-toggle="tab">2019</a></li>
-               <li><a id="pr_2018" href="#pr_2018_stats" role="tab" data-toggle="tab">2018</a></li>
-               <li><a id="pr_2017" href="#pr_2017_stats" role="tab" data-toggle="tab">2017</a></li>
-               <li><a id="pr_2016" href="#pr_2016_stats" role="tab" data-toggle="tab">2016</a></li>
-               <li><a id="pr_2015" href="#pr_2015_stats" role="tab" data-toggle="tab">2015</a></li>
-            </ul>
-
-            <div id="pr-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="pr_summary_stats"></div>
-               <div class="tab-pane" id="pr_2026_stats"></div>
-               <div class="tab-pane" id="pr_2025_stats"></div>
-               <div class="tab-pane" id="pr_2024_stats"></div>
-               <div class="tab-pane" id="pr_2023_stats"></div>
-               <div class="tab-pane" id="pr_2022_stats"></div>
-               <div class="tab-pane" id="pr_2021_stats"></div>
-               <div class="tab-pane" id="pr_2020_stats"></div>
-               <div class="tab-pane" id="pr_2019_stats"></div>
-               <div class="tab-pane" id="pr_2018_stats"></div>
-               <div class="tab-pane" id="pr_2017_stats"></div>
-               <div class="tab-pane" id="pr_2016_stats"></div>
-               <div class="tab-pane" id="pr_2015_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- Perl Weekly Challenge -->
-      <hr id="perl-weekly-challenge"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">The Weekly Challenge</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="pwc_leaders" href="#pwc_leaders_stats" role="tab" data-toggle="tab">Leaders</a></li>
-            </ul>
-
-            <div id="pwc-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="pwc_leaders_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- Pull Request Club -->
-      <hr id="pullrequest-club"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">Pull Request Club</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="prclub_summary" href="#prclub_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="prclub_2022" href="#prclub_2022_stats" role="tab" data-toggle="tab">2022</a></li>
-               <li><a id="prclub_2021" href="#prclub_2021_stats" role="tab" data-toggle="tab">2021</a></li>
-               <li><a id="prclub_2020" href="#prclub_2020_stats" role="tab" data-toggle="tab">2020</a></li>
-               <li><a id="prclub_2019" href="#prclub_2019_stats" role="tab" data-toggle="tab">2019</a></li>
-            </ul>
-
-            <div id="prclub-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="prclub_summary_stats"></div>
-               <div class="tab-pane" id="prclub_2022_stats"></div>
-               <div class="tab-pane" id="prclub_2021_stats"></div>
-               <div class="tab-pane" id="prclub_2020_stats"></div>
-               <div class="tab-pane" id="prclub_2019_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- Pull Request Challenge -->
-      <hr id="pullrequest-challenge"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">Pull Request Challenge</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="prc_summary" href="#prc_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="prc_2018" href="#prc_2018_stats" role="tab" data-toggle="tab">2018</a></li>
-               <li><a id="prc_2017" href="#prc_2017_stats" role="tab" data-toggle="tab">2017</a></li>
-               <li><a id="prc_2016" href="#prc_2016_stats" role="tab" data-toggle="tab">2016</a></li>
-               <li><a id="prc_2015" href="#prc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
-            </ul>
-
-            <div id="prc-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="prc_summary_stats"></div>
-               <div class="tab-pane" id="prc_2018_stats"></div>
-               <div class="tab-pane" id="prc_2017_stats"></div>
-               <div class="tab-pane" id="prc_2016_stats"></div>
-               <div class="tab-pane" id="prc_2015_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- GitHub Commits -->
-      <hr id="github-commits"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">GitHub Commits</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="gc_summary" href="#gc_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
-               <li><a id="gc_2026" href="#gc_2026_stats" role="tab" data-toggle="tab">2026</a></li>
-               <li><a id="gc_2025" href="#gc_2025_stats" role="tab" data-toggle="tab">2025</a></li>
-               <li><a id="gc_2024" href="#gc_2024_stats" role="tab" data-toggle="tab">2024</a></li>
-               <li><a id="gc_2023" href="#gc_2023_stats" role="tab" data-toggle="tab">2023</a></li>
-               <li><a id="gc_2022" href="#gc_2022_stats" role="tab" data-toggle="tab">2022</a></li>
-               <li><a id="gc_2021" href="#gc_2021_stats" role="tab" data-toggle="tab">2021</a></li>
-               <li><a id="gc_2020" href="#gc_2020_stats" role="tab" data-toggle="tab">2020</a></li>
-               <li><a id="gc_2019" href="#gc_2019_stats" role="tab" data-toggle="tab">2019</a></li>
-               <li><a id="gc_2018" href="#gc_2018_stats" role="tab" data-toggle="tab">2018</a></li>
-               <li><a id="gc_2017" href="#gc_2017_stats" role="tab" data-toggle="tab">2017</a></li>
-               <li><a id="gc_2016" href="#gc_2016_stats" role="tab" data-toggle="tab">2016</a></li>
-               <li><a id="gc_2015" href="#gc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
-               <li><a id="gc_2014" href="#gc_2014_stats" role="tab" data-toggle="tab">2014</a></li>
-            </ul>
-
-            <div id="gc-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="gc_summary_stats"></div>
-               <div class="tab-pane" id="gc_2026_stats"></div>
-               <div class="tab-pane" id="gc_2025_stats"></div>
-               <div class="tab-pane" id="gc_2024_stats"></div>
-               <div class="tab-pane" id="gc_2023_stats"></div>
-               <div class="tab-pane" id="gc_2022_stats"></div>
-               <div class="tab-pane" id="gc_2021_stats"></div>
-               <div class="tab-pane" id="gc_2020_stats"></div>
-               <div class="tab-pane" id="gc_2019_stats"></div>
-               <div class="tab-pane" id="gc_2018_stats"></div>
-               <div class="tab-pane" id="gc_2017_stats"></div>
-               <div class="tab-pane" id="gc_2016_stats"></div>
-               <div class="tab-pane" id="gc_2015_stats"></div>
-               <div class="tab-pane" id="gc_2014_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- PR Events -->
-      <hr id="pr-events"/>
-      <div class="container">
-          <section>
-          <div class="page-header">
-          <h1><span class="section_header">Pull Request Events</span></h1>
-          </div>
-
-            <ul class="nav nav-tabs" role="tablist">
-               <li class="active"><a id="hacktoberfest" href="#hacktoberfest_stats" role="tab" data-toggle="tab">Hacktoberfest</a></li>
-               <li><a id="pullrequest_24" href="#pullrequest_24_stats" role="tab" data-toggle="tab">24 Pull Request</a></li>
-            </ul>
-
-            <div id="pr-events-spinner" class="spinner"><img src="/images/ajax-loader.gif" alt="Loading..."/></div>
-
-            <div class="tab-content">
-               <div class="tab-pane active in" id="hacktoberfest_stats"></div>
-               <div class="tab-pane" id="pullrequest_24_stats"></div>
-            </div>
-          </section>
-      </div> <!--End Container-->
-
-      <!-- Contact -->
-      <!--hr id="contact"/>
-      <div class="container">
-            <section>
-            <div class="page-header">
-                <h2>Contact Me</h2>
-            </div><!-- End Page Header -->
-
-            <!--div id="contact-response" class="text-success"></div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <form id="contact-form" action="/contact" class="form-horizontal">
-                        <div class="form-group">
-                            <label id="name-label-id" for="user-name" class="col-lg-2 control-label text-primary">Name</label>
-                               <div class="col-lg-10">
-                                   <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Enter your name">
-                               </div>
-                        </div><!-- End form group -->
-
-                        <!--div class="form-group">
-                            <label id="email-label-id" for="user-email" class="col-lg-2 control-label text-primary">Email</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="user-email" name="user-email" placeholder="Enter your email address">
-                            </div>
-                        </div><!-- End form group -->
-
-                        <!--div class="form-group">
-                            <label id="subject-label-id" for="user-email-subject" class="col-lg-2 control-label text-primary">Subject</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="user-email-subject" name="user-email-subject" placeholder="Enter your email subject">
-                            </div>
-                        </div><!-- End form group -->
-
-                        <!--div class="form-group">
-                            <label id="message-label-id" for="user-message" class="col-lg-2 control-label text-primary">Message</label>
-                            <div class="col-lg-10">
-                                <textarea id="user-message" name="user-message" class="form-control" cols="20" rows="10" placeholder="Enter your message"></textarea>
-                            </div>
-                        </div><!-- End form group -->
-
-                        <!--div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button name="submit-button" type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                    <div class="form-group">
+                        <label for="start" class="ctrl-label">Start Station</label>
+                        <select id="start" class="form-control form-control-dark"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end" class="ctrl-label">End Station</label>
+                        <select id="end" class="form-control form-control-dark"></select>
+                    </div>
+                    <div class="form-group" style="display:flex;gap:12px;align-items:center;">
+                        <div style="flex:1;">
+                            <label class="ctrl-label">Captcha</label>
+                            <input type="text" class="form-control form-control-dark" id="txt_captcha_response" placeholder="Enter answer">
                         </div>
-                    </form>
+                        <label id="txt_captcha" style="margin-top:22px;font-size:20px;font-family:var(--font-mono);"></label>
+                    </div>
+                    <button id="map_tube_button" type="button" class="btn-primary-dark">Find Shortest Route</button>
                 </div>
-            </div><!-- End the row -->
-            <!--/section>
-      </div><!-- End Container -->
+                <div id="shortest-route-result" class="response-panel" style="max-width:560px;margin-top:16px;"></div>
+            </div>
+        </div>
+    </div>
 
-      <!-- Footer -->
-      <hr>
-      <footer>
-      <div class="container text-center">
-        <a href="https://www.patreon.com/manwar" title="Patreon" target="_blank"><i class="fa-brands fa-patreon"></i></a>
-        &nbsp;
-        <a href="https://fosstodon.org/@manwar" title="Mastodon" target="_blank"><i class="fa-brands fa-mastodon"></i></a>
-        &nbsp;
-        <a href="https://github.com/manwar" title="GitHub" target="_blank"><i class="fa-brands fa-github"></i></a>
-        &nbsp;
-        <a href="http://stackoverflow.com/users/1421774/" title="Stackoverflow" target="_blank"><i class="fa-brands fa-stack-overflow"></i></a>
-        &nbsp;
-        <a href="http://twitter.com/@cpan_author" title="Twitter" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-        &nbsp;
-        <a href="http://www.linkedin.com/in/mohammadanwar" title="LinkedIn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-        <br/>
-        | &nbsp;
-        <a href="https://theweeklychallenge.org" target="_blank">The Weekly Challenge</a>
-        &nbsp; | &nbsp;
-        <a href="https://perlschool.com/books/design-patterns" target="_blank">Design Patterns in Modern Perl</a>
-        &nbsp; |
-        <br/>
-        <small>&copy; Copyright 2015 - 2026 manwar.org</small>
-      </div>
-      </footer>
-      <hr>
+    <!-- ══════════════════════════════════════════
+         CPAN RECENT
+    ══════════════════════════════════════════ -->
+    <hr id="cpan-recent"/>
+    <div class="container section-wrap">
+        <span class="section-label">CPAN</span>
+        <h2 class="section-header">CPAN Recent</h2>
 
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <div class="cpan-grid">
+            <% FOREACH cr_row IN cr %>
+            <% FOREACH cr_col IN cr_row %>
+            <div class="cpan-item">
+                <a target="_blank" title="<% cr_col.tooltip %>" href="<% cr_col.link %>"><% cr_col.name %></a>
+            </div>
+            <% END %>
+            <% END %>
+        </div>
+    </div>
 
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/jquery.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/manwar.js"></script>
-      <script type="text/javascript">
-        $("#contact-form").submit(function(event) {
-            /* Get form data */
-            var $form   = $(this);
-            var name    = $form.find('input[name="user-name"]').val();
-            var email   = $form.find('input[name="user-email"]').val();
-            var subject = $form.find('input[name="user-email-subject"]').val();
-            var message = $form.find('textarea[name="user-message"]').val();
-            var url     = $form.attr('action');
+    <!-- ══════════════════════════════════════════
+         CPAN REGULARS
+    ══════════════════════════════════════════ -->
+    <hr id="cpan-regulars"/>
+    <div class="container section-wrap">
+        <span class="section-label">CPAN</span>
+        <h2 class="section-header">CPAN Regulars</h2>
 
-            /* Sending the data using post */
-            var posting = $.post(url, {
-                uname: name,
-                uemail: email,
-                usubject: subject,
-                umessage: message
-            });
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="ds" href="#daily_stats"   role="tab" data-toggle="tab">Daily</a></li>
+            <li><a id="ws" href="#weekly_stats"  role="tab" data-toggle="tab">Weekly</a></li>
+            <li><a id="ms" href="#monthly_stats" role="tab" data-toggle="tab">Monthly</a></li>
+        </ul>
 
-            /* Display the response */
-            posting.done(function(data) {
-                $("#contact-response").empty().append(data);;
-            });
+        <div id="cr-spinner" class="spinner-wrap"></div>
 
-            //$.post(url, $("#contact-form").serialize()).done(function(data) { $("#contact-response").empty().append(data); });
-        });
-      </script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/bootstrap.min.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/bootstrap-dialog.min.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/highstock.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/data.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/drilldown.js"></script>
-      <script type="text/javascript" src="<% request.uri_base %>/javascripts/exporting.js"></script>
+        <div class="tab-content">
+            <div class="tab-pane active in" id="daily_stats"><div class="chart-wrap"><canvas id="chart_daily_stats"></canvas></div></div>
+            <div class="tab-pane" id="weekly_stats"><div class="chart-wrap"><canvas id="chart_weekly_stats"></canvas></div></div>
+            <div class="tab-pane" id="monthly_stats"><div class="chart-wrap"><canvas id="chart_monthly_stats"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         CPAN UPLOADERS
+    ══════════════════════════════════════════ -->
+    <hr id="cpan-uploaders"/>
+    <div class="container section-wrap">
+        <span class="section-label">CPAN</span>
+        <h2 class="section-header">CPAN Uploaders</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="cus" href="#cpan_uploaders_stats"   role="tab" data-toggle="tab">All Time</a></li>
+            <li><a id="nus" href="#neocpan_uploaders_stats" role="tab" data-toggle="tab">NeoCPAN</a></li>
+        </ul>
+
+        <div id="cu-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="cpan_uploaders_stats"><div class="chart-wrap"><canvas id="chart_cpan_uploaders"></canvas></div></div>
+            <div class="tab-pane" id="neocpan_uploaders_stats"><div class="chart-wrap"><canvas id="chart_neocpan_uploaders"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         CPAN DISTRIBUTIONS
+    ══════════════════════════════════════════ -->
+    <hr id="cpan-distributions"/>
+    <div class="container section-wrap">
+        <span class="section-label">CPAN</span>
+        <h2 class="section-header">CPAN Distributions</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="ad"    href="#ad_stats"    role="tab" data-toggle="tab">Adopted</a></li>
+            <li><a id="pd-a-d" href="#pd_a_d_stats" role="tab" data-toggle="tab">Personal (a..d)</a></li>
+            <li><a id="pd-e-z" href="#pd_e_z_stats" role="tab" data-toggle="tab">Personal (e..z)</a></li>
+        </ul>
+
+        <div id="cd-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="ad_stats"><div class="chart-wrap"><canvas id="chart_adopted_dists"></canvas></div></div>
+            <div class="tab-pane" id="pd_a_d_stats"><div class="chart-wrap"><canvas id="chart_pd_a_d"></canvas></div></div>
+            <div class="tab-pane" id="pd_e_z_stats"><div class="chart-wrap"><canvas id="chart_pd_e_z"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         HISTORICAL DISTRIBUTIONS
+    ══════════════════════════════════════════ -->
+    <hr id="historical-distributions"/>
+    <div class="container section-wrap">
+        <span class="section-label">CPAN</span>
+        <h2 class="section-header">Historical Distributions</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="hd_10" href="#hd_10_stats" role="tab" data-toggle="tab">Top 10</a></li>
+            <li><a id="hd_20" href="#hd_20_stats" role="tab" data-toggle="tab">Top 20</a></li>
+            <li><a id="hd_30" href="#hd_30_stats" role="tab" data-toggle="tab">Top 30</a></li>
+        </ul>
+
+        <div id="hd-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="hd_10_stats"><div class="chart-wrap"><canvas id="chart_hd_10"></canvas></div></div>
+            <div class="tab-pane" id="hd_20_stats"><div class="chart-wrap"><canvas id="chart_hd_20"></canvas></div></div>
+            <div class="tab-pane" id="hd_30_stats"><div class="chart-wrap"><canvas id="chart_hd_30"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         GITHUB PR TRACKER
+    ══════════════════════════════════════════ -->
+    <hr id="github-pullrequest-tracker"/>
+    <div class="container section-wrap">
+        <span class="section-label">GitHub</span>
+        <h2 class="section-header">Pull Request Tracker</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="pr_tracker_summary" href="#pr_tracker_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="author_by_pr"   href="#author_by_pr_stats"   role="tab" data-toggle="tab">Author By PR</a></li>
+            <li><a id="author_by_repo" href="#author_by_repo_stats" role="tab" data-toggle="tab">Author By Repository</a></li>
+        </ul>
+
+        <div id="pr-tracker-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="pr_tracker_summary_stats"><div class="chart-wrap"><canvas id="chart_pr_tracker_summary"></canvas></div></div>
+            <div class="tab-pane" id="author_by_pr_stats"><div class="chart-wrap"><canvas id="chart_author_by_pr"></canvas></div></div>
+            <div class="tab-pane" id="author_by_repo_stats"><div class="chart-wrap"><canvas id="chart_author_by_repo"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         GITHUB PULL REQUEST
+    ══════════════════════════════════════════ -->
+    <hr id="github-pullrequest"/>
+    <div class="container section-wrap">
+        <span class="section-label">GitHub</span>
+        <h2 class="section-header">GitHub Pull Request</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="pr_summary" href="#pr_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="pr_2026" href="#pr_2026_stats" role="tab" data-toggle="tab">2026</a></li>
+            <li><a id="pr_2025" href="#pr_2025_stats" role="tab" data-toggle="tab">2025</a></li>
+            <li><a id="pr_2024" href="#pr_2024_stats" role="tab" data-toggle="tab">2024</a></li>
+            <li><a id="pr_2023" href="#pr_2023_stats" role="tab" data-toggle="tab">2023</a></li>
+            <li><a id="pr_2022" href="#pr_2022_stats" role="tab" data-toggle="tab">2022</a></li>
+            <li><a id="pr_2021" href="#pr_2021_stats" role="tab" data-toggle="tab">2021</a></li>
+            <li><a id="pr_2020" href="#pr_2020_stats" role="tab" data-toggle="tab">2020</a></li>
+            <li><a id="pr_2019" href="#pr_2019_stats" role="tab" data-toggle="tab">2019</a></li>
+            <li><a id="pr_2018" href="#pr_2018_stats" role="tab" data-toggle="tab">2018</a></li>
+            <li><a id="pr_2017" href="#pr_2017_stats" role="tab" data-toggle="tab">2017</a></li>
+            <li><a id="pr_2016" href="#pr_2016_stats" role="tab" data-toggle="tab">2016</a></li>
+            <li><a id="pr_2015" href="#pr_2015_stats" role="tab" data-toggle="tab">2015</a></li>
+        </ul>
+
+        <div id="pr-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="pr_summary_stats"><div class="chart-wrap"><canvas id="chart_pr_summary"></canvas></div></div>
+            <div class="tab-pane" id="pr_2026_stats"><div class="chart-wrap"><canvas id="chart_pr_2026"></canvas></div></div>
+            <div class="tab-pane" id="pr_2025_stats"><div class="chart-wrap"><canvas id="chart_pr_2025"></canvas></div></div>
+            <div class="tab-pane" id="pr_2024_stats"><div class="chart-wrap"><canvas id="chart_pr_2024"></canvas></div></div>
+            <div class="tab-pane" id="pr_2023_stats"><div class="chart-wrap"><canvas id="chart_pr_2023"></canvas></div></div>
+            <div class="tab-pane" id="pr_2022_stats"><div class="chart-wrap"><canvas id="chart_pr_2022"></canvas></div></div>
+            <div class="tab-pane" id="pr_2021_stats"><div class="chart-wrap"><canvas id="chart_pr_2021"></canvas></div></div>
+            <div class="tab-pane" id="pr_2020_stats"><div class="chart-wrap"><canvas id="chart_pr_2020"></canvas></div></div>
+            <div class="tab-pane" id="pr_2019_stats"><div class="chart-wrap"><canvas id="chart_pr_2019"></canvas></div></div>
+            <div class="tab-pane" id="pr_2018_stats"><div class="chart-wrap"><canvas id="chart_pr_2018"></canvas></div></div>
+            <div class="tab-pane" id="pr_2017_stats"><div class="chart-wrap"><canvas id="chart_pr_2017"></canvas></div></div>
+            <div class="tab-pane" id="pr_2016_stats"><div class="chart-wrap"><canvas id="chart_pr_2016"></canvas></div></div>
+            <div class="tab-pane" id="pr_2015_stats"><div class="chart-wrap"><canvas id="chart_pr_2015"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PERL WEEKLY CHALLENGE
+    ══════════════════════════════════════════ -->
+    <hr id="perl-weekly-challenge"/>
+    <div class="container section-wrap">
+        <span class="section-label">Events</span>
+        <h2 class="section-header">The Weekly Challenge</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="pwc_leaders" href="#pwc_leaders_stats" role="tab" data-toggle="tab">Leaders</a></li>
+        </ul>
+
+        <div id="pwc-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="pwc_leaders_stats"><div class="chart-wrap"><canvas id="chart_pwc_leaders"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PULL REQUEST CLUB
+    ══════════════════════════════════════════ -->
+    <hr id="pullrequest-club"/>
+    <div class="container section-wrap">
+        <span class="section-label">GitHub</span>
+        <h2 class="section-header">Pull Request Club</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="prclub_summary" href="#prclub_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="prclub_2022" href="#prclub_2022_stats" role="tab" data-toggle="tab">2022</a></li>
+            <li><a id="prclub_2021" href="#prclub_2021_stats" role="tab" data-toggle="tab">2021</a></li>
+            <li><a id="prclub_2020" href="#prclub_2020_stats" role="tab" data-toggle="tab">2020</a></li>
+            <li><a id="prclub_2019" href="#prclub_2019_stats" role="tab" data-toggle="tab">2019</a></li>
+        </ul>
+
+        <div id="prclub-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="prclub_summary_stats"><div class="chart-wrap"><canvas id="chart_prclub_summary"></canvas></div></div>
+            <div class="tab-pane" id="prclub_2022_stats"><div class="chart-wrap"><canvas id="chart_prclub_2022"></canvas></div></div>
+            <div class="tab-pane" id="prclub_2021_stats"><div class="chart-wrap"><canvas id="chart_prclub_2021"></canvas></div></div>
+            <div class="tab-pane" id="prclub_2020_stats"><div class="chart-wrap"><canvas id="chart_prclub_2020"></canvas></div></div>
+            <div class="tab-pane" id="prclub_2019_stats"><div class="chart-wrap"><canvas id="chart_prclub_2019"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PULL REQUEST CHALLENGE
+    ══════════════════════════════════════════ -->
+    <hr id="pullrequest-challenge"/>
+    <div class="container section-wrap">
+        <span class="section-label">GitHub</span>
+        <h2 class="section-header">Pull Request Challenge</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="prc_summary" href="#prc_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="prc_2018" href="#prc_2018_stats" role="tab" data-toggle="tab">2018</a></li>
+            <li><a id="prc_2017" href="#prc_2017_stats" role="tab" data-toggle="tab">2017</a></li>
+            <li><a id="prc_2016" href="#prc_2016_stats" role="tab" data-toggle="tab">2016</a></li>
+            <li><a id="prc_2015" href="#prc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
+        </ul>
+
+        <div id="prc-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="prc_summary_stats"><div class="chart-wrap"><canvas id="chart_prc_summary"></canvas></div></div>
+            <div class="tab-pane" id="prc_2018_stats"><div class="chart-wrap"><canvas id="chart_prc_2018"></canvas></div></div>
+            <div class="tab-pane" id="prc_2017_stats"><div class="chart-wrap"><canvas id="chart_prc_2017"></canvas></div></div>
+            <div class="tab-pane" id="prc_2016_stats"><div class="chart-wrap"><canvas id="chart_prc_2016"></canvas></div></div>
+            <div class="tab-pane" id="prc_2015_stats"><div class="chart-wrap"><canvas id="chart_prc_2015"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         GITHUB COMMITS
+    ══════════════════════════════════════════ -->
+    <hr id="github-commits"/>
+    <div class="container section-wrap">
+        <span class="section-label">GitHub</span>
+        <h2 class="section-header">GitHub Commits</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="gc_summary" href="#gc_summary_stats" role="tab" data-toggle="tab">Summary</a></li>
+            <li><a id="gc_2026" href="#gc_2026_stats" role="tab" data-toggle="tab">2026</a></li>
+            <li><a id="gc_2025" href="#gc_2025_stats" role="tab" data-toggle="tab">2025</a></li>
+            <li><a id="gc_2024" href="#gc_2024_stats" role="tab" data-toggle="tab">2024</a></li>
+            <li><a id="gc_2023" href="#gc_2023_stats" role="tab" data-toggle="tab">2023</a></li>
+            <li><a id="gc_2022" href="#gc_2022_stats" role="tab" data-toggle="tab">2022</a></li>
+            <li><a id="gc_2021" href="#gc_2021_stats" role="tab" data-toggle="tab">2021</a></li>
+            <li><a id="gc_2020" href="#gc_2020_stats" role="tab" data-toggle="tab">2020</a></li>
+            <li><a id="gc_2019" href="#gc_2019_stats" role="tab" data-toggle="tab">2019</a></li>
+            <li><a id="gc_2018" href="#gc_2018_stats" role="tab" data-toggle="tab">2018</a></li>
+            <li><a id="gc_2017" href="#gc_2017_stats" role="tab" data-toggle="tab">2017</a></li>
+            <li><a id="gc_2016" href="#gc_2016_stats" role="tab" data-toggle="tab">2016</a></li>
+            <li><a id="gc_2015" href="#gc_2015_stats" role="tab" data-toggle="tab">2015</a></li>
+            <li><a id="gc_2014" href="#gc_2014_stats" role="tab" data-toggle="tab">2014</a></li>
+        </ul>
+
+        <div id="gc-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="gc_summary_stats"><div class="chart-wrap"><canvas id="chart_gc_summary"></canvas></div></div>
+            <div class="tab-pane" id="gc_2026_stats"><div class="chart-wrap"><canvas id="chart_gc_2026"></canvas></div></div>
+            <div class="tab-pane" id="gc_2025_stats"><div class="chart-wrap"><canvas id="chart_gc_2025"></canvas></div></div>
+            <div class="tab-pane" id="gc_2024_stats"><div class="chart-wrap"><canvas id="chart_gc_2024"></canvas></div></div>
+            <div class="tab-pane" id="gc_2023_stats"><div class="chart-wrap"><canvas id="chart_gc_2023"></canvas></div></div>
+            <div class="tab-pane" id="gc_2022_stats"><div class="chart-wrap"><canvas id="chart_gc_2022"></canvas></div></div>
+            <div class="tab-pane" id="gc_2021_stats"><div class="chart-wrap"><canvas id="chart_gc_2021"></canvas></div></div>
+            <div class="tab-pane" id="gc_2020_stats"><div class="chart-wrap"><canvas id="chart_gc_2020"></canvas></div></div>
+            <div class="tab-pane" id="gc_2019_stats"><div class="chart-wrap"><canvas id="chart_gc_2019"></canvas></div></div>
+            <div class="tab-pane" id="gc_2018_stats"><div class="chart-wrap"><canvas id="chart_gc_2018"></canvas></div></div>
+            <div class="tab-pane" id="gc_2017_stats"><div class="chart-wrap"><canvas id="chart_gc_2017"></canvas></div></div>
+            <div class="tab-pane" id="gc_2016_stats"><div class="chart-wrap"><canvas id="chart_gc_2016"></canvas></div></div>
+            <div class="tab-pane" id="gc_2015_stats"><div class="chart-wrap"><canvas id="chart_gc_2015"></canvas></div></div>
+            <div class="tab-pane" id="gc_2014_stats"><div class="chart-wrap"><canvas id="chart_gc_2014"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PR EVENTS
+    ══════════════════════════════════════════ -->
+    <hr id="pr-events"/>
+    <div class="container section-wrap">
+        <span class="section-label">Events</span>
+        <h2 class="section-header">Pull Request Events</h2>
+
+        <ul class="nav nav-tabs nav-tabs-dark" role="tablist">
+            <li class="active"><a id="hacktoberfest"  href="#hacktoberfest_stats"  role="tab" data-toggle="tab">Hacktoberfest</a></li>
+            <li><a id="pullrequest_24" href="#pullrequest_24_stats" role="tab" data-toggle="tab">24 Pull Request</a></li>
+        </ul>
+
+        <div id="pr-events-spinner" class="spinner-wrap"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane active in" id="hacktoberfest_stats"><div class="chart-wrap"><canvas id="chart_hacktoberfest"></canvas></div></div>
+            <div class="tab-pane" id="pullrequest_24_stats"><div class="chart-wrap"><canvas id="chart_24pullrequest"></canvas></div></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════ -->
+    <div class="site-footer">
+        <div class="social-icons">
+            <a href="https://www.patreon.com/manwar"           title="Patreon"      target="_blank"><i class="fa-brands fa-patreon"></i></a>
+            <a href="https://fosstodon.org/@manwar"            title="Mastodon"     target="_blank"><i class="fa-brands fa-mastodon"></i></a>
+            <a href="https://github.com/manwar"                title="GitHub"       target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="http://stackoverflow.com/users/1421774/"  title="Stackoverflow" target="_blank"><i class="fa-brands fa-stack-overflow"></i></a>
+            <a href="http://twitter.com/@cpan_author"          title="Twitter"      target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="http://www.linkedin.com/in/mohammadanwar" title="LinkedIn"     target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+        <div class="footer-links">
+            <a href="https://theweeklychallenge.org" target="_blank">The Weekly Challenge</a>
+            <a href="https://perlschool.com/books/design-patterns" target="_blank">Design Patterns in Modern Perl</a>
+        </div>
+        <div style="margin-top:14px;">
+            <small>&copy; 2015&ndash;2026 manwar.org</small>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCRIPTS
+    ══════════════════════════════════════════ -->
+    <script src="<% request.uri_base %>/javascripts/jquery.js"></script>
+    <script src="<% request.uri_base %>/javascripts/bootstrap.min.js"></script>
+    <script src="<% request.uri_base %>/javascripts/bootstrap-dialog.min.js"></script>
+
+    <!-- Chart.js replaces Highcharts / highstock / data / drilldown / exporting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+    <script src="<% request.uri_base %>/javascripts/manwar.js"></script>
 
 </body>
 </html>
