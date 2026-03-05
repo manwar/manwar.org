@@ -182,8 +182,14 @@ function renderChart(canvasId, raw) {
     var labels = getCategories(raw);
     if (!labels) {
         var first = series[0] || {};
-        if (first.data && first.data.length && typeof first.data[0] === 'object' && !Array.isArray(first.data[0])) {
-            labels = (first.data || []).map(function(pt) { return pt ? (pt.name || pt.category || '') : ''; });
+        if (first.data && first.data.length) {
+            var fp = first.data[0];
+            if (Array.isArray(fp)) {
+                /* [name, value] arrays — pt[0] is the label */
+                labels = first.data.map(function(pt) { return pt[0] || ''; });
+            } else if (typeof fp === 'object' && fp !== null) {
+                labels = first.data.map(function(pt) { return pt ? (pt.name || pt.category || '') : ''; });
+            }
         }
     }
     if (!labels || !labels.length) {
@@ -193,7 +199,7 @@ function renderChart(canvasId, raw) {
     }
 
     var datasets = buildDatasets(series, type);
-    var scalesX  = { grid: { color: THEME.border + '88' }, ticks: { color: THEME.muted, maxRotation: 45 } };
+    var scalesX  = { grid: { color: THEME.border + '88' }, ticks: { color: THEME.muted, maxRotation: 90, minRotation: 45, autoSkip: false } };
     var scalesY  = { grid: { color: THEME.border + '88' }, ticks: { color: THEME.muted } };
     if (stacked) { scalesX.stacked = true; scalesY.stacked = true; }
 
@@ -237,15 +243,17 @@ function renderChart(canvasId, raw) {
                                 return prs ? [repo + ': ' + value, prs] : [repo + ': ' + value];
                             }
                             /* Use ctx.raw to avoid locale-formatted numbers e.g. "1,027" → "1027" */
-                            /* Author name lives in series[i].meta[dataIndex] in the server JSON */
-                            var cvs2   = document.getElementById(canvasId);
+                            var cvs2    = document.getElementById(canvasId);
                             var rawJson = cvs2 && cvs2._rawJson;
-                            var author = rawJson
+
+                            /* 1. Author name from series[i].meta[dataIndex] (e.g. CPAN Regulars) */
+                            var author  = rawJson
                                 && rawJson.series
                                 && rawJson.series[ctx.datasetIndex]
                                 && rawJson.series[ctx.datasetIndex].meta
                                 && rawJson.series[ctx.datasetIndex].meta[ctx.dataIndex];
-                            var label  = author || ctx.dataset.label;
+
+                            var label   = author || ctx.dataset.label;
                             return label + ': ' + ctx.raw;
                         },
                         title: function(ctxArr) {
