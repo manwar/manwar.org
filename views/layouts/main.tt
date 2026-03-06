@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="me" href="https://fosstodon.org/@manwar"/>
 
     <!-- Google Analytics -->
@@ -48,7 +48,7 @@
         --success:   #10b981;
         --warn:      #f59e0b;
         --danger:    #ef4444;
-        --font-head: 'Syne', sans-serif;
+        --font-head: 'Outfit', sans-serif;
         --font-mono: 'Space Mono', monospace;
     }
 
@@ -161,9 +161,12 @@
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        text-align: center;
         padding: 20px 40px;
-        gap: 28px;
+        gap: 16px;
     }
 
     .hero-avatar {
@@ -233,8 +236,18 @@
         box-shadow: 0 4px 24px rgba(79,140,255,.2);
     }
 
+    .hero-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+    }
+    .hero-text { text-align: center; }
+    .hero-links { justify-content: center; }
+
     @media (max-width: 767px) {
         .hero-content { flex-wrap: wrap; padding: 16px 16px; }
+        .hero-top-row { flex-direction: column; gap: 12px; }
         .hero-avatar  { width: 80px; height: 80px; }
         .hero-book    { width: 60px; }
         .hero-text h1 { font-size: 18px; }
@@ -745,10 +758,12 @@
         <img src="/images/background.jpg" class="hero-bg" alt="">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="/images/manwar.jpg" class="hero-avatar" alt="Mohammad Sajid Anwar">
-            <a href="https://perlschool.com/books/design-patterns" target="_blank">
-                <img src="/images/design-patterns-in-modern-perl.png" class="hero-book" alt="Design Patterns in Modern Perl">
-            </a>
+            <div class="hero-top-row">
+                <img src="/images/manwar.jpg" class="hero-avatar" alt="Mohammad Sajid Anwar">
+                <a href="https://perlschool.com/books/design-patterns" target="_blank">
+                    <img src="/images/design-patterns-in-modern-perl.png" class="hero-book" alt="Design Patterns in Modern Perl">
+                </a>
+            </div>
             <div class="hero-text">
                 <h1>Mohammad Sajid Anwar</h1>
                 <div style="margin: 8px 0 12px;">
