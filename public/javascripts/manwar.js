@@ -34,6 +34,96 @@ Chart.defaults.plugins.tooltip.borderWidth      = 1;
 Chart.defaults.plugins.tooltip.padding          = 10;
 Chart.defaults.plugins.tooltip.cornerRadius     = 6;
 
+/* ─── ZOOM DETECTION & HANDLING ─────────────────────────────────────── */
+(function handleZoomIssues() {
+    // Detect if zoom is not 100%
+    const ZOOM_THRESHOLD = 0.01; // Allow tiny floating point differences
+    const currentZoom = window.devicePixelRatio;
+    const isZoomed = Math.abs(currentZoom - 1) > ZOOM_THRESHOLD;
+
+    console.log(`Browser zoom: ${Math.round(currentZoom * 100)}%`);
+
+    if (isZoomed) {
+        console.warn(`Non-standard zoom detected (${Math.round(currentZoom * 100)}%). Applying chart stability fixes.`);
+
+        // 1. Disable all animations globally when zoomed
+        Chart.defaults.animation = false;
+
+        // 2. Add a style tag to force integer container heights
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Force integer heights on all chart containers */
+            [id^="chart_"], [class*="chart_"] {
+                height: ${Math.round(462 * currentZoom)}px !important;
+                min-height: ${Math.round(462 * currentZoom)}px !important;
+                max-height: ${Math.round(462 * currentZoom)}px !important;
+                image-rendering: crisp-edges;
+                image-rendering: pixelated;
+                transform: translateZ(0);
+                backface-visibility: hidden;
+                contain: strict;
+            }
+
+            /* Fix canvas rendering */
+            canvas[id^="chart_"] {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+                width: 100% !important;
+                height: 100% !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // 3. Override chart creation to handle zoom
+    const originalRenderChart = renderChart;
+    renderChart = function(canvasId, raw) {
+        // Round container height to integer before rendering
+        const canvas = document.getElementById(canvasId);
+        if (canvas && canvas.parentNode) {
+            const container = canvas.parentNode;
+            const currentHeight = container.offsetHeight;
+            const roundedHeight = Math.round(currentHeight);
+
+            // Only set if significantly different (prevents oscillation)
+            if (Math.abs(currentHeight - roundedHeight) > 0.5) {
+                container.style.height = roundedHeight + 'px';
+                container.style.minHeight = roundedHeight + 'px';
+                container.style.maxHeight = roundedHeight + 'px';
+            }
+        }
+
+        // Call original renderChart
+        originalRenderChart(canvasId, raw);
+
+        // Post-render cleanup
+        setTimeout(() => {
+            if (_registry[canvasId]) {
+                // Force integer dimensions after render
+                _registry[canvasId].resize();
+            }
+        }, 50);
+    };
+
+    // 4. Fix resize handler for zoom
+    const originalResize = Chart.prototype.resize;
+    Chart.prototype.resize = function() {
+        // Round dimensions before resizing
+        if (this.canvas && this.canvas.parentNode) {
+            const container = this.canvas.parentNode;
+            const rect = container.getBoundingClientRect();
+            const roundedWidth = Math.round(rect.width);
+            const roundedHeight = Math.round(rect.height);
+
+            // Only resize if dimensions changed significantly
+            if (Math.abs(this.width - roundedWidth) > 1 ||
+                Math.abs(this.height - roundedHeight) > 1) {
+                return originalResize.apply(this, arguments);
+            }
+        }
+    };
+})();
+
 /* ─── Chart registry (destroy before re-create) ─────────────────────── */
 var _registry = {};
 
